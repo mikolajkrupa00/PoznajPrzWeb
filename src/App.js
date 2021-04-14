@@ -3,6 +3,7 @@ import RegisterPage from "./components/register/index";
 import LoginPage from "./components/login/index";
 import AddPlacePage from "./components/AddPlace/index";
 import PlacesPage from "./components/Places/index"
+import PlacePage from "./components/Place/index"
 import StatsPage from "./components/Stats/index"
 import './App.css';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
@@ -21,6 +22,8 @@ function App() {
       <Route path="/Places" component={PlacesPage} />
       <Route path="/addPlace" component={AddPlacePage} />
       <Route path="/stats" component={StatsPage} />
+      <Route path="/Place" component={PlacePage} />
+      <Route path="/" component={PlacesPage} />
     </Switch>
     </BrowserRouter>
   );

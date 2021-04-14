@@ -1,6 +1,7 @@
 import Layout from "../Layout/index";
 import {useHistory} from 'react-router-dom'
 import { useForm } from 'react-hook-form';
+import { localStorageService } from "../../services/localStorageService"
 import components from "./styles";
 import Axios from "axios";
 
@@ -13,8 +14,13 @@ const RegisterPage = () => {
             email: data.email,
             username: data.username,
             password: data.password
-        }).then(res => 
-            history.push("places"))
+        }).then((res) => {
+            localStorageService.username = res.data.username
+            localStorageService.token = res.data.token
+            localStorageService.userId = res.data.userId
+            localStorageService.role = res.data.role
+            history.push("places")
+        })
     }
 
 

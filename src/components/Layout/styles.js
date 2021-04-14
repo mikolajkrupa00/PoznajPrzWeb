@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export default{
+const components = {
     TopNavbar: styled.div`
     width: 100%;
     flex-direction:row;
@@ -86,4 +86,11 @@ export default{
     margin-top:5px;
     margin-right: 20px;
     `,
+    LayoutContainer: styled.div`
+    `,
+    ChildContainer: styled.div`
+    `
 }
+
+
+export default components;

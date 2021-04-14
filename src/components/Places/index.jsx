@@ -3,12 +3,15 @@ import Axios from "axios";
 import { useForm } from 'react-hook-form';
 import Layout from "../Layout/index"
 import components from "./styles";
-import { localStorageService } from "../../services/localStorageService"
+import { localStorageService } from "../../services/localStorageService";
+import {useHistory} from "react-router-dom";
 
 const PlacesPage = () => {
     const { register, handleSubmit, errors, reset } = useForm();
+    const history = useHistory();
     const[places, setPlaces] = useState()
     const[ratings, setRatings] = useState()
+    const[image, setImgae] = useState();
     const[expandedId, seExpandedId] = useState()
     const { PlacesContainer, Place, PlaceName, PlaceAddress, PlaceCategory, PlaceNumOfVisits, PlaceDesc, PlaceImg, PlaceDescription, RatingsContainer, AddRatingContainer,
         Rating, PlaceContainer, RatingComment, RatingDate, RatingUsername, RatingValue, RatingTop, RatingBottom, EditButton, Navivation,AddRatingInput, 
@@ -60,14 +63,16 @@ const PlacesPage = () => {
         Axios.put(`/user/blockUser/${userId}`)
     }
     
-
+    const save = (data) =>{
+        return <img src={process.env.PUBLIC_URL + data} />;
+    }
 
     return(
         <Layout>
             <PlacesContainer>
                 {places && places.map(place => 
                     <PlaceContainer>
-                        <Place onClick={() => showRatings(place.placeId)}>
+                        <Place onClick={() => history.push("place", place.placeId)}>
                             <PlaceImg src="logo192.png" />
                             <PlaceDesc>
                                 <PlaceName>{place.categoryName}</PlaceName>
@@ -77,41 +82,10 @@ const PlacesPage = () => {
                                 <PlaceDescription>opis : {place.description}</PlaceDescription>
                             </PlaceDesc>
                         </Place>
-                        {ratings && place.placeId === expandedId &&
-                            <>
-                                <RatingsContainer>
-                                    {ratings.map((rating, index) => 
-                                    <Rating>
-                                        <RatingTop>
-                                            <RatingUsername>{rating.username}</RatingUsername>
-                                            <RatingDate>{rating.ratingDate}</RatingDate>
-                                            <RatingValue>ocena: {rating.value}</RatingValue>
-                                            {(role==='0' || username===rating.username) &&<EditButton onClick={() => deleteRating(rating.ratingId)}>usuń</EditButton>}
-                                            {role==='0' && <EditButton onClick={() => blockUser(rating.username)}>zablokuj</EditButton>}
-                                        </RatingTop>
-                                        <RatingComment>
-                                            {rating.isVisible ? <>{rating.comment}</> : "użytkownik zablokowany"}
-                                        </RatingComment>
-                                    </Rating>
-                                    )}
-                                </RatingsContainer>
-                                {console.log(role)}
-                                {role !== "2" ?
-                                    <RatingForm onSubmit={handleSubmit(addRating)}>
-                                        ocena : <AddRatingInput type="number" {...register('value', {required:true})}/>
-                                        <AddRatingInput defaultValue={place.placeId} type="hidden" {...register('placeId')}/>
-                                        komentarz: <RatingCommentArea  {...register('comment', {required:true})}/>
-                                        <RatingSubmit type="submit">dodaj komentarz</RatingSubmit>
-                                    </RatingForm> :
-                                    <>
-                                    Zostałeś zablokowany skontaktuj się z administratorem
-                                    </>
-                                }   
-                            </>
-                        }
                     </PlaceContainer>
                 )}
             </PlacesContainer>
+            
         </Layout>
     )
 }
