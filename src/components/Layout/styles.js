@@ -4,8 +4,8 @@ const componentStyles = {
 
     TopNavbar: styled.div`
     width: 100%;
-    flex-direction:row;
     height: var(--top_navbar_height);
+    flex-direction:row;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,52 +14,51 @@ const componentStyles = {
     box-shadow: 0px 1px 10px #000000;
     z-index: 10;
     `,
+
+    TopNavbarLeftSide: styled.div`
+    display:flex;
+    align-items: center;
+    
+    `,
+    
     LogoWrapper: styled.div`
-    width:29px;
-    height:36px;
+    display: flex;
+    background-color: lightblue;
+    cursor: pointer;
     `,
     
     LogoImg: styled.img`
     width:30px;
     height:30px;
+    display: block;
+    margin-left: 10px;
     `,
     LogoName: styled.div`
-    margin-left: 5px;
+    margin-left: 8px;
     font-size: 24px;
     color: rgb(255, 255, 255);
     `,
-    TopNavbarLeftSide: styled.div`
-    justify-content: space-between;
-    align-items: center;
-    display:flex;
-    flex-direction:row;
-    `,
+    
     TopNavbarRightSide: styled.div`
     display: flex;
-    justify-content: space-between;
     align-items: center;
     `,
-    BurgerMenuWraper: styled.div`
-    margin-right: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    `,
-    BurgerMenuWraper: styled.div`
-    margin-right: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    `,
+    
     BurgerMenuImg: styled.img`
     width:36px;
     height:36px;
+    margin-right: 10px;
     `,
-    MenuContainer: styled.div`
+
+    FullScreenImg: styled.img`
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    `,
+
+    ListMenuContainer: styled.div`
     height: calc(100% - var(--top_navbar_height));
-    width: 99.4%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -83,15 +82,7 @@ const componentStyles = {
         color: #333;
     }
     `,
-    FullScreenImg: styled.img`
-    width:42px;
-    height:42px;
-    `,
-    FullScreenContainer: styled.div`
-    display: block;
-    margin-top:5px;
-    margin-right: 20px;
-    `,
+    
     LayoutContainer: styled.div`
     `,
     ChildContainer: styled.div`

@@ -2,3 +2,10 @@ body{
     margin: 0px;
     padding: 0px;
 }
+
+/* ---- VARIABLES ---- */
+
+:root{
+
+    --top_navbar_height: 45px;
+}
