@@ -7,8 +7,8 @@ const Layout = (props) => {
 
     useEffect(() => {
     }, [])
-    const {TopNavbar, TopNavbarLeftSide, TopNavbarRightSide, LogoImg, LogoName, LogoWrapper, BurgerMenuWraper, BurgerMenuImg,
-        ListMenuRecord, MenuContainer, FullScreenImg, FullScreenContainer, LayoutContainer, ChildContainer} = componentStyles;
+    const {TopNavbar, TopNavbarLeftSide, TopNavbarRightSide, LogoImg, LogoName, LogoWrapper, BurgerMenuImg,
+        FullScreenImg, LayoutContainer, ChildContainer} = componentStyles;
     const [listMenuState, setListMenuState] = useState(false)
     const [fullScreenState, setFullScreenState] = useState(false)
     return(
@@ -17,19 +17,15 @@ const Layout = (props) => {
                 <TopNavbarLeftSide>
                     <LogoWrapper>
                         <LogoImg src="img/rze-herb.png" />
+                        <LogoName>Rzeszów</LogoName>
                     </LogoWrapper>
-                    <LogoName>Rzeszów</LogoName>
                 </TopNavbarLeftSide>
-                <TopNavbarRightSide>
-                    <FullScreenContainer>
-                        {fullScreenState ?
+                <TopNavbarRightSide>                   
+                    {fullScreenState ?
                         <FullScreenImg src="img/minimize.jpg" onClick={() =>{ document.exitFullscreen(); setFullScreenState(false)}}/> :
                         <FullScreenImg src="img/fullscreen.png" onClick={() =>{ document.documentElement.requestFullscreen(); setFullScreenState(true)}}/>
                     }
-                    </FullScreenContainer>
-                    <BurgerMenuWraper>
-                        <BurgerMenuImg src="img/burgerMenu.png" onClick={() => setListMenuState(!listMenuState)}/>
-                    </BurgerMenuWraper>    
+                    <BurgerMenuImg src="img/burgerMenu.png" onClick={() => setListMenuState(!listMenuState)}/>
                 </TopNavbarRightSide>
             </TopNavbar>
             {listMenuState && <ListMenu/>}

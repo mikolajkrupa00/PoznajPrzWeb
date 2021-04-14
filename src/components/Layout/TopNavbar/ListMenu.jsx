@@ -5,7 +5,7 @@ import { localStorageService } from "../../../services/localStorageService"
 const ListMenu = () => {
     const {username, role, token, userId } = localStorageService;
     const history = useHistory();
-    const{ListMenuRecord, MenuContainer} = componentStyles
+    const{ListMenuRecord, ListMenuContainer} = componentStyles
 
 
     const logout = () => {
@@ -18,7 +18,7 @@ const ListMenu = () => {
     }
 
     return(
-        <MenuContainer>
+        <ListMenuContainer>
             <ListMenuRecord onClick={() => history.push("home")}>Strona Główna</ListMenuRecord>
             <ListMenuRecord onClick={() => history.push("map")}>Mapa</ListMenuRecord>
             <ListMenuRecord onClick={() => history.push("places")}>Miejsca</ListMenuRecord>
@@ -27,7 +27,7 @@ const ListMenu = () => {
             <ListMenuRecord onClick={() => history.push("login")}>Logowanie</ListMenuRecord>}
             <ListMenuRecord onClick={() => history.push("register")}>Rejestracja</ListMenuRecord>
             <ListMenuRecord>Zmien jezyk</ListMenuRecord>
-        </MenuContainer>
+        </ListMenuContainer>
     )
 }
 
