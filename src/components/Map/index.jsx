@@ -5,6 +5,9 @@ import Layout from "../Layout/index"
 import componentStyles from "./styles";
 import { localStorageService } from "../../services/localStorageService"
 
+import L from 'leaflet'
+import {MapContainer} from 'react-leaflet'
+
 const Map = () => {
 
         
