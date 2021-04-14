@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import Axios from "axios";
 import { useForm } from 'react-hook-form';
 import Layout from "../Layout/index"
-import components from "./styles";
+import componentStyles from "./styles";
 import { localStorageService } from "../../services/localStorageService";
 import {useHistory} from "react-router-dom";
 
@@ -15,7 +15,7 @@ const PlacesPage = () => {
     const[expandedId, seExpandedId] = useState()
     const { PlacesContainer, Place, PlaceName, PlaceAddress, PlaceCategory, PlaceNumOfVisits, PlaceDesc, PlaceImg, PlaceDescription, RatingsContainer, AddRatingContainer,
         Rating, PlaceContainer, RatingComment, RatingDate, RatingUsername, RatingValue, RatingTop, RatingBottom, EditButton, Navivation,AddRatingInput, 
-        RatingCommentArea, RatingForm, RatingSubmit } = components;
+        RatingCommentArea, RatingForm, RatingSubmit } = componentStyles;
 
     const { role, username, userId } = localStorageService // 0 admin
     useEffect(() => {
@@ -73,7 +73,7 @@ const PlacesPage = () => {
                 {places && places.map(place => 
                     <PlaceContainer>
                         <Place onClick={() => history.push("place", place.placeId)}>
-                            <PlaceImg src="logo192.png" />
+                            <PlaceImg src="img/logo192.png" />
                             <PlaceDesc>
                                 <PlaceName>{place.categoryName}</PlaceName>
                                 <Navivation href={`https://www.google.com/maps/search/?api=1&query=${place.attitude},${place.latitude}`} target="_blank">nawiguj</Navivation>

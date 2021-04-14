@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import components from "./styles"
+import componentStyles from "./styles"
 import { localStorageService } from "../../services/localStorageService"
 import ListMenu from "./TopNavbar/ListMenu"
 
@@ -8,7 +8,7 @@ const Layout = (props) => {
     useEffect(() => {
     }, [])
     const {TopNavbar, TopNavbarLeftSide, TopNavbarRightSide, LogoImg, LogoName, LogoWrapper, BurgerMenuWraper, BurgerMenuImg,
-        ListMenuRecord, MenuContainer, FullScreenImg, FullScreenContainer, LayoutContainer, ChildContainer} = components;
+        ListMenuRecord, MenuContainer, FullScreenImg, FullScreenContainer, LayoutContainer, ChildContainer} = componentStyles;
     const [listMenuState, setListMenuState] = useState(false)
     const [fullScreenState, setFullScreenState] = useState(false)
     return(
@@ -16,19 +16,19 @@ const Layout = (props) => {
             <TopNavbar>
                 <TopNavbarLeftSide>
                     <LogoWrapper>
-                        <LogoImg src="rze-herb.png" />
+                        <LogoImg src="img/rze-herb.png" />
                     </LogoWrapper>
                     <LogoName>Rzeszów</LogoName>
                 </TopNavbarLeftSide>
                 <TopNavbarRightSide>
                     <FullScreenContainer>
                         {fullScreenState ?
-                        <FullScreenImg src="minimize.jpg" onClick={() =>{ document.exitFullscreen(); setFullScreenState(false)}}/> :
-                        <FullScreenImg src="fullscreen.png" onClick={() =>{ document.documentElement.requestFullscreen(); setFullScreenState(true)}}/>
+                        <FullScreenImg src="img/minimize.jpg" onClick={() =>{ document.exitFullscreen(); setFullScreenState(false)}}/> :
+                        <FullScreenImg src="img/fullscreen.png" onClick={() =>{ document.documentElement.requestFullscreen(); setFullScreenState(true)}}/>
                     }
                     </FullScreenContainer>
                     <BurgerMenuWraper>
-                        <BurgerMenuImg src="burgerMenu.png" onClick={() => setListMenuState(!listMenuState)}/>
+                        <BurgerMenuImg src="img/burgerMenu.png" onClick={() => setListMenuState(!listMenuState)}/>
                     </BurgerMenuWraper>    
                 </TopNavbarRightSide>
             </TopNavbar>

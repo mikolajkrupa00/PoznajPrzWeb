@@ -2,12 +2,12 @@ import Layout from "../Layout/index";
 import {useHistory} from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import { localStorageService } from "../../services/localStorageService"
-import components from "./styles";
+import componentStyles from "./styles";
 import Axios from "axios";
 
 const RegisterPage = () => {
     const { register, handleSubmit, errors } = useForm();
-    const { RegisterMain, RegisterFrom, RegisterLabel, RegisterInput, RegisterSubmit} = components;
+    const { RegisterMain, RegisterFrom, RegisterLabel, RegisterInput, RegisterSubmit} = componentStyles;
     const history = useHistory();
     const registerUser = (data) => {
         Axios.post("/user", {

@@ -1,13 +1,13 @@
 import Layout from "../Layout/index";
 import { useForm } from 'react-hook-form';
 import {useHistory} from 'react-router-dom'
-import components from "./styles";
+import componentStyles from "./styles";
 import Axios from "axios";
 import { localStorageService } from "../../services/localStorageService"
 
 const LoginPage = () => {
     const { register, handleSubmit, errors } = useForm();
-    const { LoginMain, LoginFrom, LoginLabel, LoginInput, LoginSubmit} = components;
+    const { LoginMain, LoginFrom, LoginLabel, LoginInput, LoginSubmit} = componentStyles;
     const history = useHistory();
 
     const loginUser = (data) => {

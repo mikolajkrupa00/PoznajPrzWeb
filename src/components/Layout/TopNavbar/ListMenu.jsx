@@ -1,11 +1,11 @@
-import components from "../styles"
+import componentStyles from "../styles"
 import {useHistory} from 'react-router-dom'
 import { localStorageService } from "../../../services/localStorageService"
 
 const ListMenu = () => {
     const {username, role, token, userId } = localStorageService;
     const history = useHistory();
-    const{ListMenuRecord, MenuContainer} = components
+    const{ListMenuRecord, MenuContainer} = componentStyles
 
 
     const logout = () => {
@@ -19,6 +19,7 @@ const ListMenu = () => {
 
     return(
         <MenuContainer>
+            <ListMenuRecord onClick={() => history.push("home")}>Strona Główna</ListMenuRecord>
             <ListMenuRecord onClick={() => history.push("map")}>Mapa</ListMenuRecord>
             <ListMenuRecord onClick={() => history.push("places")}>Miejsca</ListMenuRecord>
             <ListMenuRecord onClick={() => history.push("addPlace")}>Dodaj miejsce</ListMenuRecord>

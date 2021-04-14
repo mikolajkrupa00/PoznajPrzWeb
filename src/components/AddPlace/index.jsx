@@ -1,6 +1,6 @@
 import Layout from "../Layout/index";
 import { useForm } from 'react-hook-form';
-import components from "./styles";
+import componentStyles from "./styles";
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import { localStorageService } from "../../services/localStorageService";
@@ -8,7 +8,7 @@ import { localStorageService } from "../../services/localStorageService";
 const AddPlacePage = () => {
     const { register, handleSubmit, errors } = useForm();
     const [categories, setCategories] = useState();
-    const { AddPlaceMain, AddPlaceForm, AddPlaceLabel, AddPlaceInput, AddPlaceSubmit, AddPlaceTextArea, DropDownList, DropDownOption} = components;
+    const { AddPlaceMain, AddPlaceForm, AddPlaceLabel, AddPlaceInput, AddPlaceSubmit, AddPlaceTextArea, DropDownList, DropDownOption} = componentStyles;
 
 
     useEffect(() => {

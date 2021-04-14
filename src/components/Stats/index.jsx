@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import Axios from "axios";
 import Layout from "../Layout/index"
-import components from "./styles";
+import componentStyles from "./styles";
 
 const StatsPage = () => {
     const[visits, setVisits] = useState()
     const[expanded, seExpanded] = useState()
-    const { PlacesContainer, Place, PlaceName, PlaceAddress, PlaceCategory, PlaceNumOfVisits, PlaceDesc, PlaceImg, PlaceId} = components;
+    const { PlacesContainer, Place, PlaceName, PlaceAddress, PlaceCategory, PlaceNumOfVisits, PlaceDesc, PlaceImg, PlaceId} = componentStyles;
     useEffect(() => {
         Axios.get("/visit/getStats/365").then(res => setVisits(res.data))
     },[])

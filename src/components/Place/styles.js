@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 
+const componentStyles = {
 
-export default{
     PlacesContainer: styled.div`
     `,
     Place: styled.div`
@@ -75,3 +75,5 @@ export default{
     `,
 
 }
+
+export default componentStyles

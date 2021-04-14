@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
-export default{
+const componentStyles = {
+
     AddPlaceMain: styled.div`
     
     `,
@@ -22,5 +23,6 @@ export default{
     DropDownOption: styled.option`
     `,
 
-
 }
+
+export default componentStyles

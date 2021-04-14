@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
-const components = {
+const componentStyles = {
+
     TopNavbar: styled.div`
     width: 100%;
     flex-direction:row;
@@ -76,6 +77,11 @@ const components = {
     border-bottom: 1px solid white;
     margin: 20px 0px;
     width: 80%;
+
+    :hover{
+        cursor: pointer;
+        color: #333;
+    }
     `,
     FullScreenImg: styled.img`
     width:42px;
@@ -93,4 +99,4 @@ const components = {
 }
 
 
-export default components;
+export default componentStyles;

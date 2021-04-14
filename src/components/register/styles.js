@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default {
+const componentStyles =  {
     RegisterMain: styled.div`
     `,
     RegisterFrom: styled.form`
@@ -18,3 +18,5 @@ export default {
     `,
 
 }
+
+export default componentStyles

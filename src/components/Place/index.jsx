@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import Axios from "axios";
 import { useForm } from 'react-hook-form';
 import Layout from "../Layout/index"
-import components from "./styles";
+import componentStyles from "./styles";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import ReactHtmlParser from 'react-html-parser'; 
@@ -18,7 +18,7 @@ const PlacePage = (props) => {
     const[comment, setComment] = useState()
     const { PlacesContainer, Place, PlaceName, PlaceAddress, PlaceCategory, PlaceNumOfVisits, PlaceDesc, PlaceImg, PlaceDescription, RatingsContainer, AddRatingContainer,
         Rating, PlaceContainer, RatingComment, RatingDate, RatingUsername, RatingValue, RatingTop, RatingBottom, EditButton, Navivation,AddRatingInput, 
-        RatingCommentArea, RatingForm, RatingSubmit } = components;
+        RatingCommentArea, RatingForm, RatingSubmit } = componentStyles;
 
     const { role, username, userId } = localStorageService // 0 admin
     useEffect(() => {
