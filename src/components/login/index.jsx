@@ -7,7 +7,7 @@ import { localStorageService } from "../../services/localStorageService"
 
 const LoginPage = () => {
     const { register, handleSubmit, errors } = useForm();
-    const { LoginMain, LoginFrom, LoginLabel, LoginInput, LoginSubmit} = componentStyles;
+    const { LoginMain, LoginFrom, LoginTitle, LoginLabel, LoginInput, LoginButton, LoginText} = componentStyles;
     const history = useHistory();
 
     const loginUser = (data) => {
@@ -29,11 +29,14 @@ const LoginPage = () => {
         <Layout>
             <LoginMain>
                 <LoginFrom onSubmit={handleSubmit(loginUser)}>
+                    <LoginTitle>Logowanie</LoginTitle>
                     <LoginLabel>Nazwa użytkownika</LoginLabel>
                     <LoginInput type="text" name="username" {...register('username')} placeholder="nazwa użytkownika" />
                     <LoginLabel>Hasło</LoginLabel>
                     <LoginInput type="password" {...register('password')} placeholder="hasło" />
-                    <LoginSubmit type="submit">Zaloguj się</LoginSubmit>
+                    <LoginButton type="submit" color="#FFFFFF">Zaloguj się</LoginButton>
+                    <LoginText>Nie masz jeszcze konta?</LoginText>
+                    <LoginButton onClick={() => history.push("register")}>Zarejestruj się</LoginButton>
                 </LoginFrom>
             </LoginMain>
         </Layout>
