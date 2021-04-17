@@ -1,0 +1,36 @@
+.markers_layer_controler_wrapper{
+
+    /* height: 50px; */
+    width: calc(100% - 20px);
+    padding: 10px 10px;
+    overflow-y: scroll;
+    white-space: nowrap;
+       
+    /* box-shadow: 0px 0px 4px black; */
+    position: absolute;
+    top: 15px;
+    z-index: 1000;
+
+    
+
+}
+
+.markers_layer_controler_item{
+    
+    border-radius: 20px;
+    padding: 5px 10px;
+    border: 1px solid rgb(255, 255, 255);
+    background-color: white;
+    margin: 0px 5px;
+    box-shadow: 0px 0px 4px black;
+    display: inline-block;
+    text-align: center;
+    z-index: 1000;
+    font-weight: 500;
+}
+
+.markers_layer_controler_item:hover{
+    cursor: pointer;
+    border: 1px solid rgb(0, 110, 230);
+    background-color: rgb(237, 246, 255);
+}

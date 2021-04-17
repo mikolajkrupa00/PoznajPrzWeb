@@ -7,5 +7,6 @@ body{
 
 :root{
 
-    --top_navbar_height: 45px;
+    --top_navbar_height: 45px;    
+    --circle_button_size: 50px;  /* TODO change name to: on_map_circle_button_size */
 }

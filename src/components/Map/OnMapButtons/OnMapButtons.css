@@ -1,0 +1,51 @@
+.circle_button{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    /* border: 1px solid white; */
+    box-shadow: 0px 0px 4px black;
+}
+
+
+
+/* ---- ON SCREEN BUTTONS WRAPPER ---- */
+.on_screen_buttons_wrapper{
+
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 20%;
+    right: 5px;
+    z-index: 1000;
+}
+
+.on_screen_buttons_wrapper > div{
+    margin: 5px 0px;
+}
+
+
+
+/* ---- LOCALIZATION BUTTON ---- */
+.localization_btn{
+
+    width: var(--circle_button_size);
+    height: var(--circle_button_size);
+    line-height: var(--circle_button_size);
+    /* background-color: rgb(0, 110, 230); */
+    background-color: white;
+    border-color: grey;
+    color: white;
+}
+
+/* ---- CENTRE POINT BUTTON ---- */
+.centre_btn{
+
+    width: var(--circle_button_size);
+    height: var(--circle_button_size);
+    line-height: var(--circle_button_size);
+    background-color: rgb(0, 90, 194);
+    background-color: rgb(0, 110, 230);
+    color: white;
+}

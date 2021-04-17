@@ -4,10 +4,12 @@ import styled from "styled-components";
 const componentStyles = {
     
     MapWrapper: styled.div`
-    margin-top: 100px;
-    font-size: 50px;
-    color: lightblue;
-    text-align: center;
+        
+    height: calc(100vh - var(--top_navbar_height));
+    width: 100%;
+    position: absolute;
+    top: var(--top_navbar_height);
+    z-index: -1;.
     `
   
 }
