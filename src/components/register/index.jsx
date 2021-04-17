@@ -7,7 +7,7 @@ import Axios from "axios";
 
 const RegisterPage = () => {
     const { register, handleSubmit, errors } = useForm();
-    const { RegisterMain, RegisterFrom, RegisterLabel, RegisterInput, RegisterSubmit} = componentStyles;
+    const { RegisterMain, RegisterFrom, RegisterTitle, RegisterLabel, RegisterInput, RegisterButton, RegisterText} = componentStyles;
     const history = useHistory();
     const registerUser = (data) => {
         Axios.post("/user", {
@@ -28,6 +28,7 @@ const RegisterPage = () => {
         <Layout>
             <RegisterMain>
                 <RegisterFrom onSubmit={handleSubmit(registerUser)}>
+                    <RegisterTitle>Rejestracja</RegisterTitle>
                     <RegisterLabel>Nazwa użytkownika</RegisterLabel>
                     <RegisterInput type="text" {...register('username', {required: true})} placeholder="nazwa użytkownika" />
                     <RegisterLabel>email</RegisterLabel>
@@ -35,7 +36,9 @@ const RegisterPage = () => {
                     <RegisterLabel>hasło</RegisterLabel>
                     <RegisterInput type="password" {...register('password',
                      {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })} placeholder="hasło" />
-                    <RegisterSubmit type="submit">Zarejestruj się</RegisterSubmit>
+                    <RegisterButton type="submit" color="#FFFFFF">Zarejestruj się</RegisterButton>
+                    <RegisterText>Masz już konto?</RegisterText>
+                    <RegisterButton onClick={() => history.push("login")}>Zaloguj się</RegisterButton>
                 </RegisterFrom>
             </RegisterMain>
         </Layout>
