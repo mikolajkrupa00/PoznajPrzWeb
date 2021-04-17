@@ -35,6 +35,9 @@ const componentStyles = {
         padding: 5px 10px;
         font-family: Arial;
         color: #707070;
+        :hover {
+            box-shadow: 0px 0px 5px #707070;
+        }
     `,
     LoginButton: styled.button`
         margin: 15px auto;
@@ -46,6 +49,9 @@ const componentStyles = {
         font-weight: bold;
         color: #707070;
         background: ${props => props.color || "#E6E6E6"};
+        :hover {
+            box-shadow: 0px 0px 5px #707070;
+        }
     `,
     LoginText: styled.label`
         text-align: center;
