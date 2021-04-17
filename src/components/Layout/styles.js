@@ -57,24 +57,25 @@ const componentStyles = {
     `,
 
     ListMenuContainer: styled.div`
-    height: calc(100% - var(--top_navbar_height));
+    height: calc(100% - var(--top_navbar_height) - 50px);
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    // justify-content: center; //dla malych ekranow nie pokazuje wszystkich opcji w menu
     align-items: center;   
     background-color: rgb(163, 162, 162, 0.9);
     position: absolute;
     top: var(--top_navbar_height);
-
+    overflow-y: scroll;
+    padding: 25px 0px;
     z-index: 10;
     `,
     ListMenuRecord:styled.div`
     text-align: center;
-    font-size: 25px;
+    font-size: 22px;
     color: rgb(255, 255, 255);
     border-bottom: 1px solid white;
-    margin: 20px 0px;
+    margin: 15px 0px;
     width: 80%;
 
     :hover{
