@@ -15,8 +15,13 @@ const componentStyles =  {
         top: max(calc((100vh - (var(--top_navbar_height) + 470px)) / 2), 0px);
         margin: 5px auto;
         position: relative;
-        border: 2px solid #707070;
+        border: 1px solid #E9E9E9;
+        border-radius: 5px;
         box-shadow: 0px 0px 10px #707070;
+
+        @media (min-width: 700px) {
+            width: 630px;
+        }
     `,
     RegisterTitle: styled.label`
         text-align: center;
