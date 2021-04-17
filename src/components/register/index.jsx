@@ -29,11 +29,14 @@ const RegisterPage = () => {
             <RegisterMain>
                 <RegisterFrom onSubmit={handleSubmit(registerUser)}>
                     <RegisterTitle>Rejestracja</RegisterTitle>
-                    <RegisterLabel>Nazwa użytkownika</RegisterLabel>
-                    <RegisterInput type="text" {...register('username', {required: true})} placeholder="nazwa użytkownika" />
-                    <RegisterLabel>email</RegisterLabel>
+                    {/* <RegisterLabel>Nazwa użytkownika</RegisterLabel>
+                    <RegisterInput type="text" {...register('username', {required: true})} placeholder="nazwa użytkownika" /> */}
+                    <RegisterLabel>E-mail</RegisterLabel>
                     <RegisterInput type="email" {...register('email', {required: true})} placeholder="email" />
-                    <RegisterLabel>hasło</RegisterLabel>
+                    <RegisterLabel>Hasło</RegisterLabel>
+                    <RegisterInput type="password" {...register('password',
+                     {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })} placeholder="hasło" />
+                    <RegisterLabel>Powtórz hasło</RegisterLabel>
                     <RegisterInput type="password" {...register('password',
                      {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })} placeholder="hasło" />
                     <RegisterButton type="submit" color="#FFFFFF">Zarejestruj się</RegisterButton>
