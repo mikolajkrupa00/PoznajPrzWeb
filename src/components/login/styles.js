@@ -16,8 +16,13 @@ const componentStyles = {
         margin: 5px auto;
         position: relative;
         top: max(calc((100vh - (var(--top_navbar_height) + 400px)) / 2), 0px);
-        border: 2px solid #707070;
+        border: 1px solid #E9E9E9;
+        border-radius: 5px;
         box-shadow: 0px 0px 10px #707070;
+
+        @media (min-width: 700px) {
+            width: 630px;
+        }
     `,
     LoginTitle: styled.label`
         text-align: center;
