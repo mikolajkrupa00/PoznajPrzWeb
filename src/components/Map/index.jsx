@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import Layout from "../Layout/index"
 import componentStyles from "./styles";
 import { localStorageService } from "../../services/localStorageService"
-import LeafletMap from './LeafletMap'
 
 
 
