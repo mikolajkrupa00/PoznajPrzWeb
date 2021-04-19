@@ -5,7 +5,7 @@ const componentStyles = {
     
     MapWrapper: styled.div`
         
-    height: calc(100vh - var(--top_navbar_height));
+    height: calc(100% - var(--top_navbar_height));
     width: 100%;
     position: absolute;
     top: var(--top_navbar_height);
