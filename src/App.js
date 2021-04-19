@@ -6,6 +6,7 @@ import AddPlacePage from "./components/AddPlace/index";
 import PlacesPage from "./components/Places/index"
 import PlacePage from "./components/Place/index"
 import StatsPage from "./components/Stats/index"
+import AdminPanel from "./components/AdminPanel/index"
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { setupAxiosInterceptors } from './services/interceptor';
 
@@ -25,6 +26,7 @@ function App() {
       <Route path="/addPlace" component={AddPlacePage} />
       <Route path="/stats" component={StatsPage} />
       <Route path="/place" component={PlacePage} />
+      <Route path="/adminPanel" component={AdminPanel} />
     </Switch>
     </BrowserRouter>
   );

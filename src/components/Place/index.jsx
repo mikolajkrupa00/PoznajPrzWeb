@@ -95,7 +95,7 @@ const PlacePage = (props) => {
                                         <RatingForm onSubmit={handleSubmit(addRating)}>
                                             ocena : <AddRatingInput type="number" {...register('value', {required:true})}/>
                                             <AddRatingInput defaultValue={place.placeId} type="hidden" {...register('placeId')}/>
-                                            komentarz: <ReactQuill theme="snow" value={comment} onChange={setComment}/>
+                                            komentarz: <ReactQuill theme="snow" value={comment || ''} onChange={setComment}/>
                                             <RatingSubmit type="submit">dodaj komentarz</RatingSubmit>
                                         </RatingForm> :
                                         <>

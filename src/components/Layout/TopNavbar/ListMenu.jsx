@@ -22,10 +22,17 @@ const ListMenu = () => {
             <ListMenuRecord onClick={() => history.push("home")}>Strona Główna</ListMenuRecord>
             <ListMenuRecord onClick={() => history.push("map")}>Mapa</ListMenuRecord>
             <ListMenuRecord onClick={() => history.push("places")}>Miejsca</ListMenuRecord>
-            <ListMenuRecord onClick={() => history.push("addPlace")}>Dodaj miejsce</ListMenuRecord>
+            {username && <ListMenuRecord onClick={() => history.push("addPlace")}>Dodaj miejsce</ListMenuRecord>}
             {username ? <ListMenuRecord onClick={() => logout()}>Wyloguj</ListMenuRecord> : 
-            <ListMenuRecord onClick={() => history.push("login")}>Logowanie</ListMenuRecord>}
-            <ListMenuRecord onClick={() => history.push("register")}>Rejestracja</ListMenuRecord>
+            <>
+                <ListMenuRecord onClick={() => history.push("login")}>Logowanie</ListMenuRecord>
+                <ListMenuRecord onClick={() => history.push("register")}>Rejestracja</ListMenuRecord>
+            </> }
+            {role=='0' && 
+            <>
+                <ListMenuRecord onClick={() => history.push("stats")}>Statystyki</ListMenuRecord>
+                <ListMenuRecord onClick={() => history.push("adminPanel")}>Panel admina</ListMenuRecord>
+            </>}
             <ListMenuRecord>Zmien jezyk</ListMenuRecord>
         </ListMenuContainer>
     )
