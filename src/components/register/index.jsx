@@ -16,11 +16,11 @@ const RegisterPage = () => {
             password: data.password,
             confirmPassword:data.confirmPassword
         }).then((res) => {
-            localStorageService.username = res.data.username
+            localStorageService.username = data.username
             localStorageService.token = res.data.token
             localStorageService.userId = res.data.userId
-            localStorageService.role = res.data.role
-            history.push("places")
+            localStorageService.role = '1'
+            history.push("home")
         })
     }
 
@@ -30,8 +30,8 @@ const RegisterPage = () => {
             <RegisterMain>
                 <RegisterFrom onSubmit={handleSubmit(registerUser)}>
                     <RegisterTitle>Rejestracja</RegisterTitle>
-                    {/* <RegisterLabel>Nazwa użytkownika</RegisterLabel>
-                    <RegisterInput type="text" {...register('username', {required: true})} placeholder="nazwa użytkownika" /> */}
+                    <RegisterLabel>Nazwa użytkownika</RegisterLabel>
+                    <RegisterInput type="text" {...register('username', {required: true})} placeholder="nazwa użytkownika" />
                     <RegisterLabel>E-mail</RegisterLabel>
                     <RegisterInput type="email" {...register('email', {required: true})} placeholder="email" />
                     <RegisterLabel>Hasło</RegisterLabel>
