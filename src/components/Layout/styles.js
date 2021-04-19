@@ -87,7 +87,13 @@ const componentStyles = {
     LayoutContainer: styled.div`
     `,
     ChildContainer: styled.div`
-    `
+    `,
+    ProfileButton:styled.div`
+    margin-right:50px;
+    &:hover{
+        cursor:pointer;
+    }
+    `,
 }
 
 

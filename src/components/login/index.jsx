@@ -21,7 +21,7 @@ const LoginPage = () => {
             localStorageService.userId = res.data.userId
             localStorageService.role = res.data.role
         });
-        history.push("places")
+        history.push("home")
     }
 
 

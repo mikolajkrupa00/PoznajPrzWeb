@@ -51,8 +51,9 @@ const PlacePage = (props) => {
         reset()
     }
 
-    const blockUser = (userId) => {
-        Axios.put(`/user/blockUser/${userId}`)
+    const blockUser = (username) => {
+        console.log(username);
+        Axios.put(`/user/blockUser/${username}`)
     }
     
 
@@ -77,6 +78,7 @@ const PlacePage = (props) => {
                                     <RatingsContainer>
                                         {ratings.map((rating, index) => 
                                         <Rating>
+                                        {console.log(rating)}
                                             <RatingTop>
                                                 <RatingUsername>{rating.username}</RatingUsername>
                                                 <RatingDate>{rating.ratingDate}</RatingDate>
@@ -90,8 +92,7 @@ const PlacePage = (props) => {
                                         </Rating>
                                         )}
                                     </RatingsContainer>
-                                    {console.log(role)}
-                                    {role !== "2" ?
+                                    {role !== "2" ? username &&
                                         <RatingForm onSubmit={handleSubmit(addRating)}>
                                             ocena : <AddRatingInput type="number" {...register('value', {required:true})}/>
                                             <AddRatingInput defaultValue={place.placeId} type="hidden" {...register('placeId')}/>
