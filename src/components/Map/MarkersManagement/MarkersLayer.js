@@ -2,17 +2,20 @@ import L from 'leaflet'
 import {useState, useEffect} from 'react'
 import { LayerGroup, Marker, useMap} from 'react-leaflet'
 import {useHistory} from 'react-router-dom'
-import { localStorageService } from "../../../services/localStorageService"
-import {markers} from '../Data'  //szcztuczna baza danych
+import Axios from "axios";
+// import {markers} from '../Data'  //szcztuczna baza danych
 import MarkersLayerControler from './MarkersLayerControler'
 import OtherCategoriesTab from './OtherCategoriesTab'
 import MarkerBriefDescription from './MarkerBriefDescription/index'
 
 
-function Icon(size, iconImg) {
+function Icon(size, marker) {
 
+    //const path to icon in public folder: img/place_category_icons/{CATEGORY_NAME}.png
+    var iconPath = 'img/place_category_icons/' + marker.categoryName + '.png'
+    
     const icon = L.icon({
-        iconUrl: process.env.PUBLIC_URL + iconImg,
+        iconUrl: process.env.PUBLIC_URL + iconPath,
         iconSize: size
         //iconAnchor: [20, 45],
     })
@@ -22,26 +25,28 @@ function Icon(size, iconImg) {
    
 }
 
-function M() {
-
-
-}
 
 const MarkersLayer = () => {
 
     const map = useMap()
     const history = useHistory();
+    
 
     const [iconSize, setIconSize] = useState([20, 20])
+    const [markers, setMarkers] = useState();
     const [placeCategory, setPlaceCategory] = useState('all')
     const [otherCategories, setOtherCategories] = useState('off')
     const [briefDescription, setBriefDescription] = useState(false)
+    const [clickedMarker, setClickedMarker] = useState('');
 
     useEffect(() => {
         
         //call once when component is rendered
-        map.on('zoom', resizeMarkersIcon)        
+        map.on('zoom', resizeMarkersIcon)
+        Axios.get("/place/getPlaces").then(res => {setMarkers(res.data); console.log(res.data)})
     }, [])
+
+    
 
 
     const changePlaceCategory = (category) =>{
@@ -89,21 +94,22 @@ const MarkersLayer = () => {
     const onMarkerClick = (markerObj) => {
 
         setBriefDescription(true)
-        var pos =  markerObj.position;
+        var pos =  [markerObj.attitude, markerObj.latitude]
         //TODO: dodac prawdziwe srodkowanie mapy na 'onMarkerClick', wymaga zmiany wysokosci diva 'mapWrapper'
         //TODO: dodac wyroznienie do kliknietego markera'
         pos[0] -= 0.003
         map.setView(pos)
-        console.log(markerObj.id)
+        console.log(markerObj.placeId)
         localStorage.setItem('clickedMarker', JSON.stringify(markerObj))
         console.log("Added to localStorage")
+        setClickedMarker(markerObj)
     }
 
     const goToDescription = () => {
-        var clickedMarker = JSON.parse(localStorage.getItem('clickedMarker'))
-
-        console.log('Object from local storeage: ', clickedMarker)
-        history.push("places/" + clickedMarker.id)
+        //var clickedMarker = JSON.parse(localStorage.getItem('clickedMarker'))
+        //console.log('Object from local storeage: ', clickedMarker)
+        //history.push("places/" + clickedMarker.id)
+        history.push("place", clickedMarker.placeId)
     }
 
    
@@ -117,21 +123,22 @@ const MarkersLayer = () => {
 
             <MarkersLayerControler changePlaceCategory={changePlaceCategory}/>
 
-            {   
+            {markers &&   
                 markers.map((marker, id) => 
                 {   
-                    if(marker.min_zoom_to_render === 'none'){
+                    
+                    if(marker.zoom <= 10){
 
                         if(placeCategory === 'all'){
                             return(
-                                <Marker key={id} position={marker.position} icon={Icon(iconSize, marker.iconPath)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
+                                <Marker key={id} position={[marker.attitude, marker.latitude]} icon={Icon(iconSize, marker)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
                             )
                         }
                         else{
                             
                             if(marker.category === placeCategory){
                                 return(
-                                    <Marker key={id} position={marker.position} icon= {Icon(iconSize, marker.iconPath)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
+                                    <Marker key={id} position={[marker.attitude, marker.latitude]} icon={Icon(iconSize, marker)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
                                 )
                             }
     
@@ -139,18 +146,18 @@ const MarkersLayer = () => {
                     }
                     else{
 
-                        if(map.getZoom() >= marker.min_zoom_to_render){
+                        if(map.getZoom() >= marker.zoom){
 
                             if(placeCategory === 'all'){
                                 return(
-                                    <Marker key={id} position={marker.position} icon= {Icon(iconSize, marker.iconPath)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
+                                    <Marker key={id} position={[marker.attitude, marker.latitude]} icon={Icon(iconSize, marker)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
                                 )
                             }
                             else{
                                 
                                 if(marker.category === placeCategory){
                                     return(
-                                        <Marker key={id} position={marker.position} icon= {Icon(iconSize, marker.iconPath)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
+                                        <Marker key={id} position={[marker.attitude, marker.latitude]} icon={Icon(iconSize, marker)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
                                     )
                                 }
         
@@ -162,7 +169,7 @@ const MarkersLayer = () => {
             }
 
             
-            {briefDescription && <MarkerBriefDescription closeBriefDescription={() => setBriefDescription(false)} goToDescription={goToDescription}/>}
+            {briefDescription && <MarkerBriefDescription closeBriefDescription={() => setBriefDescription(false)} goToDescription={goToDescription} clickedMarker={clickedMarker}/>}
             
         </LayerGroup>
     )
