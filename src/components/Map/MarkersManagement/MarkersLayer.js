@@ -136,7 +136,7 @@ const MarkersLayer = () => {
                         }
                         else{
                             
-                            if(marker.category === placeCategory){
+                            if(marker.categoryName === placeCategory){
                                 return(
                                     <Marker key={id} position={[marker.attitude, marker.latitude]} icon={Icon(iconSize, marker)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
                                 )
@@ -155,7 +155,7 @@ const MarkersLayer = () => {
                             }
                             else{
                                 
-                                if(marker.category === placeCategory){
+                                if(marker.categoryName === placeCategory){
                                     return(
                                         <Marker key={id} position={[marker.attitude, marker.latitude]} icon={Icon(iconSize, marker)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
                                     )
