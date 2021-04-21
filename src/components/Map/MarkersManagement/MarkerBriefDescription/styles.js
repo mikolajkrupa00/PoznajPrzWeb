@@ -27,6 +27,9 @@ const componentStyles = {
     PlaceName: styled.div`
     font-size: 22px;
     font-weight: 500;
+    width: 80%;
+    overfolw: hide;
+    text-align: left;
     `,
 
     CloseButton: styled.div`
