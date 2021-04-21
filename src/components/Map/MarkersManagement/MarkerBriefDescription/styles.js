@@ -56,8 +56,14 @@ const componentStyles = {
     BottomDiv: styled.div`
     height: 25px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
+    `,
+
+    Address: styled.div`
+    width: 80%;
+    text-align: left;
+    overfolw: hidden;
     `,
 
     GoToDescriptionButton: styled.div`

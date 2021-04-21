@@ -1,22 +1,28 @@
 import React, {useEffect, useState} from "react";
 import Axios from "axios";
 import { useForm } from 'react-hook-form';
+import {useHistory} from "react-router-dom";
 import Layout from "../Layout/index"
 import componentStyles from "./styles";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import ReactHtmlParser from 'react-html-parser'; 
 import { localStorageService } from "../../services/localStorageService"
+import { BiLeftArrowAlt } from 'react-icons/bi';
 
 const PlacePage = (props) => {
 
 
     const { register, handleSubmit, errors, reset } = useForm();
+    let iconStyles = { color: '#303030', fontSize: "25px" };
     const placeId = props.location.state;
+    const history = useHistory();
     const[place, setPlace] = useState(true)
     const[ratings, setRatings] = useState()
     const[comment, setComment] = useState()
-    const { PlacesContainer, Place, PlaceName, PlaceAddress, PlaceCategory, PlaceNumOfVisits, PlaceDesc, PlaceImg, PlaceDescription, RatingsContainer, AddRatingContainer,
+
+
+    const { PlacesContainer, GoBack ,Place, PlaceName, PlaceAddress, PlaceCategory, PlaceNumOfVisits, PlaceDesc, PlaceImg, PlaceDescription, RatingsContainer, AddRatingContainer,
         Rating, PlaceContainer, RatingComment, RatingDate, RatingUsername, RatingValue, RatingTop, RatingBottom, EditButton, Navivation,AddRatingInput, 
         RatingCommentArea, RatingForm, RatingSubmit } = componentStyles;
 
@@ -64,7 +70,8 @@ const PlacePage = (props) => {
                     { place  &&
                         <PlaceContainer>
                             <Place>
-                                <PlaceImg src="logo192.png" />
+                                <GoBack onClick={() => history.goBack()}><BiLeftArrowAlt style={iconStyles} /></GoBack>
+                                <PlaceImg src="logo192.png"/>
                                 <PlaceDesc>
                                     <PlaceName>{place.name}</PlaceName>
                                     <Navivation href={`https://www.google.com/maps/search/?api=1&query=${place.attitude},${place.latitude}`} target="_blank">nawiguj</Navivation>

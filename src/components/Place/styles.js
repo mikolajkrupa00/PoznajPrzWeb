@@ -10,6 +10,8 @@ const componentStyles = {
     display:flex;
     flex-direction:row;
     `,
+    GoBack: styled.div`
+    `,
     PlaceName:styled.div`
     `,
     PlaceAddress: styled.div`

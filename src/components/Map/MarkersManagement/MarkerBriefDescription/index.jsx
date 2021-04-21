@@ -12,23 +12,21 @@ import { BiRightArrowAlt } from 'react-icons/bi';
 
 
 
-const MarkerBriefDescription = ({closeBriefDescription, goToDescription}) => {
+const MarkerBriefDescription = ({closeBriefDescription, goToDescription, clickedMarker}) => {
 
-    const {BriefDescriptionWrapper, TopDiv, MiddleDiv, BottomDiv, PlaceName, PlaceImg, PlaceDescription, CloseButton, GoToDescriptionButton} = componentStyles
+    const {BriefDescriptionWrapper, TopDiv, MiddleDiv, BottomDiv, PlaceName, PlaceImg, PlaceDescription, CloseButton, GoToDescriptionButton, Address} = componentStyles
 
     let closeIcon = { color: '#303030', fontSize: "25px" };
     let goToIcon = { color: '#303030', fontSize: "30px" };
+
     
-
-   
-
     return(
 
-
+       
         <BriefDescriptionWrapper>
 
             <TopDiv>
-                <PlaceName>Nazwa miejsca</PlaceName>
+                <PlaceName>{clickedMarker.name}</PlaceName>
                 <CloseButton>
                     <VscChromeClose style={closeIcon} onClick={closeBriefDescription} ></VscChromeClose>
                 </CloseButton>
@@ -53,19 +51,13 @@ const MarkerBriefDescription = ({closeBriefDescription, goToDescription}) => {
 
 
             <BottomDiv>
+                <Address>{clickedMarker.address}</Address>
                 <GoToDescriptionButton> <BiRightArrowAlt style={goToIcon} onClick={goToDescription}/> </GoToDescriptionButton>
-            </BottomDiv>
+            </BottomDiv>    
 
-           
-
-           
-            
-           
-          
-           
-
-        
         </BriefDescriptionWrapper>
+
+
     )
 
 }
