@@ -75,6 +75,7 @@ const RatingForm = styled.form`
     display:flex;
     flex-direction:column;
     margin-top:50px;
+    padding: 10px;
 `;
 
 const RatingRow = styled.div`
