@@ -3,14 +3,21 @@ import Axios from "axios";
 import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
 import Layout from "../Layout/index"
-import componentStyles, { FileInput, Header, 
+
+import { FileInput, Header, 
 	RatingCol, RatingForm, RatingRow, UploadFile,
 	RatingSubmit } from "./styles";
+
+import componentStyles from "./styles";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import ReactHtmlParser from 'react-html-parser';
 import { localStorageService } from "../../services/localStorageService"
 import { BiLeftArrowAlt } from 'react-icons/bi';
+//Rafal nowe style
+import {VscChromeClose} from 'react-icons/vsc'
+import {BsThreeDots} from 'react-icons/bs'
+import {MdKeyboardArrowUp} from 'react-icons/md'
 
 const PlacePage = (props) => {
 
@@ -23,10 +30,18 @@ const PlacePage = (props) => {
 	const [ratings, setRatings] = useState()
 	const [comment, setComment] = useState()
 	const [file, _setFile] = useState(null);
-
-	const { PlacesContainer, GoBack, Place, PlaceName, PlaceAddress, PlaceCategory, PlaceNumOfVisits, PlaceDesc, PlaceImg, PlaceDescription, RatingsContainer, AddRatingContainer,
-		Rating, PlaceContainer, RatingComment, RatingDate, RatingUsername, RatingValue, RatingTop, RatingBottom, EditButton, Navivation, AddRatingInput,
-		RatingCommentArea } = componentStyles;
+    const [addComment, setAddComment] = useState(false)
+    const [commentSection, setCommentSection] = useState('')
+    const [descriptionHeight, setDescriptionHeight] = useState('250px')
+    
+	const { PlacePageContainer, TopBar, GoBack, PlaceIntro, Gallery, Photo, PlaceName, PlaceAddress, 
+        PlaceCategory, PlaceNumOfVisits, PlaceDesc, PlaceImg, PlaceDescription, 
+        DescriptionContent,  DescriptionButton,
+        RatingsContainer, RatingsPanel, AddRatingContainer, RatingSubmitWrapper, RatingFormTopPanel,
+        Rating, RatingComment, RatingDate, RatingUsername, RatingValue, RatingTop, 
+        RatingBottom, RatingOptions, EditButton, Navigation,AddRatingInput,  RatingFormLable,
+        RatingFormRaitingWrapper, RatingFormAddImageWrapper,
+        RaitingTextarea, RatingForm, RatingSubmit, Button, ButtonsWrapper} = componentStyles;
 
 	const { role, username, userId } = localStorageService // 0 admin
 	useEffect(() => {
@@ -84,77 +99,183 @@ const PlacePage = (props) => {
 		}
 	}
 
-	return (
-		<Layout>
-			<PlacesContainer>
-				{place &&
-					<PlaceContainer>
-						<Place>
-							<GoBack onClick={() => history.goBack()}><BiLeftArrowAlt style={iconStyles} /></GoBack>
-							<PlaceImg src="logo192.png" />
-							<PlaceDesc>
-								<PlaceName>{place.name}</PlaceName>
-								<Navivation href={`https://www.google.com/maps/search/?api=1&query=${place.attitude},${place.latitude}`} target="_blank">nawiguj</Navivation>
-								<PlaceAddress>{place.address}</PlaceAddress>
-								<PlaceCategory>kategoria :  {place.categoryName}</PlaceCategory>
-								<PlaceDescription>opis : {place.description}</PlaceDescription>
-							</PlaceDesc>
-						</Place>
-						{ratings &&
-							<>
-								<RatingsContainer>
-									{ratings.map((rating, index) =>
-										<Rating>
-											{console.log(rating)}
-											<RatingTop>
-												<RatingUsername>{rating.username}</RatingUsername>
-												<RatingDate>{rating.ratingDate}</RatingDate>
-												<RatingValue>ocena: {rating.value}</RatingValue>
-												{(role === '0' || username === rating.username) && <EditButton onClick={() => deleteRating(rating.ratingId)}>usuń</EditButton>}
-												{role === '0' && <EditButton onClick={() => blockUser(rating.username)}>zablokuj</EditButton>}
-											</RatingTop>
-											<RatingComment>
-												{rating.isVisible ? <>{ReactHtmlParser(rating.comment)}</> : "użytkownik zablokowany"}
-											</RatingComment>
-										</Rating>
-									)}
-								</RatingsContainer>
-								{role !== "2" ? username &&
-									<RatingForm onSubmit={handleSubmit(addRating)}>
-										<RatingRow>
-											<RatingCol>
-												ocena : <AddRatingInput type="number" {...register('value', { required: true })} />
-												<AddRatingInput defaultValue={place.placeId} type="hidden" {...register('placeId')} />
-												komentarz: <ReactQuill theme="snow" value={comment || ''} onChange={setComment} />
-											</RatingCol>
+    return(
+        <Layout>
 
-											<RatingCol>
-												<UploadFile>
-													<Header>Dodaj zdjęcie</Header>
-													<FileInput
-														type='file'
-														id='file'
-														name='file'
-														accept='image/*'
-														onChange={ e => setFile(e) }
-													/>
-												</UploadFile>
-											</RatingCol>
-										</RatingRow>										
+            { place  &&
+                <PlacePageContainer>
+                    <TopBar>
+                        <GoBack onClick={() => history.goBack()}><BiLeftArrowAlt style={iconStyles} /></GoBack>
+                    </TopBar>
 
-										<RatingSubmit type="submit">dodaj komentarz</RatingSubmit>
-									</RatingForm> :
-									<>
-										Zostałeś zablokowany skontaktuj się z administratorem
-                                        </>
-								}
-							</>
-						}
-					</PlaceContainer>
-				}
-			</PlacesContainer>
-		</Layout>
-	)
+                    <PlaceIntro>
+                        <PlaceImg src="logo192.png"/>
+                        <PlaceDesc>
+                            <PlaceName>{place.name}</PlaceName>
+                            <PlaceAddress>{place.address}</PlaceAddress>
+                            <PlaceCategory>Kategoria :  {place.categoryName}</PlaceCategory>
+                            
+                            <ButtonsWrapper>
+                                <Button>
+                                    {/* TODO: dodac pozycje uzytkownika do url w Google zeby szukalo drogi zjego lokalizacji*/}
+                                    <Navigation href={`https://www.google.com/maps/search/?api=1&query=${place.attitude},${place.latitude}`} target="_blank">Nawiguj</Navigation>
+                                </Button>
+
+                                <Button inputColor="green">Cos jeszcze?</Button>
+                                <Button inputColor="orange">Kolejny BTN?</Button>
+                                <Button inputColor="purple">Ostatni BTN?</Button>
+
+                            </ButtonsWrapper>
+                            
+
+                        </PlaceDesc>
+                    </PlaceIntro>
+
+                    <Gallery>
+                        <Photo></Photo>
+                        <Photo></Photo>
+                        <Photo></Photo>
+                        <Photo></Photo>
+                        <Photo></Photo>
+                        <Photo></Photo>
+                    </Gallery>
+
+                    <PlaceDescription>
+                        <DescriptionContent inputHeigh={descriptionHeight}>
+                            {/* {place.description} */}
+                            <p>
+                            Lorem Ipsum jest tekstem stosowanym jako przykładowy
+                            wypełniacz w przemyśle poligraficznym. Został po raz
+                            pierwszy użyty w XV w. przez nieznanego drukarza do
+                            wypełnienia tekstem próbnej książki. Pięć wieków później
+                            zaczął być używany przemyśle elektronicznym, pozostając
+                            praktycznie niezmienionym. Spopularyzował się w latach 60.
+                            XX w. wraz z publikacją arkuszy Letrasetu, zawierających
+                            fragmenty Lorem Ipsum, a ostatnio z zawierającym różne
+                            wersje Lorem Ipsum oprogramowaniem przeznaczonym do
+                            realizacji druków na komputerach osobistych, jak Aldus
+                            PageMaker.
+                            </p>
+                            <p>
+                            Lorem Ipsum jest tekstem stosowanym jako przykładowy
+                            wypełniacz w przemyśle poligraficznym. Został po raz
+                            pierwszy użyty w XV w. przez nieznanego drukarza do
+                            wypełnienia tekstem próbnej książki. Pięć wieków później
+                            zaczął być używany przemyśle elektronicznym, pozostając
+                            praktycznie niezmienionym. Spopularyzował się w latach 60.
+                            XX w. wraz z publikacją arkuszy Letrasetu, zawierających
+                            fragmenty Lorem Ipsum, a ostatnio z zawierającym różne
+                            wersje Lorem Ipsum oprogramowaniem przeznaczonym do
+                            realizacji druków na komputerach osobistych, jak Aldus
+                            PageMaker.
+                            </p>
+                        </DescriptionContent>
+                        
+                        {descriptionHeight === '250px' ?
+                        <BsThreeDots style={iconStyles} onClick={() => {setDescriptionHeight('500px')}}></BsThreeDots>                   
+                        : 
+                        <MdKeyboardArrowUp style={iconStyles} onClick={() => {setDescriptionHeight('250px')}}></MdKeyboardArrowUp>
+                        }
+                        
+                    </PlaceDescription>
+
+                    
+
+                    {ratings &&
+                    <>
+                        <RatingsContainer>
+
+                            <RatingsPanel>
+                                {/* TODO: Dodac komunikat gdy niezalogowany użytkownik chce dodac komentarz*/}
+                                <Button inputColor='#777'>Sortuj?</Button>
+                                <Button inputColor='#555'>??????</Button>
+                                <Button inputColor='black' onClick={() => {setCommentSection(true)}}>Dodaj komentarz</Button>                               
+                            </RatingsPanel>
+
+
+                            {/* 0-admin     1-user      2-zablokowany */}
+                            {role !== "2" ? (username && commentSection) &&
+                            <RatingForm onSubmit={handleSubmit(addRating)}>
+                                
+                                <RatingFormTopPanel>
+                                    <VscChromeClose style={iconStyles} onClick={() => {setCommentSection(false)}}/>
+                                </RatingFormTopPanel>
+                                
+                                <RatingFormRaitingWrapper>
+                                    <RatingFormLable>Ocena:</RatingFormLable>
+                                    <AddRatingInput type="number" {...register('value', {required:true})}/>
+                                    <AddRatingInput defaultValue={place.placeId} type="hidden" {...register('placeId')}/>
+                                </RatingFormRaitingWrapper>
+                                
+                            
+                                <RatingFormLable>Komentarz: </RatingFormLable>                         
+                                <RaitingTextarea 
+                                    placeholder={"Co sadzisz o tym miejscu?"} 
+                                    onChange={(e) => {console.log(e.target.value); setComment(e.target.value)}}>
+                                </RaitingTextarea>
+
+                                <RatingFormLable>Dodaj zdjęcie: </RatingFormLable>
+                                <RatingFormAddImageWrapper>
+                                    {/* TO JEST DIV DLA OSKARA    */}
+									<FileInput
+											type='file'
+											id='file'
+											name='file'
+											accept='image/*'
+											onChange={ e => setFile(e) }
+									/>									
+                                </RatingFormAddImageWrapper>
+                               
+
+                                <RatingSubmitWrapper>
+                                    <RatingSubmit type="submit">Dodaj komentarz</RatingSubmit>
+                                </RatingSubmitWrapper>
+                                
+                                
+                            </RatingForm> 
+                            :
+                            <>
+                                Zostałeś zablokowany skontaktuj się z administratorem
+                            </>
+                            }
+
+
+                            {ratings.map((rating, index) => 
+                            <Rating>
+                                {/* {console.log(rating)} */}
+                                <RatingTop>
+                                    <RatingUsername>{rating.username}</RatingUsername>
+                                    <RatingValue>Ocena: {rating.value}</RatingValue>                                    
+                                </RatingTop>
+
+                                <RatingComment>                               
+                                    {rating.isVisible ? <>{ReactHtmlParser(rating.comment)}</> : "Użytkownik zablokowany"}
+                                </RatingComment>
+
+                                <RatingBottom>
+                                    <RatingDate>{rating.ratingDate}</RatingDate>
+
+                                    <RatingOptions>
+                                        {(role==='0' || username===rating.username) &&<EditButton onClick={() => deleteRating(rating.ratingId)}>Usuń</EditButton>}
+                                        {role==='0' && <EditButton onClick={() => blockUser(rating.username)}>Zablokuj</EditButton>}
+                                    </RatingOptions>
+                                </RatingBottom>
+
+                            </Rating>
+                            )}
+                        </RatingsContainer>
+
+                        
+
+                    </>
+                    }
+                </PlacePageContainer>
+            }
+                       
+        </Layout>
+    )
+
+	
 }
 
 export default PlacePage;
