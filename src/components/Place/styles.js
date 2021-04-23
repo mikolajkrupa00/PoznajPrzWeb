@@ -68,14 +68,51 @@ const componentStyles = {
     `,
     RatingCommentArea: styled.textarea`
     `,
-    RatingForm: styled.form`
+    
+}
+
+const RatingForm = styled.form`
     display:flex;
     flex-direction:column;
     margin-top:50px;
-    `,
-    RatingSubmit : styled.button`
-    `,
+`;
 
+const RatingRow = styled.div`
+    display: flex;
+    flex-direction: row;
+`
+
+const RatingCol = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    flex-grow: 1;
+`;
+
+const UploadFile = styled.div`
+    margin-left: 36px;
+
+`;
+
+const Header = styled.h3`
+
+`;
+
+const FileInput = styled.input`
+
+`;
+
+const RatingSubmit = styled.button`
+    margin-top: 60px;
+`;
+
+export default componentStyles;
+export {
+    RatingForm,
+    UploadFile,
+    Header,
+    FileInput,
+    RatingRow,
+    RatingCol,
+    RatingSubmit
 }
-
-export default componentStyles
