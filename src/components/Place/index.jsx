@@ -56,7 +56,7 @@ const PlacePage = (props) => {
 
 	const addRating = (data) => {
 		var request = new FormData();
-		request.append('ratingDate', new Date());
+		request.append('ratingDate', new Date().toDateString());
 		request.append('comment', comment);
 		request.append('value', data.value);
 		request.append('userId', userId);
