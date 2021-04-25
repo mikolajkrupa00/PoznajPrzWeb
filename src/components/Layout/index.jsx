@@ -32,7 +32,7 @@ const Layout = (props) => {
                     <BurgerMenuImg src="img/burgerMenu.png" onClick={() => setListMenuState(!listMenuState)}/>
                 </TopNavbarRightSide>
             </TopNavbar>
-            {listMenuState && <ListMenu/>}
+            {listMenuState && <ListMenu closeListMenu={() => setListMenuState(false)}/>}
             <ChildContainer>
                 {props.children}
             </ChildContainer>

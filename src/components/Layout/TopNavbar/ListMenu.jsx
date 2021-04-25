@@ -2,14 +2,14 @@ import componentStyles from "../styles"
 import {useHistory} from 'react-router-dom'
 import { localStorageService } from "../../../services/localStorageService"
 
-const ListMenu = () => {
+const ListMenu = ({closeListMenu}) => {
     const {username, role, token, userId } = localStorageService;
     const history = useHistory();
     const{ListMenuRecord, ListMenuContainer} = componentStyles
 
 
     const logout = () => {
-        console.log("asd")
+        console.log("Logout")
         localStorageService.userId = ''
         localStorageService.role = ''
         localStorageService.username = ''
@@ -19,19 +19,19 @@ const ListMenu = () => {
 
     return(
         <ListMenuContainer>
-            <ListMenuRecord onClick={() => history.push("home")}>Strona Główna</ListMenuRecord>
-            <ListMenuRecord onClick={() => history.push("map")}>Mapa</ListMenuRecord>
-            <ListMenuRecord onClick={() => history.push("places")}>Miejsca</ListMenuRecord>
-            {username && <ListMenuRecord onClick={() => history.push("addPlace")}>Dodaj miejsce</ListMenuRecord>}
+            <ListMenuRecord onClick={() => {history.push("home"); closeListMenu()}}>Strona Główna</ListMenuRecord>
+            <ListMenuRecord onClick={() => {history.push("map"); closeListMenu()}}>Mapa</ListMenuRecord>
+            <ListMenuRecord onClick={() => {history.push("places"); closeListMenu()}}>Miejsca</ListMenuRecord>
+            {username && <ListMenuRecord onClick={() => {history.push("addPlace"); closeListMenu()}}>Dodaj miejsce</ListMenuRecord>}
             {username ? <ListMenuRecord onClick={() => logout()}>Wyloguj</ListMenuRecord> : 
             <>
-                <ListMenuRecord onClick={() => history.push("login")}>Logowanie</ListMenuRecord>
-                <ListMenuRecord onClick={() => history.push("register")}>Rejestracja</ListMenuRecord>
+                <ListMenuRecord onClick={() => {history.push("login"); closeListMenu()}}>Logowanie</ListMenuRecord>
+                <ListMenuRecord onClick={() => {history.push("register"); closeListMenu()}}>Rejestracja</ListMenuRecord>
             </> }
             {role=='0' && 
             <>
-                <ListMenuRecord onClick={() => history.push("stats")}>Statystyki</ListMenuRecord>
-                <ListMenuRecord onClick={() => history.push("adminPanel")}>Panel admina</ListMenuRecord>
+                <ListMenuRecord onClick={() => {history.push("stats"); closeListMenu()}}>Statystyki</ListMenuRecord>
+                <ListMenuRecord onClick={() => {history.push("adminPanel"); closeListMenu()}}>Panel admina</ListMenuRecord>
             </>}
             <ListMenuRecord>Zmien jezyk</ListMenuRecord>
         </ListMenuContainer>
