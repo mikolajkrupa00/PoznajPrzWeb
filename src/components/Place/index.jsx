@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
 import Layout from "../Layout/index"
 
+
 import { FileInput, Header, 
 	RatingCol, RatingForm, RatingRow, UploadFile,
 	RatingSubmit } from "./styles";
@@ -216,7 +217,6 @@ const PlacePage = (props) => {
 
                                 <RatingFormLable>Dodaj zdjęcie: </RatingFormLable>
                                 <RatingFormAddImageWrapper>
-                                    {/* TO JEST DIV DLA OSKARA    */}
 									<FileInput
 											type='file'
 											id='file'
@@ -228,6 +228,8 @@ const PlacePage = (props) => {
                                
 
                                 <RatingSubmitWrapper>
+                                    {/* TODO: Po dodaniu komentarza strona w nieprawidlowy sposb pokazuje jego dodanie
+                                        mozna wymusic przeladowanie strony po dodaniu komentarzajej dodaniu */}
                                     <RatingSubmit type="submit">Dodaj komentarz</RatingSubmit>
                                 </RatingSubmitWrapper>
                                 
@@ -248,9 +250,14 @@ const PlacePage = (props) => {
                                     <RatingValue>Ocena: {rating.value}</RatingValue>                                    
                                 </RatingTop>
 
-                                <RatingComment>                               
+                                <RatingComment>                     
                                     {rating.isVisible ? <>{ReactHtmlParser(rating.comment)}</> : "Użytkownik zablokowany"}
                                 </RatingComment>
+                                
+                                {/* TODO: Komponent umozliwiajacy podglad zdjecia po jego kliknieciu  */}
+                                {rating.filePath == null ? '' :       
+                                <img style={{height: '50px', width: '50px'}}src={rating.filePath} alt=""/>
+                                }                                
 
                                 <RatingBottom>
                                     <RatingDate>{rating.ratingDate}</RatingDate>
