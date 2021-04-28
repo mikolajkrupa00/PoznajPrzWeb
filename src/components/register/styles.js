@@ -11,8 +11,8 @@ const componentStyles =  {
         flex-direction: column;
         background: #E6E6E6;
         width: 90%;
-        height: 470px;
-        top: max(calc((100vh - (var(--top_navbar_height) + 470px)) / 2), 0px);
+        height: 530px;
+        top: max(calc((100vh - (var(--top_navbar_height) + 530px)) / 2), 0px);
         margin: 5px auto;
         position: relative;
         border: 1px solid #E9E9E9;

@@ -1,3 +1,4 @@
+import {useState} from 'react'
 import Layout from "../Layout/index";
 import {useHistory} from 'react-router-dom'
 import { useForm } from 'react-hook-form';
@@ -7,21 +8,35 @@ import Axios from "axios";
 
 const RegisterPage = () => {
     const { register, handleSubmit, errors } = useForm();
-    const { RegisterMain, RegisterFrom, RegisterTitle, RegisterLabel, RegisterInput, RegisterButton, RegisterText} = componentStyles;
+    const { RegisterMain, RegisterFrom, RegisterTitle, RegisterLabel, RegisterInput, RegisterButton, RegisterText, RegisterPopUp } = componentStyles;
     const history = useHistory();
+    const [wrongPasswordPopUp, setWrongPasswordPopUp] = useState(false);
+    var popUpTimeout;
+
+    const closeAllPopUps = () => {
+        setWrongPasswordPopUp(false);
+    }
+
     const registerUser = (data) => {
-        Axios.post("/user", {
-            email: data.email,
-            username: data.username,
-            password: data.password,
-            confirmPassword:data.confirmPassword
-        }).then((res) => {
-            localStorageService.username = data.username
-            localStorageService.token = res.data.token
-            localStorageService.userId = res.data.userId
-            localStorageService.role = '1'
-            history.push("home")
-        })
+        clearTimeout(popUpTimeout);
+        closeAllPopUps();
+        if (data.password == data.confirmPassword) {
+            Axios.post("/user", {
+                email: data.email,
+                username: data.username,
+                password: data.password,
+                confirmPassword:data.confirmPassword
+            }).then((res) => {
+                localStorageService.username = data.username
+                localStorageService.token = res.data.token
+                localStorageService.userId = res.data.userId
+                localStorageService.role = '1'
+                history.push("home")
+            })
+        } else {
+            setWrongPasswordPopUp(true);
+            popUpTimeout = setTimeout(() => setWrongPasswordPopUp(false), 5000);
+        }
     }
 
 
@@ -44,6 +59,7 @@ const RegisterPage = () => {
                     <RegisterText>Masz już konto?</RegisterText>
                     <RegisterButton onClick={() => history.push("login")}>Zaloguj się</RegisterButton>
                 </RegisterFrom>
+                {wrongPasswordPopUp ? <RegisterPopUp onClick={setWrongPasswordPopUp(false)}>Wpisane hasła nie są identyczne</RegisterPopUp> : null}
             </RegisterMain>
         </Layout>
     )

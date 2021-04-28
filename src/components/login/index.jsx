@@ -1,3 +1,4 @@
+import {useState} from 'react'
 import Layout from "../Layout/index";
 import { useForm } from 'react-hook-form';
 import {useHistory} from 'react-router-dom'
@@ -7,11 +8,12 @@ import { localStorageService } from "../../services/localStorageService"
 
 const LoginPage = () => {
     const { register, handleSubmit, errors } = useForm();
-    const { LoginMain, LoginFrom, LoginTitle, LoginLabel, LoginInput, LoginButton, LoginText} = componentStyles;
+    const { LoginMain, LoginFrom, LoginTitle, LoginLabel, LoginInput, LoginButton, LoginText, LoginPopUp } = componentStyles;
     const history = useHistory();
+    const [showPopUp, setShowPopUp] = useState(false);
+    var popUpTimeout;
 
     const loginUser = (data) => {
-        console.log(data)
         Axios.post("/user/authenticate", {
             username: data.username,
             password: data.password
@@ -21,7 +23,14 @@ const LoginPage = () => {
             localStorageService.userId = res.data.userId
             localStorageService.role = res.data.role
         });
-        history.push("home")
+        clearTimeout(popUpTimeout);
+        if (localStorageService.username) {
+            history.push("home");
+            window.location.reload();
+        } else {
+            setShowPopUp(true);
+            popUpTimeout = setTimeout(() => setShowPopUp(false), 5000);
+        }    
     }
 
 
@@ -38,6 +47,7 @@ const LoginPage = () => {
                     <LoginText>Nie masz jeszcze konta?</LoginText>
                     <LoginButton onClick={() => history.push("register")}>Zarejestruj się</LoginButton>
                 </LoginFrom>
+                {showPopUp ? <LoginPopUp onClick={() => setShowPopUp(false)}>Nieprawidłowa nazwa użytkownika lub hasło</LoginPopUp> : null}
             </LoginMain>
         </Layout>
     )
