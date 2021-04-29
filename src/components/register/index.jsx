@@ -10,17 +10,19 @@ const RegisterPage = () => {
     const { register, handleSubmit, errors } = useForm();
     const { RegisterMain, RegisterFrom, RegisterTitle, RegisterLabel, RegisterInput, RegisterButton, RegisterText, RegisterPopUp } = componentStyles;
     const history = useHistory();
-    const [wrongPasswordPopUp, setWrongPasswordPopUp] = useState(false);
-    var popUpTimeout;
+    const [ShowPopUp, setShowPopUp] = useState(false);
+    const [PopUpTimeout, setPopUpTimeout] = useState(null)
+    const [PopUpMessage, setPopUpMessage] = useState("")
 
-    const closeAllPopUps = () => {
-        setWrongPasswordPopUp(false);
+    const enablePopUp = (message) => {
+        clearTimeout(PopUpTimeout);
+        setPopUpMessage(message);
+        setShowPopUp(true);
+        setPopUpTimeout(setTimeout(() => setShowPopUp(false), 5000));
     }
 
     const registerUser = (data) => {
-        clearTimeout(popUpTimeout);
-        closeAllPopUps();
-        if (data.password == data.confirmPassword) {
+        if (data.password === data.confirmPassword) {
             Axios.post("/user", {
                 email: data.email,
                 username: data.username,
@@ -31,11 +33,17 @@ const RegisterPage = () => {
                 localStorageService.token = res.data.token
                 localStorageService.userId = res.data.userId
                 localStorageService.role = '1'
-                history.push("home")
+            }).catch((error) => {
+            
+            }).then(() =>{
+                if (localStorageService.username) {
+                    history.push("home")
+                } else {
+                    enablePopUp("Podana nazwa użytkownika jest już zajęta!")
+                }
             })
         } else {
-            setWrongPasswordPopUp(true);
-            popUpTimeout = setTimeout(() => setWrongPasswordPopUp(false), 5000);
+            enablePopUp("Wpisane hasła nie są identyczne!");
         }
     }
 
@@ -59,7 +67,7 @@ const RegisterPage = () => {
                     <RegisterText>Masz już konto?</RegisterText>
                     <RegisterButton onClick={() => history.push("login")}>Zaloguj się</RegisterButton>
                 </RegisterFrom>
-                {wrongPasswordPopUp ? <RegisterPopUp onClick={setWrongPasswordPopUp(false)}>Wpisane hasła nie są identyczne</RegisterPopUp> : null}
+                {ShowPopUp ? <RegisterPopUp onClick={() => setShowPopUp(false)}>{PopUpMessage}</RegisterPopUp> : null}
             </RegisterMain>
         </Layout>
     )

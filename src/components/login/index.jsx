@@ -10,27 +10,37 @@ const LoginPage = () => {
     const { register, handleSubmit, errors } = useForm();
     const { LoginMain, LoginFrom, LoginTitle, LoginLabel, LoginInput, LoginButton, LoginText, LoginPopUp } = componentStyles;
     const history = useHistory();
-    const [showPopUp, setShowPopUp] = useState(false);
-    var popUpTimeout;
+    const [ShowPopUp, setShowPopUp] = useState(false);
+    const [PopUpTimeout, setPopUpTimeout] = useState(null)
+    const [PopUpMessage, setPopUpMessage] = useState("")
+
+    const enablePopUp = (message) => {
+        clearTimeout(PopUpTimeout);
+        setPopUpMessage(message);
+        setShowPopUp(true);
+        setPopUpTimeout(setTimeout(() => setShowPopUp(false), 5000));
+    }
 
     const loginUser = (data) => {
         Axios.post("/user/authenticate", {
             username: data.username,
             password: data.password
         }).then( (res) => {
+            console.log(res)
             localStorageService.username = res.data.username
             localStorageService.token = res.data.token
             localStorageService.userId = res.data.userId
             localStorageService.role = res.data.role
-        });
-        clearTimeout(popUpTimeout);
-        if (localStorageService.username) {
-            history.push("home");
-            window.location.reload();
-        } else {
-            setShowPopUp(true);
-            popUpTimeout = setTimeout(() => setShowPopUp(false), 5000);
-        }    
+        }).catch((error) => {
+            
+        }).then(() => {
+            if (localStorageService.username) {
+                history.push("home");
+                window.location.reload();
+            } else {
+                enablePopUp("Nieprawidłowa nazwa użytkownika lub hasło!");
+            }
+        });  
     }
 
 
@@ -47,7 +57,7 @@ const LoginPage = () => {
                     <LoginText>Nie masz jeszcze konta?</LoginText>
                     <LoginButton onClick={() => history.push("register")}>Zarejestruj się</LoginButton>
                 </LoginFrom>
-                {showPopUp ? <LoginPopUp onClick={() => setShowPopUp(false)}>Nieprawidłowa nazwa użytkownika lub hasło</LoginPopUp> : null}
+                {ShowPopUp ? <LoginPopUp onClick={() => setShowPopUp(false)}>{PopUpMessage}</LoginPopUp> : null}
             </LoginMain>
         </Layout>
     )
