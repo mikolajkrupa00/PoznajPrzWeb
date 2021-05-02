@@ -7,12 +7,17 @@ import componentStyles from "./styles";
 import Axios from "axios";
 
 const RegisterPage = () => {
-    const { register, handleSubmit, errors } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const { RegisterMain, RegisterFrom, RegisterTitle, RegisterLabel, RegisterInput, RegisterButton, RegisterText, RegisterPopUp } = componentStyles;
     const history = useHistory();
     const [ShowPopUp, setShowPopUp] = useState(false);
     const [PopUpTimeout, setPopUpTimeout] = useState(null)
     const [PopUpMessage, setPopUpMessage] = useState("")
+    const [Password, setPassword] = useState("")
+
+    const handlePasswordChange = (event) => {
+        setPassword(event.target.value)
+    }
 
     const enablePopUp = (message) => {
         clearTimeout(PopUpTimeout);
@@ -47,23 +52,37 @@ const RegisterPage = () => {
         }
     }
 
-
+    console.log(Password)
     return(
         <Layout>
             <RegisterMain>
                 <RegisterFrom onSubmit={handleSubmit(registerUser)}>
                     <RegisterTitle>Rejestracja</RegisterTitle>
-                    <RegisterLabel>Nazwa użytkownika</RegisterLabel>
-                    <RegisterInput type="text" {...register('username', {required: true})} placeholder="nazwa użytkownika" />
-                    <RegisterLabel>E-mail</RegisterLabel>
-                    <RegisterInput type="email" {...register('email', {required: true})} placeholder="email" />
-                    <RegisterLabel>Hasło</RegisterLabel>
-                    <RegisterInput type="password" {...register('password',
-                     {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })} placeholder="hasło" />
+                    <RegisterLabel error={errors.username}>
+                        Nazwa użytkownika
+                        {errors.username && " - pole jest wymagane"}
+                    </RegisterLabel>
+                    <RegisterInput error={errors.username} type="text" {...register('username', {required: true})} placeholder="nazwa użytkownika" />
+                    
+                    <RegisterLabel error={errors.email}>
+                        E-mail
+                        {errors.email && " - pole jest wymagane"}
+                    </RegisterLabel>
+                    <RegisterInput error={errors.email} type="email" {...register('email', {required: true})} placeholder="email" />
+
+                    <RegisterLabel error={errors.password}>
+                        Hasło
+                        {errors.password && " - min. 6 znaków, w tym: cyfra, mała i duża litera"}
+                    </RegisterLabel>
+                    <RegisterInput error={errors.password} type="password" onChange={handlePasswordChange} {...register('password',
+                    {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })} placeholder="hasło" />
+
                     <RegisterLabel>Powtórz hasło</RegisterLabel>
                     <RegisterInput type="password" {...register('confirmPassword',
                      {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })} placeholder="hasło" />
+
                     <RegisterButton type="submit" color="#FFFFFF">Zarejestruj się</RegisterButton>
+
                     <RegisterText>Masz już konto?</RegisterText>
                     <RegisterButton onClick={() => history.push("login")}>Zaloguj się</RegisterButton>
                 </RegisterFrom>
