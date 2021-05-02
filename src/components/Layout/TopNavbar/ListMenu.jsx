@@ -1,8 +1,11 @@
 import componentStyles from "../styles"
 import {useHistory} from 'react-router-dom'
 import { localStorageService } from "../../../services/localStorageService"
+import { useTranslation } from "react-i18next";
 
 const ListMenu = ({closeListMenu}) => {
+
+    const {t} = useTranslation();
     const {username, role, token, userId } = localStorageService;
     const history = useHistory();
     const{ListMenuRecord, ListMenuContainer} = componentStyles
@@ -19,23 +22,25 @@ const ListMenu = ({closeListMenu}) => {
 
     return(
         <ListMenuContainer>
-            <ListMenuRecord onClick={() => {history.push("home"); closeListMenu()}}>Strona Główna</ListMenuRecord>
-            <ListMenuRecord onClick={() => {history.push("map"); closeListMenu()}}>Mapa</ListMenuRecord>
-            <ListMenuRecord onClick={() => {history.push("places"); closeListMenu()}}>Miejsca</ListMenuRecord>
-            {username && <ListMenuRecord onClick={() => {history.push("addPlace"); closeListMenu()}}>Dodaj miejsce</ListMenuRecord>}
-            {username ? <ListMenuRecord onClick={() => logout()}>Wyloguj</ListMenuRecord> : 
+            <ListMenuRecord onClick={() => {history.push("home"); closeListMenu()}}>{t('list-menu.home-page')}</ListMenuRecord>
+            <ListMenuRecord onClick={() => {history.push("map"); closeListMenu()}}>{t('list-menu.map')}</ListMenuRecord>
+            <ListMenuRecord onClick={() => {history.push("places"); closeListMenu()}}>{t('list-menu.places')}</ListMenuRecord>
+            {username && <ListMenuRecord onClick={() => {history.push("addPlace"); closeListMenu()}}>{t('list-menu.add-place')}</ListMenuRecord>}
+            {username ? <ListMenuRecord onClick={() => logout()}>{t('list-menu.logout')}</ListMenuRecord> : 
             <>
-                <ListMenuRecord onClick={() => {history.push("login"); closeListMenu()}}>Logowanie</ListMenuRecord>
-                <ListMenuRecord onClick={() => {history.push("register"); closeListMenu()}}>Rejestracja</ListMenuRecord>
+                <ListMenuRecord onClick={() => {history.push("login"); closeListMenu()}}>{t('list-menu.log-in')}</ListMenuRecord>
+                <ListMenuRecord onClick={() => {history.push("register"); closeListMenu()}}>{t('list-menu.register')}</ListMenuRecord>
             </> }
             {role=='0' && 
             <>
                 <ListMenuRecord onClick={() => {history.push("stats"); closeListMenu()}}>Statystyki</ListMenuRecord>
                 <ListMenuRecord onClick={() => {history.push("adminPanel"); closeListMenu()}}>Panel admina</ListMenuRecord>
             </>}
-            <ListMenuRecord>Zmien jezyk</ListMenuRecord>
+            
+            <ListMenuRecord onClick={() => {history.push("changeLanguage"); closeListMenu()}}>{t('list-menu.change-language')}</ListMenuRecord>
         </ListMenuContainer>
     )
+
 }
 
 export default ListMenu

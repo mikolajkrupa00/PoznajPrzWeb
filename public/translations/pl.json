@@ -1,0 +1,59 @@
+{
+
+
+    "list-menu":{
+        "home-page": "Strona główna",
+        "map": "Mapa",
+        "places": "Miejsca",
+        "add-place": "Dodaj miejsce",
+        "log-in": "Logowanie",
+        "register": "Rejestracja",
+        "logout": "Wyloguj",
+        "change-language": "Zmień język"
+    },
+
+    "change-language":{
+        "title": "Zmień język",
+        "polish": "Polski",
+        "english": "English",
+        "german": "Deutsche",
+        "french": "Français ",
+        "russian": "Pусский "
+    },
+
+    "log-in":{
+
+        "form":{
+            "title": "Logowanie",
+            "username-label": "Nazwa użytkownika",
+            "username-placeholder": "Nazwa użytkownika",
+            "password-label": "Hasło",
+            "password-placeholder": "Hasło",
+            "log-in-button": "Zaloguj się",       
+            "account-question": "Nie masz jeszcze konta?",
+            "register-button": "Zarejestruj się"
+        }
+    },
+
+    "register":{
+
+        "form":{
+            "title": "Rejestracja",
+            "username-label": "Nazwa użytkownika",
+            "username-placeholder": "Nazwa użytkownika",
+            "email-label": "E-mail",
+            "email-placeholder": "E-mail",
+            "password-label": "Hasło",
+            "password-placeholder": "Hasło",
+            "repeat-password-label": "Hasło",
+            "repeat-password-placeholder": "Powtórz hasło",
+            "register-button": "Zarejestruj się",
+            "account-question": "Masz już konto?",
+            "log-in-button": "Zaloguj się"
+        }
+    }
+
+        
+
+}
+

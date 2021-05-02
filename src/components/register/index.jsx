@@ -4,8 +4,11 @@ import { useForm } from 'react-hook-form';
 import { localStorageService } from "../../services/localStorageService"
 import componentStyles from "./styles";
 import Axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const RegisterPage = () => {
+
+    const {t} = useTranslation();
     const { register, handleSubmit, errors } = useForm();
     const { RegisterMain, RegisterFrom, RegisterTitle, RegisterLabel, RegisterInput, RegisterButton, RegisterText} = componentStyles;
     const history = useHistory();
@@ -24,25 +27,27 @@ const RegisterPage = () => {
         })
     }
 
+    const tnm = 'register.form.' //translation namespace
+
 
     return(
         <Layout>
             <RegisterMain>
                 <RegisterFrom onSubmit={handleSubmit(registerUser)}>
-                    <RegisterTitle>Rejestracja</RegisterTitle>
-                    <RegisterLabel>Nazwa użytkownika</RegisterLabel>
-                    <RegisterInput type="text" {...register('username', {required: true})} placeholder="nazwa użytkownika" />
-                    <RegisterLabel>E-mail</RegisterLabel>
-                    <RegisterInput type="email" {...register('email', {required: true})} placeholder="email" />
-                    <RegisterLabel>Hasło</RegisterLabel>
+                    <RegisterTitle>{t(tnm+'title')}</RegisterTitle>
+                    <RegisterLabel>{t(tnm+'username-label')}</RegisterLabel>
+                    <RegisterInput type="text" {...register('username', {required: true})} placeholder={t(tnm+'username-placeholder')} />
+                    <RegisterLabel>{t(tnm+'email-label')}</RegisterLabel>
+                    <RegisterInput type="email" {...register('email', {required: true})} placeholder={t(tnm+'email-placeholder')} />
+                    <RegisterLabel>{t(tnm+'password-label')}</RegisterLabel>
                     <RegisterInput type="password" {...register('password',
-                     {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })} placeholder="hasło" />
-                    <RegisterLabel>Powtórz hasło</RegisterLabel>
+                     {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })} placeholder={t(tnm+'password-placeholder')} />
+                    <RegisterLabel>{t(tnm+'repeat-password-label')}</RegisterLabel>
                     <RegisterInput type="password" {...register('confirmPassword',
-                     {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })} placeholder="hasło" />
-                    <RegisterButton type="submit" color="#FFFFFF">Zarejestruj się</RegisterButton>
-                    <RegisterText>Masz już konto?</RegisterText>
-                    <RegisterButton onClick={() => history.push("login")}>Zaloguj się</RegisterButton>
+                     {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })} placeholder={t(tnm+'repeat-password-placeholder')} />
+                    <RegisterButton type="submit" color="#FFFFFF">{t(tnm+'register-button')}</RegisterButton>
+                    <RegisterText>{t(tnm+'account-question')}</RegisterText>
+                    <RegisterButton onClick={() => history.push("login")}>{t(tnm+'log-in-button')}</RegisterButton>
                 </RegisterFrom>
             </RegisterMain>
         </Layout>

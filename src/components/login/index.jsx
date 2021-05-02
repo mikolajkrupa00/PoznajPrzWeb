@@ -4,8 +4,11 @@ import {useHistory} from 'react-router-dom'
 import componentStyles from "./styles";
 import Axios from "axios";
 import { localStorageService } from "../../services/localStorageService"
+import { useTranslation } from "react-i18next";
 
 const LoginPage = () => {
+
+    const {t} = useTranslation();
     const { register, handleSubmit, errors } = useForm();
     const { LoginMain, LoginFrom, LoginTitle, LoginLabel, LoginInput, LoginButton, LoginText} = componentStyles;
     const history = useHistory();
@@ -24,20 +27,21 @@ const LoginPage = () => {
         history.push("home")
     }
 
+    const tnm = 'log-in.form.'  //translation namespace
+
 
     return(
         <Layout>
             <LoginMain>
                 <LoginFrom onSubmit={handleSubmit(loginUser)}>
-                    <LoginTitle>Logowanie</LoginTitle>
-                    <LoginLabel>Nazwa użytkownika</LoginLabel>
-                    <LoginInput type="text" name="username" {...register('username')} placeholder="nazwa użytkownika" />
-                    <LoginLabel>Hasło</LoginLabel>
-                    <LoginInput type="password" {...register('password')} placeholder="hasło" />
-                    <LoginButton type="submit" color="#FFFFFF">Zaloguj się</LoginButton>
-                    <LoginText>Nie masz jeszcze konta?</LoginText>
-                    <LoginButton onClick={() => history.push("register")}>Zarejestruj się</LoginButton>
-                </LoginFrom>
+                    <LoginTitle>{t(tnm+'title')}</LoginTitle>
+                    <LoginLabel>{t(tnm+'username-label')}</LoginLabel>
+                    <LoginInput type="text" name="username" {...register('username')} placeholder={t(tnm+'username-placeholder')} />
+                    <LoginLabel>{t(tnm+'password-label')}</LoginLabel>
+                    <LoginInput type="password" {...register('password')} placeholder={t(tnm+'password-placeholder')} />
+                    <LoginButton type="submit" color="#FFFFFF">{t(tnm+'log-in-button')}</LoginButton>
+                    <LoginText>{t(tnm+'account-question')}</LoginText>
+                    <LoginButton onClick={() => history.push("register")}>{t(tnm+'register-button')}</LoginButton>                </LoginFrom>
             </LoginMain>
         </Layout>
     )
