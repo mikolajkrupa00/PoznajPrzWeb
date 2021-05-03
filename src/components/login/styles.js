@@ -32,6 +32,7 @@ const componentStyles = {
     `,
     LoginLabel: styled.label`
         margin: 2px 40px;
+        text-align: left;
     `,
     LoginInput: styled.input`
         margin: 0px 30px 15px 30px;
@@ -63,6 +64,16 @@ const componentStyles = {
         text-align: center;
         margin-top: 30px;
     `,
+    LoginPopUp: styled.div`
+        position: fixed;
+        width: 100%;
+        height: 50px;
+        top: var(--top_navbar_height);
+        left: 0;
+        background-color: rgba(255, 0, 0, 0.5);
+        color: #FFFFFF;
+        line-height: 50px;
+    `
 }
 
 export default componentStyles
