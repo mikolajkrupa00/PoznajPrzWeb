@@ -5,8 +5,10 @@ import { useForm } from 'react-hook-form';
 import { localStorageService } from "../../services/localStorageService"
 import componentStyles from "./styles";
 import Axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const RegisterPage = () => {
+    const {t} = useTranslation();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { RegisterMain, RegisterFrom, RegisterTitle, RegisterLabel, RegisterInput, RegisterButton, RegisterText, RegisterPopUp } = componentStyles;
     const history = useHistory();
@@ -47,41 +49,43 @@ const RegisterPage = () => {
         }
     }
 
+    const tnm = 'register.form.' //translation namespace
+
     return(
         <Layout>
             <RegisterMain>
                 <RegisterFrom onSubmit={handleSubmit(registerUser)}>
-                    <RegisterTitle>Rejestracja</RegisterTitle>
+                    <RegisterTitle>{t(tnm+'title')}</RegisterTitle>
                     <RegisterLabel error={errors.username}>
-                        Nazwa użytkownika
+                        {t(tnm+'username-label')}
                         {errors.username && " - pole jest wymagane"}
                     </RegisterLabel>
-                    <RegisterInput error={errors.username} type="text" {...register('username', {required: true})} placeholder="nazwa użytkownika" />
+                    <RegisterInput error={errors.username} type="text" {...register('username', {required: true})} placeholder={t(tnm+'username-placeholder')} />
                     
                     <RegisterLabel error={errors.email}>
-                        E-mail
+                        {t(tnm+'email-label')}
                         {errors.email && " - pole jest wymagane"}
                     </RegisterLabel>
-                    <RegisterInput error={errors.email} type="email" {...register('email', {required: true})} placeholder="email" />
+                    <RegisterInput error={errors.email} type="email" {...register('email', {required: true})} placeholder={t(tnm+'email-placeholder')} />
 
                     <RegisterLabel error={errors.password}>
-                        Hasło
+                        {t(tnm+'password-label')}
                         {errors.password && " - min. 6 znaków, w tym: cyfra, mała i duża litera"}
                     </RegisterLabel>
                     <RegisterInput error={errors.password} type="password" {...register('password',
-                    {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })} placeholder="hasło" />
+                    {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })} placeholder={t(tnm+'password-placeholder')} />
 
                     <RegisterLabel error={errors.confirmPassword}>
-                        Powtórz hasło
+                        {t(tnm+'repeat-password-label')}
                         {errors.confirmPassword && " - min. 6 znaków, w tym: cyfra, mała i duża litera"}
                     </RegisterLabel>
                     <RegisterInput error={errors.confirmPassword} type="password" {...register('confirmPassword',
-                     {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })} placeholder="hasło" />
+                     {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })} placeholder={t(tnm+'repeat-password-placeholder')} />
 
-                    <RegisterButton type="submit" color="#FFFFFF">Zarejestruj się</RegisterButton>
+                    <RegisterButton type="submit" color="#FFFFFF">{t(tnm+'register-button')}</RegisterButton>
 
-                    <RegisterText>Masz już konto?</RegisterText>
-                    <RegisterButton onClick={() => history.push("login")}>Zaloguj się</RegisterButton>
+                    <RegisterText>{t(tnm+'account-question')}</RegisterText>
+                    <RegisterButton onClick={() => history.push("login")}>{t(tnm+'log-in-button')}</RegisterButton>
                 </RegisterFrom>
                 {ShowPopUp ? <RegisterPopUp onClick={() => setShowPopUp(false)}>{PopUpMessage}</RegisterPopUp> : null}
             </RegisterMain>

@@ -12,10 +12,10 @@ const componentStyles = {
         flex-direction: column;
         background: #E6E6E6;
         width: 90%;
-        height: 400px;
+        height: 440px;
         margin: 5px auto;
         position: relative;
-        top: max(calc((100vh - (var(--top_navbar_height) + 400px)) / 2), 0px);
+        top: max(calc((100vh - (var(--top_navbar_height) + 440px)) / 2), 0px);
         border: 1px solid #E9E9E9;
         border-radius: 5px;
         box-shadow: 0px 0px 10px #707070;
@@ -26,7 +26,8 @@ const componentStyles = {
     `,
     LoginTitle: styled.label`
         text-align: center;
-        margin: 20px;
+        margin-top: 30px;
+        margin-bottom: 40px;
         font-size: 35px;
     `,
     LoginLabel: styled.label`

@@ -11,8 +11,8 @@ const componentStyles =  {
         flex-direction: column;
         background: #E6E6E6;
         width: 90%;
-        height: 530px;
-        top: max(calc((100vh - (var(--top_navbar_height) + 530px)) / 2), 0px);
+        height: 570px;
+        top: max(calc((100vh - (var(--top_navbar_height) + 570px)) / 2), 0px);
         margin: 5px auto;
         position: relative;
         border: 1px solid #E9E9E9;
@@ -25,7 +25,8 @@ const componentStyles =  {
     `,
     RegisterTitle: styled.label`
         text-align: center;
-        margin: 20px;
+        margin-top: 30px;
+        margin-bottom: 40px;
         font-size: 35px;
     `,
     RegisterLabel: styled.label`

@@ -1,0 +1,62 @@
+{
+
+
+    "list-menu":{
+        "home-page": "Home Page",
+        "map": "Map",
+        "places": "Places",
+        "add-place": "Add place",
+        "log-in": "Log in",
+        "register": "Register",
+        "logout": "Logout",
+        "change-language": "Change language",
+        "link": "React Multi Language App - i18next Tutorial"
+    },
+
+    "change-language":{
+        "title": "Change language",
+        "polish": "Polski",
+        "english": "English",
+        "german": "Deutsche",
+        "french": "Français ",
+        "russian": "Pусский "
+    },
+
+    "log-in":{
+
+        "form":{
+            "title": "Log in",
+            "username-label": "Username",
+            "username-placeholder": "Username",
+            "password-label": "Password",
+            "password-placeholder": "Password",
+            "log-in-button": "Log in",       
+            "account-question": "You don't have an account yet?",
+            "register-button": "Register"
+        }
+    },
+
+    "register":{
+
+        "form":{
+            "title": "Registration",
+            "username-label": "Username",
+            "username-placeholder": "Username",
+            "email-label": "E-mail",
+            "email-placeholder": "E-mail",
+            "password-label": "Password",
+            "password-placeholder": "Password",
+            "repeat-password-label": "Repeat password",
+            "repeat-password-placeholder": "Repeat password",
+            "register-button": "Register",
+            "account-question": "Already have an account?",
+            "log-in-button": "Log in"
+        }
+    }
+       
+        
+
+
+
+}
+
