@@ -31,6 +31,7 @@ const componentStyles = {
     `,
     LoginLabel: styled.label`
         margin: 2px 40px;
+        text-align: left;
     `,
     LoginInput: styled.input`
         margin: 0px 30px 15px 30px;
