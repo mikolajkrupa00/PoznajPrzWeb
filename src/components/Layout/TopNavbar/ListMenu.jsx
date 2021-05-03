@@ -17,7 +17,7 @@ const ListMenu = ({closeListMenu}) => {
     const {t} = useTranslation();
     const {username, role, token, userId } = localStorageService;
     const history = useHistory();
-    const{ListMenuRecord, ListMenuContainer} = componentStyles
+    const{ListMenuContainer, ListMenuRecord, TopRow, LogoutButton} = componentStyles
 
 
     const logout = () => {
@@ -31,11 +31,17 @@ const ListMenu = ({closeListMenu}) => {
 
     return(
         <ListMenuContainer>
+
+            <TopRow>
+                {username && <LogoutButton onClick={() => logout()}>{t('list-menu.logout')}</LogoutButton> }
+            </TopRow>
+            
+
             <ListMenuRecord onClick={() => {history.push("home"); closeListMenu()}}>{t('list-menu.home-page')}</ListMenuRecord>
             <ListMenuRecord onClick={() => {history.push("map"); closeListMenu()}}>{t('list-menu.map')}</ListMenuRecord>
             <ListMenuRecord onClick={() => {history.push("places"); closeListMenu()}}>{t('list-menu.places')}</ListMenuRecord>
             {username && <ListMenuRecord onClick={() => {history.push("addPlace"); closeListMenu()}}>{t('list-menu.add-place')}</ListMenuRecord>}
-            {username ? <ListMenuRecord onClick={() => logout()}>{t('list-menu.logout')}</ListMenuRecord> : 
+            {!username &&
             <>
                 <ListMenuRecord onClick={() => {history.push("login"); closeListMenu()}}>{t('list-menu.log-in')}</ListMenuRecord>
                 <ListMenuRecord onClick={() => {history.push("register"); closeListMenu()}}>{t('list-menu.register')}</ListMenuRecord>
