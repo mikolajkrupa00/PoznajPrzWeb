@@ -2,6 +2,20 @@ import styled from "styled-components"
 
 const componentStyles = {
 
+    LayoutContainer: styled.div`
+    width: 100%;
+    height: 100%;
+    background-color: whitesmoke;
+    `,
+    ChildContainer: styled.div`
+    //width: 100%;
+    //height: calc(100% - var(--top_navbar_height));
+    //height: 500px;
+    //overflow: scroll;
+    //min-height: calc(100% - var(--top_navbar_height));
+    padding-bottom: 15px;
+    `,
+
     TopNavbar: styled.div`
     width: 100%;
     height: var(--top_navbar_height);
@@ -78,16 +92,17 @@ const componentStyles = {
     margin: 15px 0px;
     width: 80%;
 
+    &:last-child{
+        display: flex;
+        justify-content: center;
+    }
+
     :hover{
         cursor: pointer;
         color: #333;
     }
     `,
     
-    LayoutContainer: styled.div`
-    `,
-    ChildContainer: styled.div`
-    `,
     ProfileButton:styled.div`
     margin-right:50px;
     &:hover{

@@ -2,8 +2,17 @@ import componentStyles from "../styles"
 import {useHistory} from 'react-router-dom'
 import { localStorageService } from "../../../services/localStorageService"
 import { useTranslation } from "react-i18next";
+import i18n from "i18next";
 
 const ListMenu = ({closeListMenu}) => {
+
+    var flagPath = 'img/flags_icons/'+i18n.language+'.png'
+    const flagStyles = {
+        width: "32px",
+        height: "32px",
+        marginLeft: "20px",
+        disply: "block"
+    }
 
     const {t} = useTranslation();
     const {username, role, token, userId } = localStorageService;
@@ -37,7 +46,10 @@ const ListMenu = ({closeListMenu}) => {
                 <ListMenuRecord onClick={() => {history.push("adminPanel"); closeListMenu()}}>Panel admina</ListMenuRecord>
             </>}
             
-            <ListMenuRecord onClick={() => {history.push("changeLanguage"); closeListMenu()}}>{t('list-menu.change-language')}</ListMenuRecord>
+            <ListMenuRecord onClick={() => {history.push("changeLanguage"); closeListMenu()}}>
+                {t('list-menu.change-language')}
+                <img alt='' src={flagPath} style={flagStyles}></img>
+            </ListMenuRecord>
         </ListMenuContainer>
     )
 
