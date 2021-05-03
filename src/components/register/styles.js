@@ -31,11 +31,11 @@ const componentStyles =  {
     RegisterLabel: styled.label`
         margin: 2px 40px;
         text-align: left;
-        color: ${props => props.error ? "#FF0000" : "#707070"};
+        color: ${props => props.error ? "#CC0000" : "#707070"};
     `,
     RegisterInput: styled.input`
         margin: 0px 30px 15px 30px;
-        border: 1px solid ${props => props.error ? "#FF0000" : "#707070"};
+        border: 1px solid ${props => props.error ? "#CC0000" : "#707070"};
         border-radius: 15px;
         font-size: 15px;
         padding: 5px 10px;
@@ -44,6 +44,7 @@ const componentStyles =  {
         :hover {
             box-shadow: 0px 0px 5px #707070;
         }
+        ${props => props.error && "background-color: #FFEEEE;"}
     `,
     RegisterButton: styled.button`
         margin: 15px auto;

@@ -13,11 +13,6 @@ const RegisterPage = () => {
     const [ShowPopUp, setShowPopUp] = useState(false);
     const [PopUpTimeout, setPopUpTimeout] = useState(null)
     const [PopUpMessage, setPopUpMessage] = useState("")
-    const [Password, setPassword] = useState("")
-
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value)
-    }
 
     const enablePopUp = (message) => {
         clearTimeout(PopUpTimeout);
@@ -52,7 +47,6 @@ const RegisterPage = () => {
         }
     }
 
-    console.log(Password)
     return(
         <Layout>
             <RegisterMain>
@@ -74,11 +68,14 @@ const RegisterPage = () => {
                         Hasło
                         {errors.password && " - min. 6 znaków, w tym: cyfra, mała i duża litera"}
                     </RegisterLabel>
-                    <RegisterInput error={errors.password} type="password" onChange={handlePasswordChange} {...register('password',
+                    <RegisterInput error={errors.password} type="password" {...register('password',
                     {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })} placeholder="hasło" />
 
-                    <RegisterLabel>Powtórz hasło</RegisterLabel>
-                    <RegisterInput type="password" {...register('confirmPassword',
+                    <RegisterLabel error={errors.confirmPassword}>
+                        Powtórz hasło
+                        {errors.confirmPassword && " - min. 6 znaków, w tym: cyfra, mała i duża litera"}
+                    </RegisterLabel>
+                    <RegisterInput error={errors.confirmPassword} type="password" {...register('confirmPassword',
                      {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })} placeholder="hasło" />
 
                     <RegisterButton type="submit" color="#FFFFFF">Zarejestruj się</RegisterButton>
