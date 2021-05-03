@@ -16,7 +16,8 @@ const LoginPage = () => {
     const [ShowPopUp, setShowPopUp] = useState(false);
     const [PopUpTimeout, setPopUpTimeout] = useState(null)
     const [PopUpMessage, setPopUpMessage] = useState("")
-
+    const tnm = 'log-in.form.'  //translation namespace
+    
     const enablePopUp = (message) => {
         clearTimeout(PopUpTimeout);
         setPopUpMessage(message);
@@ -41,12 +42,11 @@ const LoginPage = () => {
                 history.push("home");
                 window.location.reload();
             } else {
-                enablePopUp("Nieprawidłowa nazwa użytkownika lub hasło!");
+                enablePopUp(t(tnm+'login-fail-message'));
             }
         });  
     }
 
-    const tnm = 'log-in.form.'  //translation namespace
 
 
     return(
@@ -58,7 +58,7 @@ const LoginPage = () => {
                     <LoginInput type="text" name="username" {...register('username')} placeholder={t(tnm+'username-placeholder')} />
                     <LoginLabel>{t(tnm+'password-label')}</LoginLabel>
                     <LoginInput type="password" {...register('password')} placeholder={t(tnm+'password-placeholder')} />
-                    <LoginButton type="submit" color="#FFFFFF">Zaloguj się</LoginButton>
+                    <LoginButton type="submit" color="#FFFFFF">{t(tnm+'log-in-button')}</LoginButton>
                     <LoginText>{t(tnm+'account-question')}</LoginText>
                     <LoginButton onClick={() => history.push("register")}>{t(tnm+'register-button')}</LoginButton>
                 </LoginFrom>

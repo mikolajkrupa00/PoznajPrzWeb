@@ -41,11 +41,11 @@ const RegisterPage = () => {
                 if (localStorageService.username) {
                     history.push("home")
                 } else {
-                    enablePopUp("Podana nazwa użytkownika jest już zajęta!")
+                    enablePopUp(t(tnm+'username-taken'))
                 }
             })
         } else {
-            enablePopUp("Wpisane hasła nie są identyczne!");
+            enablePopUp(t(tnm+'pass-mismatch'));
         }
     }
 
@@ -58,26 +58,26 @@ const RegisterPage = () => {
                     <RegisterTitle>{t(tnm+'title')}</RegisterTitle>
                     <RegisterLabel error={errors.username}>
                         {t(tnm+'username-label')}
-                        {errors.username && " - pole jest wymagane"}
+                        {errors.username && " - " + t(tnm+'field-required')}
                     </RegisterLabel>
                     <RegisterInput error={errors.username} type="text" {...register('username', {required: true})} placeholder={t(tnm+'username-placeholder')} />
                     
                     <RegisterLabel error={errors.email}>
                         {t(tnm+'email-label')}
-                        {errors.email && " - pole jest wymagane"}
+                        {errors.email && " - " + t(tnm+'field-required')}
                     </RegisterLabel>
                     <RegisterInput error={errors.email} type="email" {...register('email', {required: true})} placeholder={t(tnm+'email-placeholder')} />
 
                     <RegisterLabel error={errors.password}>
                         {t(tnm+'password-label')}
-                        {errors.password && " - min. 6 znaków, w tym: cyfra, mała i duża litera"}
+                        {errors.password && " - " + t(tnm+'pass-requirements')}
                     </RegisterLabel>
                     <RegisterInput error={errors.password} type="password" {...register('password',
                     {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })} placeholder={t(tnm+'password-placeholder')} />
 
                     <RegisterLabel error={errors.confirmPassword}>
                         {t(tnm+'repeat-password-label')}
-                        {errors.confirmPassword && " - min. 6 znaków, w tym: cyfra, mała i duża litera"}
+                        {errors.confirmPassword && " - " + t(tnm+'pass-requirements')}
                     </RegisterLabel>
                     <RegisterInput error={errors.confirmPassword} type="password" {...register('confirmPassword',
                      {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })} placeholder={t(tnm+'repeat-password-placeholder')} />

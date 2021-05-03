@@ -32,7 +32,8 @@
             "password-placeholder": "Password",
             "log-in-button": "Log in",       
             "account-question": "You don't have an account yet?",
-            "register-button": "Register"
+            "register-button": "Register",
+            "login-fail-message": "Incorrect username or password!"
         }
     },
 
@@ -50,7 +51,11 @@
             "repeat-password-placeholder": "Repeat password",
             "register-button": "Register",
             "account-question": "Already have an account?",
-            "log-in-button": "Log in"
+            "log-in-button": "Log in",
+            "field-required": "field is required",
+            "pass-requirements": "min. 6 characters, including: digit, small and big letter",
+            "pass-mismatch": "Entered passwords are not identical!",
+            "username-taken": "Username already taken!"
         }
     }
        

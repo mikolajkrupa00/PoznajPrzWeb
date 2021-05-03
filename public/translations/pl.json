@@ -31,7 +31,8 @@
             "password-placeholder": "Hasło",
             "log-in-button": "Zaloguj się",       
             "account-question": "Nie masz jeszcze konta?",
-            "register-button": "Zarejestruj się"
+            "register-button": "Zarejestruj się",
+            "login-fail-message": "Nieprawidłowa nazwa użytkownika lub hasło!"
         }
     },
 
@@ -49,7 +50,11 @@
             "repeat-password-placeholder": "Powtórz hasło",
             "register-button": "Zarejestruj się",
             "account-question": "Masz już konto?",
-            "log-in-button": "Zaloguj się"
+            "log-in-button": "Zaloguj się",
+            "field-required": "pole jest wymagane",
+            "pass-requirements": "min. 6 znaków, w tym: cyfra, mała i duża litera",
+            "pass-mismatch": "Wpisane hasła nie są identyczne!",
+            "username-taken": "Podana nazwa użytkownika jest już zajęta!"
         }
     }
 
