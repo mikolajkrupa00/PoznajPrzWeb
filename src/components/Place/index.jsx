@@ -4,20 +4,13 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
 import Layout from "../Layout/index"
 
-
-// import { FileInput, Header, 
-// 	RatingCol, RatingForm, RatingRow, UploadFile,
-// 	RatingSubmit } from "./styles";
-
 import componentStyles from "./styles";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import ReactHtmlParser from 'react-html-parser';
 import { localStorageService } from "../../services/localStorageService"
 import { BiLeftArrowAlt } from 'react-icons/bi';
-import {VscChromeClose} from 'react-icons/vsc'
-import {BsThreeDots} from 'react-icons/bs'
-import {MdKeyboardArrowUp} from 'react-icons/md'
+import { VscChromeClose } from 'react-icons/vsc'
+import { BsThreeDots } from 'react-icons/bs'
+import { MdKeyboardArrowUp } from 'react-icons/md'
 
 const PlacePage = (props) => {
 
@@ -264,7 +257,7 @@ const PlacePage = (props) => {
 
                             {ratings.map((rating, index) => 
                             <Rating>
-                                {/* {console.log(rating)} */}
+                                
                                 <RatingTop>
                                     <RatingUsername>{rating.username}</RatingUsername>
                                     <RatingValue>Ocena: {rating.value}</RatingValue>                                    
