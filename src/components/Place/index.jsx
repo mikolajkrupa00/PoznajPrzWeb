@@ -33,12 +33,13 @@ const PlacePage = (props) => {
 	const [file, _setFile] = useState(null);
     const [addComment, setAddComment] = useState(false)
     const [commentSection, setCommentSection] = useState('')
+    const [ratingPanelMessage, setRatingPanelMessage] = useState('')
     const [descriptionHeight, setDescriptionHeight] = useState('250px')
     
 	const { PlacePageContainer, TopBar, GoBack, PlaceIntro, Gallery, Photo, PlaceName, PlaceAddress, 
         PlaceCategory, PlaceNumOfVisits, PlaceDesc, PlaceImg, PlaceDescription, 
         DescriptionContent,  DescriptionButton,
-        RatingsContainer, RatingsPanel, AddRatingContainer, RatingSubmitWrapper, RatingFormTopPanel,
+        RatingsContainer, RatingsPanel, RatingsPanelMessages, AddRatingContainer, RatingSubmitWrapper, RatingFormTopPanel,
         Rating, RatingComment, RatingDate, RatingUsername, RatingValue, RatingTop, 
         RatingBottom, RatingOptions, EditButton, Navigation,AddRatingInput,  RatingFormLable,
         RatingFormRaitingWrapper, RatingFormAddImageWrapper,
@@ -99,6 +100,28 @@ const PlacePage = (props) => {
 			_setFile(file);
 		}
 	}
+
+    const openCommentSection = () =>{
+
+        if(!username){
+            if(ratingPanelMessage === ""){
+                setRatingPanelMessage("Musisz być zalogowany, żeby dodać komentarz!")
+                setTimeout(() => {setRatingPanelMessage("")}, 3000)
+            }
+            return
+        }
+
+        if(role === 2){
+            if(ratingPanelMessage === ""){
+                setRatingPanelMessage("Możliwość dodawania komentarzy została dla Ciebie zablokowana. Powód: ...{powód blokady}...")
+                setTimeout(() => {setRatingPanelMessage("")}, 6000)
+            }
+            return
+        }
+
+        setCommentSection(true)
+
+    }
 
     return(
         <Layout>
@@ -190,11 +213,16 @@ const PlacePage = (props) => {
                                 {/* TODO: Dodac komunikat gdy niezalogowany użytkownik chce dodac komentarz*/}
                                 <Button inputColor='#777'>Sortuj?</Button>
                                 <Button inputColor='#555'>??????</Button>
-                                <Button inputColor='black' onClick={() => {setCommentSection(true)}}>Dodaj komentarz</Button>                               
+                                <Button inputColor='black' onClick={openCommentSection}>Dodaj komentarz</Button>                               
                             </RatingsPanel>
+
+                            <RatingsPanelMessages>{ratingPanelMessage}</RatingsPanelMessages>
+
+
 
 
                             {/* 0-admin     1-user      2-zablokowany */}
+                            {/* COMMENT SECTION */}
                             {role !== "2" ? (username && commentSection) &&
                             <RatingForm onSubmit={handleSubmit(addRating)}>
                                 
@@ -236,8 +264,9 @@ const PlacePage = (props) => {
                                 
                             </RatingForm> 
                             :
-                            <>
-                                Zostałeś zablokowany skontaktuj się z administratorem
+                            <> 
+                                {console.log("Musisz byc zalogowany!")}
+                                {/* <div>Zostałeś zablokowany skontaktuj się z administratorem</div> */}
                             </>
                             }
 

@@ -129,7 +129,17 @@ const componentStyles = {
     RatingsPanel: styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 40px;
+    margin-bottom: 15px;
+    `,
+
+    RatingsPanelMessages: styled.div`
+    display: flex;
+    justify-content: center;
+    min-height: 18px;
+    line-height: 18px;
+    padding: 2px 5px;
+    color: red;
+    margin-bottom: 25px;
     `,
 
     RatingForm: styled.form`
