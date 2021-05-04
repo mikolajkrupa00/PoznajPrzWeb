@@ -5,9 +5,9 @@ import { useHistory } from "react-router-dom";
 import Layout from "../Layout/index"
 
 
-import { FileInput, Header, 
-	RatingCol, RatingForm, RatingRow, UploadFile,
-	RatingSubmit } from "./styles";
+// import { FileInput, Header, 
+// 	RatingCol, RatingForm, RatingRow, UploadFile,
+// 	RatingSubmit } from "./styles";
 
 import componentStyles from "./styles";
 import ReactQuill from 'react-quill';
@@ -15,7 +15,6 @@ import 'react-quill/dist/quill.snow.css';
 import ReactHtmlParser from 'react-html-parser';
 import { localStorageService } from "../../services/localStorageService"
 import { BiLeftArrowAlt } from 'react-icons/bi';
-//Rafal nowe style
 import {VscChromeClose} from 'react-icons/vsc'
 import {BsThreeDots} from 'react-icons/bs'
 import {MdKeyboardArrowUp} from 'react-icons/md'
@@ -42,7 +41,7 @@ const PlacePage = (props) => {
         RatingsContainer, RatingsPanel, RatingsPanelMessages, AddRatingContainer, RatingSubmitWrapper, RatingFormTopPanel,
         Rating, RatingComment, RatingDate, RatingUsername, RatingValue, RatingTop, 
         RatingBottom, RatingOptions, EditButton, Navigation,AddRatingInput,  RatingFormLable,
-        RatingFormRaitingWrapper, RatingFormAddImageWrapper,
+        RatingFormRaitingWrapper, RatingFormAddImageWrapper, FileInput,
         RaitingTextarea, RatingForm, RatingSubmit, Button, ButtonsWrapper} = componentStyles;
 
 	const { role, username, userId } = localStorageService // 0 admin
@@ -209,8 +208,7 @@ const PlacePage = (props) => {
                     <>
                         <RatingsContainer>
 
-                            <RatingsPanel>
-                                {/* TODO: Dodac komunikat gdy niezalogowany użytkownik chce dodac komentarz*/}
+                            <RatingsPanel>                                
                                 <Button inputColor='#777'>Sortuj?</Button>
                                 <Button inputColor='#555'>??????</Button>
                                 <Button inputColor='black' onClick={openCommentSection}>Dodaj komentarz</Button>                               
@@ -219,11 +217,9 @@ const PlacePage = (props) => {
                             <RatingsPanelMessages>{ratingPanelMessage}</RatingsPanelMessages>
 
 
-
-
                             {/* 0-admin     1-user      2-zablokowany */}
                             {/* COMMENT SECTION */}
-                            {role !== "2" ? (username && commentSection) &&
+                            {(role !== "2" && username && commentSection) &&
                             <RatingForm onSubmit={handleSubmit(addRating)}>
                                 
                                 <RatingFormTopPanel>
@@ -263,11 +259,6 @@ const PlacePage = (props) => {
                                 
                                 
                             </RatingForm> 
-                            :
-                            <> 
-                                {console.log("Musisz byc zalogowany!")}
-                                {/* <div>Zostałeś zablokowany skontaktuj się z administratorem</div> */}
-                            </>
                             }
 
 

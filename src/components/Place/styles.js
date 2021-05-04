@@ -189,6 +189,10 @@ const componentStyles = {
     margin-bottom: 20px; 
     `,
 
+    FileInput: styled.input`
+    margin-top: 10px;
+    `,
+
     RatingSubmitWrapper: styled.div`
     align-items: center;
     `,
@@ -242,49 +246,4 @@ const componentStyles = {
     
 }
 
-const RatingForm = styled.form`
-    display:flex;
-    flex-direction:column;
-    margin-top:50px;
-    padding: 10px;
-`;
-
-const RatingRow = styled.div`
-    display: flex;
-    flex-direction: row;
-`
-
-const RatingCol = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    flex-grow: 1;
-`;
-
-const UploadFile = styled.div`
-    margin-left: 36px;
-
-`;
-
-const Header = styled.h3`
-
-`;
-
-const FileInput = styled.input`
-    margin-top: 10px;
-`;
-
-const RatingSubmit = styled.button`
-    margin-top: 60px;
-`;
-
 export default componentStyles;
-export {
-    RatingForm,
-    UploadFile,
-    Header,
-    FileInput,
-    RatingRow,
-    RatingCol,
-    RatingSubmit
-}
