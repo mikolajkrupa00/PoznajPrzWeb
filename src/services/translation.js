@@ -16,7 +16,6 @@ i18n
     },
     backend:{
       loadPath: '/translations/{{lng}}.json',
-      //loadPath: '/translations/{{lng}}/translation.json',
     },
     react: { useSuspense: false}
   });
