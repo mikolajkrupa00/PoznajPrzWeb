@@ -3,41 +3,25 @@ import styled from "styled-components"
 const componentStyles = {
 
     Wrapper: styled.div`
-    margin: 80px 0px;
-    font-size: 40px;
+    margin: 100px 0px;
+    font-size: 50px;
     color: lightblue;
     text-align: center;
-    justify-content: center;
-
     `,
 
     Button: styled.div`
+    margin: 15px;
+    padding: 10px 20px;
     display: flex;
-    align-items: center;
-    width: 200px;
-    margin: 15px auto;
-    padding: 1px 20px;
-    justify-content: center;
-    font-size: 18px;
-    color: black;
+    flex-direction: column;
+    justify-content: flex-start;
     border: 1px solid black;
 
-    &:first-child{
-        margin-top: 45px;
-    }
     :hover{
         cursor: pointer;
         border: 1px solid #666;
     }
-    `,
-
-    CountryName: styled.div`
-    width: 80px;
-    `,
-
-    Flag: styled.div`
-    align-self: start;
-    `,
+    `
 
 }
 

@@ -34,7 +34,7 @@ const Layout = (props) => {
             </TopNavbar>
             {listMenuState && <ListMenu closeListMenu={() => setListMenuState(false)}/>}
             <ChildContainer>
-                {props.children}   {/* components put beteween <Layout></Layout> tags are displayed here  */}
+                {props.children}
             </ChildContainer>
         </LayoutContainer>
     )
