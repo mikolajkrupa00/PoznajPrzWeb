@@ -5,31 +5,53 @@ import componentStyles from "./styles";
 
 const StatsPage = () => {
     const[visits, setVisits] = useState()
-    const [ratings, setRatings] = useState()
-    const[expanded, seExpanded] = useState()
-    const { PlacesContainer, Place, PlaceName, PlaceAddress, PlaceCategory, PlaceNumOfVisits, PlaceDesc, PlaceImg, PlaceId} = componentStyles;
-    useEffect(() => {
-        Axios.get("/visit/getStats/365").then(res => setVisits(res.data));
-        Axios.get(`/Place/getPlaces/1c45f396-84f8-49cb-9d1b-849de68cdd0d`).then(res => setRatings(res.data));
-    },[])
-
+    const [ratings, setRatings] = useState('')
+    const [days,setDays] = useState('')
+    const [filteredDays,setFilteredDays] = useState('')
+    const { PlacesContainer, Place, PlaceName, PlaceAddress, PlaceCategory, PlaceNumOfVisits, PlaceDesc, PlaceImg, AverageRating, NumOfComments, DaysInput, Input, Button, Stats} = componentStyles;
+    
+    const handleDays = (e) =>{
+        setDays(e.target.value);
+        }
+    const handleFilterDays = () =>{
+        setFilteredDays(days);
+        Axios.get(`/visit/getStats/${days}`).then(res => setVisits(res.data));
+        Axios.get(`/rating/getRatingsStats/${days}`).then(res => setRatings(res.data));
+    }
+    
+    const stats = (placeId) =>{
+        const record = ratings.filter(item=>item.placeId==placeId)
+        return(
+            <>
+               <NumOfComments>Liczba komentarzy: {record[0].numOfComments}</NumOfComments>
+                <AverageRating>Średnia ocena: {record[0].averageValue}</AverageRating>
+            </>
+        )
+    }
     return(
         <Layout>
+            
             <PlacesContainer>
+            <DaysInput>
+                    <Input type="text" placeholder="Liczba dni" value={days} onChange={handleDays}/>
+                    <Button onClick={handleFilterDays}>Filtruj</Button>
+            </DaysInput>
                 {visits && visits.map(visit => 
                     <Place>
-                        <PlaceImg src="logo192.png" />
+                        <PlaceImg src="img/logo192.png" />
                         <PlaceDesc>
-                        {console.log(visit)}
                             <PlaceName>{visit.categoryName}</PlaceName>
                             <PlaceAddress>{visit.address}</PlaceAddress>
-                            <PlaceCategory>kategoria :  {visit.categoryName}</PlaceCategory>
-                            <PlaceNumOfVisits>liczba odwiedzin w ostatnich 365 dniach:  {visit.numOfVisits}</PlaceNumOfVisits>
-                            {console.log(ratings)}
+                            <PlaceCategory>Kategoria :  {visit.categoryName}</PlaceCategory>
+                            <Stats> Statystyki z ostatnich {filteredDays} dni:</Stats>
+                            <PlaceNumOfVisits>Liczba odwiedzin  {visit.numOfVisits}</PlaceNumOfVisits>
+                            {ratings && stats(visit.placeId)}
+                            
                         </PlaceDesc>
                     </Place>
                 )}
             </PlacesContainer>
+            
         </Layout>
     )
 }
