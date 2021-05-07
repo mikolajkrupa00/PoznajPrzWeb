@@ -1,4 +1,4 @@
-import HomePage from "./components/HomePage/index"
+import HomePage from "./pages/Home/index"
 import Map from "./components/Map/index"
 import RegisterPage from "./components/Register/index";
 import LoginPage from "./components/Login/index";

@@ -4,8 +4,8 @@ import reportWebVitals from './reportWebVitals';
 import './services/translation';
 
 import App from './App';
-import './index.css'
-
+import './index.css';
+import 'react-calendar/dist/Calendar.css';
 
 ReactDOM.render(
   <React.StrictMode>

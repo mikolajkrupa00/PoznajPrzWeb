@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components"
 
 const componentStyles = {
@@ -36,6 +37,10 @@ const componentStyles = {
     
     `,
     
+    LogoLink: styled(Link)`
+        text-decoration: none;
+    `,
+
     LogoWrapper: styled.div`
     display: flex;
     background-color: lightblue;
@@ -91,7 +96,7 @@ const componentStyles = {
     top: var(--top_navbar_height);
     overflow-y: scroll;
     padding: 25px 0px;
-    z-index: 10;
+    z-index: 6666;
     `,
     ListMenuRecord: styled.div`
     text-align: center;

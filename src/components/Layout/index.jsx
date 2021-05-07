@@ -2,14 +2,14 @@ import React, {useState, useEffect} from 'react'
 import componentStyles from "./styles"
 import { localStorageService } from "../../services/localStorageService"
 import ListMenu from "./TopNavbar/ListMenu"
-import {useHistory} from "react-router-dom"
+import {Link, useHistory} from "react-router-dom"
 
 const Layout = (props) => {
 
     useEffect(() => {
     }, [])
     const {TopNavbar, TopNavbarLeftSide, TopNavbarRightSide, LogoImg, LogoName, LogoWrapper, BurgerMenuImg,
-        FullScreenImg, LayoutContainer, ChildContainer, ProfileButton} = componentStyles;
+        FullScreenImg, LayoutContainer, ChildContainer, ProfileButton, LogoLink} = componentStyles;
     const [listMenuState, setListMenuState] = useState(false)
     const [fullScreenState, setFullScreenState] = useState(false)
     const history = useHistory()
@@ -18,10 +18,12 @@ const Layout = (props) => {
         <LayoutContainer>
             <TopNavbar>
                 <TopNavbarLeftSide>
-                    <LogoWrapper>
-                        <LogoImg src="img/rze-herb.png" />
-                        <LogoName>Rzeszów</LogoName>
-                    </LogoWrapper>
+                    <LogoLink to='/'>
+                        <LogoWrapper>
+                            <LogoImg src="img/rze-herb.png" />
+                            <LogoName>Rzeszów</LogoName>
+                        </LogoWrapper>
+                    </LogoLink>                    
                 </TopNavbarLeftSide>
                 <TopNavbarRightSide>     
                     {username && <ProfileButton onClick={() => history.push("/profile")}>{username}</ProfileButton>}              
