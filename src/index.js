@@ -6,6 +6,7 @@ import './services/translation';
 import App from './App';
 import './index.css';
 import 'react-calendar/dist/Calendar.css';
+import 'react-clock/dist/Clock.css';
 
 ReactDOM.render(
   <React.StrictMode>
