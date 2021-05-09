@@ -129,7 +129,17 @@ const componentStyles = {
     RatingsPanel: styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 40px;
+    margin-bottom: 15px;
+    `,
+
+    RatingsPanelMessages: styled.div`
+    display: flex;
+    justify-content: center;
+    min-height: 18px;
+    line-height: 18px;
+    padding: 2px 5px;
+    color: red;
+    margin-bottom: 25px;
     `,
 
     RatingForm: styled.form`
@@ -177,6 +187,10 @@ const componentStyles = {
     RatingFormAddImageWrapper: styled.div`
     display: flex;
     margin-bottom: 20px; 
+    `,
+
+    FileInput: styled.input`
+    margin-top: 10px;
     `,
 
     RatingSubmitWrapper: styled.div`
@@ -232,49 +246,4 @@ const componentStyles = {
     
 }
 
-const RatingForm = styled.form`
-    display:flex;
-    flex-direction:column;
-    margin-top:50px;
-    padding: 10px;
-`;
-
-const RatingRow = styled.div`
-    display: flex;
-    flex-direction: row;
-`
-
-const RatingCol = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    flex-grow: 1;
-`;
-
-const UploadFile = styled.div`
-    margin-left: 36px;
-
-`;
-
-const Header = styled.h3`
-
-`;
-
-const FileInput = styled.input`
-    margin-top: 10px;
-`;
-
-const RatingSubmit = styled.button`
-    margin-top: 60px;
-`;
-
 export default componentStyles;
-export {
-    RatingForm,
-    UploadFile,
-    Header,
-    FileInput,
-    RatingRow,
-    RatingCol,
-    RatingSubmit
-}
