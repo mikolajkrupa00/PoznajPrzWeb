@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import Layout from "../Layout/index";
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 import {useHistory} from 'react-router-dom'
 import componentStyles from "./styles";
 import Axios from "axios";
@@ -11,12 +11,15 @@ const LoginPage = () => {
 
     const {t} = useTranslation();
     const { register, handleSubmit, errors } = useForm();
-    const { LoginMain, LoginFrom, LoginTitle, LoginLabel, LoginInput, LoginButton, LoginText } = componentStyles;
+    const { LoginMain, LoginFrom, LoginTitle, LoginLabel, LoginInput, LoginButton, LoginText, LoginErrorText } = componentStyles;
     const history = useHistory();
     const tnm = 'log-in.form.'  //translation namespace
     const [loginError, setLoginError] = useState(0)
+    const [awaitingServerResponse, setAwaitingServerResponse] = useState(false)
 
     const loginUser = (data) => {
+        setAwaitingServerResponse(true)
+        setLoginError(0)
         Axios.post("/user/authenticate", {
             username: data.username,
             password: data.password
@@ -29,11 +32,16 @@ const LoginPage = () => {
                 history.push("home")
                 window.location.reload()
             } else {
-                setLoginError(1)
+                setLoginError(2)
             }
         }).catch((error) => {
-            console.log("This \\/")
-            console.log(error.response)
+            if (error.response && error.response.status == 401) {
+                setLoginError(1)
+            } else {
+                setLoginError(2)
+            }
+        }).then(() => {
+            setAwaitingServerResponse(false)
         });  
     }
 
@@ -44,12 +52,16 @@ const LoginPage = () => {
             <LoginMain>
                 <LoginFrom onSubmit={handleSubmit(loginUser)}>
                     <LoginTitle>{t(tnm+'title')}</LoginTitle>
-                    <LoginLabel>{t(tnm+'username-label')}</LoginLabel>
-                    <LoginInput type="text" name="username" {...register('username')} placeholder={t(tnm+'username-placeholder')} />
-                    <LoginLabel>{t(tnm+'password-label')}</LoginLabel>
-                    <LoginInput type="password" {...register('password')} placeholder={t(tnm+'password-placeholder')} />
-                    <LoginText error>{t(tnm+'login-fail-message')}</LoginText>
-                    <LoginButton type="submit" color="#FFFFFF">{t(tnm+'log-in-button')}</LoginButton>
+                    <LoginLabel error={loginError == 1 ? "error" : ""}>{t(tnm+'username-label')}</LoginLabel>
+                    <LoginInput error={loginError == 1 ? "error" : ""} type="text" name="username" 
+                        {...register('username')} placeholder={t(tnm+'username-placeholder')} 
+                        onChange={() => setLoginError(0)} />
+                    <LoginLabel error={loginError == 1 ? "error" : ""}>{t(tnm+'password-label')}</LoginLabel>
+                    <LoginInput error={loginError == 1 ? "error" : ""} type="password" 
+                        {...register('password')} placeholder={t(tnm+'password-placeholder')} 
+                        onChange={() => setLoginError(0)} />
+                    <LoginErrorText error>{loginError > 0 ? t(tnm+'login-fail-message'+loginError) : null}</LoginErrorText>
+                    <LoginButton disabled={awaitingServerResponse} type="submit" color="#FFFFFF">{t(tnm+'log-in-button')}</LoginButton>
                     <LoginText>{t(tnm+'account-question')}</LoginText>
                     <LoginButton onClick={() => history.push("register")}>{t(tnm+'register-button')}</LoginButton>
                 </LoginFrom>
