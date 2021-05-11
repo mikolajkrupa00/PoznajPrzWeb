@@ -62,17 +62,8 @@ const componentStyles = {
     `,
     LoginText: styled.label`
         text-align: center;
-        margin-top: 30px;
-    `,
-    LoginPopUp: styled.div`
-        position: fixed;
-        width: 100%;
-        height: 50px;
-        top: var(--top_navbar_height);
-        left: 0;
-        background-color: rgba(255, 0, 0, 0.5);
-        color: #FFFFFF;
-        line-height: 50px;
+        margin-top: 10px;
+        ${props => props.error && "color: #CC0000;"}
     `
 }
 
