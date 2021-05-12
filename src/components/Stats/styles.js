@@ -11,19 +11,33 @@ const componentStyles = {
     background-color: #f0f0f0;
     `,
     DaysInput: styled.div`
-    margin-top: 5px;
-    margin-bottom: 20px;
+    margin-top: 50px;
+    
     `,
     PlaceInput: styled.div`
-    margin-top: 50px;
+    margin-top: 5px;
+    margin-bottom: 20px;
     `,
     Input: styled.input`
     padding: 10px;
     border: solid 1px #d0d0d0;
+    border-top-left-radius:1em;
+    border-bottom-left-radius:1em;
+    outline: none;
     `,
-    Button: styled.button`
+    InputPlace: styled.input`
     padding: 10px;
     border: solid 1px #d0d0d0;
+    border-radius:1em;
+    width: 230px;
+    outline: none;
+    `,
+    Button: styled.button`
+    width: 60px;
+    padding: 10px;
+    border: solid 1px #d0d0d0;
+    border-top-right-radius:1em;
+    border-bottom-right-radius:1em;
     &:hover{
         background-color: #d0d0d0;
     }
@@ -42,8 +56,6 @@ const componentStyles = {
     `,
     PlaceAddress: styled.div`
     `,
-    PlaceCategory: styled.div`
-    `,
     PlaceNumOfVisits: styled.div`
     `,
     PlaceDesc: styled.div`
@@ -59,6 +71,8 @@ const componentStyles = {
     margin-top: 8px;
     margin-bottom: 5px;
     font-weight: bold;
+    `,
+    Counter:styled.div`
     `,
     NumOfComments: styled.div`
     `,
