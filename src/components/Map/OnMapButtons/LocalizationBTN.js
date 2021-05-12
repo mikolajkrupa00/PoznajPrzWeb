@@ -84,14 +84,11 @@ const LocalizationButtonIcon = forwardRef((props, ref) => {
 
 const LocalizationBTN = ({mapInstance}) => {
 
-        
-    const childRef = useRef()
+    const childRef = useRef()    
 
-    var pos = { lat: 50.045507099999995, lng: 21.999670599999998}
-    
     const icon = L.icon({
         iconUrl: man_icon,
-        iconSize: [40, 40],
+        iconSize: [30, 30],
         //iconAnchor: [20, 45],
     })    
 
@@ -100,10 +97,7 @@ const LocalizationBTN = ({mapInstance}) => {
 
     const localize = () => {
     
-        pos.lat += 1
-        console.log('localising', pos)
-        //mapInstance.locate({setView: true, maxZoom: 13, timeout:10000})
-        mapInstance.locate()
+        mapInstance.locate({setView: true, maxZoom: 13, timeout:10000})
         mapInstance.on('locationfound', onLocationFound);
         mapInstance.on('locationerror', onLocationError);
 
@@ -113,14 +107,12 @@ const LocalizationBTN = ({mapInstance}) => {
     const onLocationFound = (e) => {
         var radius = e.accuracy;
         var latlng = e.latlng
-
-        console.log('onLocationFound', pos)
-               
-        markerRadius.setLatLng(pos)
+              
+        markerRadius.setLatLng(latlng)
         markerRadius.setRadius(radius)
         markerRadius.addTo(mapInstance)
 
-        marker.setLatLng(pos)
+        marker.setLatLng(latlng)
         marker.addTo(mapInstance)
 
         childRef.current.setLocationIconBasedOnGeolocationPermisson()
