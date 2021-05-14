@@ -43,7 +43,6 @@ const componentStyles = {
 
     LogoWrapper: styled.div`
     display: flex;
-    background-color: lightblue;
     cursor: pointer;
     `,
     

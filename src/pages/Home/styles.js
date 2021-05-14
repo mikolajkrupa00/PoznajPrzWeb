@@ -1,112 +1,168 @@
+import { Carousel, Col, Row } from "react-bootstrap";
 import styled from "styled-components"
+import mostMazowieckiego from '../../assets/img/most_mazowieckiego.jpg';
 
-const Wrapper = styled.main`
-  display: flex;
-	width: calc(100vw - 40px);
-	height: calc(100vh - 40px - var(--top_navbar_height));
-	padding: 10px;
+const StyledCarousel = styled(Carousel)`
+	height: 300px;
 `;
 
-const LeftWrapper = styled.div`
-	width: 25%;
-	flex-grow: 1;
+const StyledCarousel2 = styled(StyledCarousel)`
+	height: 300px;
+    margin-top: 18px
 `;
 
-const RightWrapper = styled.div`
-	width: 75%;
-	flex-grow: 1;
-`;
-
-const MapWrapper = styled.div`
+const StyledCaption = styled(Carousel.Caption)`
+	top: 50%;
+	left: 50%;
+	bottom: unset;
+	right: unset;
+	transform: translate(-50%, -50%);
 	width: 100%;
+
+	& > h3 {
+		font-weight: 700 !important;
+	}
+`;
+
+const StyledItem = styled(Carousel.Item)`
 	height: 300px;
+
+	&:before {
+		content:"";
+		display:block;
+		position:absolute;
+		top:0;
+		bottom:0;
+		left:0;
+		right:0;
+		background:rgba(0,0,0,0.4);
+	}
 `;
 
-const ClockWrapper = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin: 20px;
-	flex-direction: column;
+const StyledImg = styled.img`
+	height: 100%;
+	object-fit: cover;
 `;
 
-const DigitalClock = styled.div`
-	display: flex;
-	flex-direction: row;
-	margin-top: 20px;
-	font-size: 2rem;
-`;
-
-const PlaceWrapper = styled.div`
-	max-width: 320px;
-	max-height: 640px;
-	overflow-y: hidden;
-	background: #fff;
-	box-shadow: 0 0 10px aqua;
-	margin: 10px;
-	padding: 10px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-`;
-
-const Button = styled.button`
-	margin-top: 10px;
-`;
-
-const InfoHeader = styled.h3`
+const RzeszowDescription = styled.div`
 	font-family: 'Calibri';
+    padding: 10px;
+    text-align: left !important;
 `;
 
-const Header = styled.h3`
-	font-family: 'Calibri';
+const StyledLink = styled.a`
+    margin-left: auto;
+    display: flex;
+    width: max-content;
+    margin-right: 18px;
+    text-decoration: underline;
+    z-index: -1;
 `;
 
-const Description = styled.small`
-	font-family: 'Calibri';
+const ZaletyBox = styled(Row)`
+    padding: 16px;
+    justify-content: space-between;
+    margin-top: 18px;
+    background-color: #eee;
 `;
 
-const Picture = styled.img`
-	width: 192px;
-	height: 192px;
+const ZaletyItem = styled(Col)`
+
 `;
 
-const RzeszowWrapper = styled.div`
-	display: flex;
-	flex-direction: row;
-	height: 300px;
-	padding: 10px;
-	margin: 10px;
+const ZaletyTitle = styled.div`
+    padding-top: 10px;
 `;
 
-const RzeszowLeft = styled.div`
-	width: 50%;
+const TopBox = styled.div`
+    margin-top: 18px;
+    padding: 10px;
 `;
 
-const RzeszowPicture = styled.img`
-	height: 300px;
-	width: 100%;
+const TopBoxHeader = styled.h4`
+
 `;
 
-const RzeszowRight = styled.div`
-	width: 50%;
-	padding: 10px;
+const TopBoxRow = styled(Row)`
+
 `;
 
-const RzeszowHeader = styled.h1`
-	font-family: 'Calibri';
+const TopBoxItem = styled(Col)`
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
-const RzeszowDescription = styled.span`
-	font-family: 'Calibri';
+const TopBoxImgBox = styled.div`
+    position: relative;
+    max-width: 256px;
+`;
+
+const TopBoxImg = styled.img`
+    width: 100%;
+    padding: 16px;
+`;
+
+const TopBoxCaption = styled.div`
+
+`;
+
+const TopBoxRating = styled.div`
+    position: absolute;
+    bottom: 40px;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.5);
+
+    & > svg {
+        margin-left: 6px;
+    }
+`;
+
+const EventsBox = styled.div`
+    margin-top: 18px;
+    padding: 10px;
+`;
+
+const EventsBoxHeader = styled.h4`
+
+`;
+
+const BackgroundBox = styled.div`
+    height: 200px;
+    background-image: url('${mostMazowieckiego}');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 18px;
+`;
+
+const PlaceButton = styled.button`
+    border: none;
+    background: #555;
+    color: #fff;
+    padding: 10px 50px;
 `;
 
 export {
-	Wrapper, LeftWrapper, RightWrapper,
-	MapWrapper, ClockWrapper, DigitalClock,
-	PlaceWrapper, Button, Description, Header,
-	Picture, InfoHeader, RzeszowWrapper,
-	RzeszowPicture, RzeszowHeader,
-	RzeszowDescription, RzeszowRight,
-	RzeszowLeft
+    StyledCaption,
+    StyledCarousel,
+    StyledCarousel2,
+    StyledImg,
+    StyledItem,
+    RzeszowDescription,
+    StyledLink,
+    ZaletyBox,
+    ZaletyItem,
+    ZaletyTitle,
+    TopBox, TopBoxHeader,
+    TopBoxRow, TopBoxItem,
+    TopBoxImg, TopBoxCaption,
+    TopBoxRating, TopBoxImgBox,
+    EventsBox, EventsBoxHeader,
+    BackgroundBox,
+    PlaceButton
 }
