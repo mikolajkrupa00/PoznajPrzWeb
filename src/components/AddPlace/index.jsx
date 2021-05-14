@@ -8,9 +8,10 @@ import { localStorageService } from "../../services/localStorageService";
 const AddPlacePage = () => {
     const { register, handleSubmit, errors, reset } = useForm();
     const [categories, setCategories] = useState();
-    const [addedPhotos, setAddedPhotos] = useState("huj");
+    const [mainPhoto, setMainPhoto] = useState(null);
+    const [addedPhotos, setAddedPhotos] = useState([]);
     const { AddPlaceMain, AddPlaceForm, AddPlaceLabel, AddPlaceInput, AddPlaceSubmit, AddPlaceTextArea, 
-            DropDownList, DropDownOption, FileInput} = componentStyles;
+            DropDownList, DropDownOption, FileInput, FileInputLabel} = componentStyles;
 
 
     useEffect(() => {
@@ -19,43 +20,46 @@ const AddPlacePage = () => {
     },[])
 
     const fileInputHandler = (e) => {
-        //console.log(e.target.files)
-        console.log(Object.values(e.target.files))     
+        
+        if (e.target.name === "main_photo"){
+            
+            if(e.target.files.length > 0){
+                setMainPhoto(e.target.files[0])
+                // const { files } = e.target;
+                // const file = files[0];
+                // setMainPhoto(file)
+                console.log("main photo set!")
+                console.log(e.target.files[0])
+            }  
+        }
 
-        const { files } = e.target;
-        console.log(files)
-
-        //setAddedPhotos(files);
-
-		// if(files.length === 1) {
-		// 	const file = files[0];
-        //     console.log(file)
-		// 	setAddedPhotos(file);
-		// }
-
-        if(e.target.files.length > 0){
-            //setAddedPhotos(e.target.files);
-            setAddedPhotos(Object.values(e.target.files));
-        }               
+        if (e.target.name === "photos"){
+            var photos = Object.values(e.target.files)
+            console.log(photos)
+        
+            if(e.target.files.length > 0){
+                setAddedPhotos(Object.values(e.target.files));
+            }      
+        }
+                 
     }
 
     
     const addPlace = (data) => {
 		var request = new FormData();
 		
-        console.log("addedPhotos from request: ", addedPhotos)
-
 		request.append('latitude', data.latitude);
 		request.append('longitude', data.longitude);
 		request.append('name', data.name);
 		request.append('description', data.desc);
         request.append('address', data.address);
         request.append('categoryId', data.categoryId);
-		request.append('files', addedPhotos);
-
-        console.log("addedPhotos from request: ", addedPhotos)
-
-        console.log(request)
+        request.append('mainPhoto', mainPhoto);        
+		
+        for (var index in addedPhotos) {
+            var photo = addedPhotos[index]
+            request.append("photos", photo, photo.name);
+        }        
 
 		Axios.request({
 			url: "/place",
@@ -70,22 +74,12 @@ const AddPlacePage = () => {
 
 		reset();
 	}
-    // const addPlace = (data) => {
-    //     Axios.post("/place", {
-    //         latitude: data.latitude,
-    //         longitude: data.longitude,
-    //         name: data.name,
-    //         description: data.desc,
-    //         address: data.address,
-    //         categoryId: data.categoryId
-    //     }).then(res => console.log(res)).catch(er => console.log(er))
-    // }
 
-
+    
     return(
         <Layout>
             <AddPlaceMain>
-                
+
                 <AddPlaceForm onSubmit={handleSubmit()}>
                     <AddPlaceLabel>Szerokość geograficzna</AddPlaceLabel>
                     <AddPlaceInput type="number" {...register('latitude')} placeholder="Szerokość geograficzna" />
@@ -103,11 +97,22 @@ const AddPlacePage = () => {
                             <DropDownOption value={category.categoryId}>{category.name}</DropDownOption>
                         )}
                     </DropDownList>
-
+                    
+                    <FileInputLabel>Wybierz zdjęcie główne</FileInputLabel>
                     <FileInput
 						type='file'
-						id='file'
-						name='file'
+						id='main_photo'
+						name='main_photo'
+						accept='image/*'
+                        multiple={false}
+						onChange={ e => fileInputHandler(e) }
+					/>		
+                    
+                    <FileInputLabel>Wybierz zdjęcia do galerii</FileInputLabel>
+                    <FileInput
+						type='file'
+						id='photos'
+						name='photos'
 						accept='image/*'
                         multiple={true}
 						onChange={ e => fileInputHandler(e) }

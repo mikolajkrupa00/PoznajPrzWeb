@@ -23,6 +23,10 @@ const componentStyles = {
     DropDownOption: styled.option`
     `,
 
+    FileInputLabel: styled.label`
+    margin-bottom: 5px;
+    margin-top: 25px;
+    `,
     FileInput: styled.input`
     margin-top: 10px;
     `,
