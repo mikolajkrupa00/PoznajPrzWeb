@@ -15,7 +15,7 @@ const AddPlacePage = () => {
 
 
     useEffect(() => {
-        console.log(localStorageService.token)
+        //console.log(localStorageService.token)
         Axios.get("/category").then(res => setCategories(res.data));
     },[])
 
@@ -25,11 +25,6 @@ const AddPlacePage = () => {
             
             if(e.target.files.length > 0){
                 setMainPhoto(e.target.files[0])
-                // const { files } = e.target;
-                // const file = files[0];
-                // setMainPhoto(file)
-                console.log("main photo set!")
-                console.log(e.target.files[0])
             }  
         }
 
@@ -93,9 +88,9 @@ const AddPlacePage = () => {
                     <AddPlaceTextArea type="textarea" {...register('address')} placeholder="Opis" />
                     <AddPlaceLabel>Kategoria</AddPlaceLabel>
                     <DropDownList {...register('categoryId')}>
-                        {categories && categories.map(category => 
-                            <DropDownOption value={category.categoryId}>{category.name}</DropDownOption>
-                        )}
+                        {categories && categories.map(    (category, id) => {
+                            return( <DropDownOption key={id} value={category.categoryId}>{category.name}</DropDownOption> )
+                        })}
                     </DropDownList>
                     
                     <FileInputLabel>Wybierz zdjęcie główne</FileInputLabel>
