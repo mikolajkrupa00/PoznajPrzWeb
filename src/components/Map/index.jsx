@@ -1,16 +1,12 @@
 import React, {useEffect, useState} from "react";
 import Axios from "axios";
-import { useForm } from 'react-hook-form';
 import Layout from "../Layout/index"
 import componentStyles from "./styles";
-import { localStorageService } from "../../services/localStorageService"
-
 
 
 import {L} from 'leaflet';
 import {MapContainer,TileLayer} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-// import '../../../CSS/Map.css'
 import OnScreenButtons from './OnMapButtons/OnScreenButtons'
 import MarkersLayer from './MarkersManagement/MarkersLayer'
 
