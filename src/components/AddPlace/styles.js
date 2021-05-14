@@ -23,6 +23,10 @@ const componentStyles = {
     DropDownOption: styled.option`
     `,
 
+    FileInput: styled.input`
+    margin-top: 10px;
+    `,
+
 }
 
 export default componentStyles
