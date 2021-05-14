@@ -32,7 +32,8 @@
             "log-in-button": "Zaloguj się",       
             "account-question": "Nie masz jeszcze konta?",
             "register-button": "Zarejestruj się",
-            "login-fail-message": "Nieprawidłowa nazwa użytkownika lub hasło!"
+            "login-fail-message1": "Nieprawidłowa nazwa użytkownika lub hasło!",
+            "login-fail-message2": "Wystąpił problem, spróbuj ponownie później"
         }
     },
 
