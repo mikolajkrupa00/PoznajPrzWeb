@@ -15,6 +15,11 @@ const LoginPage = () => {
     const history = useHistory();
     const tnm = 'log-in.form.'  //translation namespace
     const [loginError, setLoginError] = useState(0)
+    /* Error codes:
+        0 - no error
+        1 - wrong username or password
+        2 - other (i.e. no response from server)
+    */
     const [awaitingServerResponse, setAwaitingServerResponse] = useState(false)
 
     const loginUser = (data) => {
@@ -23,14 +28,14 @@ const LoginPage = () => {
         Axios.post("/user/authenticate", {
             username: data.username,
             password: data.password
-        }).then( (res) => {
-            if (res.data) {
+        }).then((res) => {
+            console.log(res)
+            if (res.status == 200 && res.data) {
                 localStorageService.username = res.data.username
                 localStorageService.token = res.data.token
                 localStorageService.userId = res.data.userId
                 localStorageService.role = res.data.role
                 history.push("home")
-                window.location.reload()
             } else {
                 setLoginError(2)
             }
@@ -60,7 +65,7 @@ const LoginPage = () => {
                     <LoginInput error={loginError == 1 ? "error" : ""} type="password" 
                         {...register('password')} placeholder={t(tnm+'password-placeholder')} 
                         onChange={() => setLoginError(0)} />
-                    <LoginErrorText error>{loginError > 0 ? t(tnm+'login-fail-message'+loginError) : null}</LoginErrorText>
+                    <LoginErrorText>{loginError > 0 ? t(tnm+'login-fail-message'+loginError) : null}</LoginErrorText>
                     <LoginButton disabled={awaitingServerResponse} type="submit" color="#FFFFFF">{t(tnm+'log-in-button')}</LoginButton>
                     <LoginText>{t(tnm+'account-question')}</LoginText>
                     <LoginButton onClick={() => history.push("register")}>{t(tnm+'register-button')}</LoginButton>

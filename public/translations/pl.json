@@ -47,7 +47,7 @@
             "email-placeholder": "E-mail",
             "password-label": "Hasło",
             "password-placeholder": "Hasło",
-            "repeat-password-label": "Hasło",
+            "repeat-password-label": "Powtórz hasło",
             "repeat-password-placeholder": "Powtórz hasło",
             "register-button": "Zarejestruj się",
             "account-question": "Masz już konto?",
@@ -55,7 +55,9 @@
             "field-required": "pole jest wymagane",
             "pass-requirements": "min. 6 znaków, w tym: cyfra, mała i duża litera",
             "pass-mismatch": "Wpisane hasła nie są identyczne!",
-            "username-taken": "Podana nazwa użytkownika jest już zajęta!"
+            "username-taken": "Podana nazwa użytkownika jest już zajęta!",
+            "email-taken": "Podany e-mail jest już zajęty!",
+            "other-error": "Wystąpił problem, spróbuj ponownie później"
         }
     }
 

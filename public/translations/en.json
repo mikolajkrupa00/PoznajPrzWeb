@@ -56,7 +56,9 @@
             "field-required": "field is required",
             "pass-requirements": "min. 6 characters, including: digit, small and big letter",
             "pass-mismatch": "Entered passwords are not identical!",
-            "username-taken": "Username already taken!"
+            "username-taken": "Username already taken!",
+            "email-taken": "E-mail already taken!",
+            "other-error": "Error occured, try again later"
         }
     }
        
