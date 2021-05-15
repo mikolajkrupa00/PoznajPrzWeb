@@ -11,7 +11,7 @@ const componentStyles =  {
         background: #E6E6E6;
         width: 90%;
         height: auto;
-        top: max(calc((100vh - (var(--top_navbar_height) + 570px)) / 2), 0px);
+        top: max(calc((100vh - (var(--top_navbar_height) + 554px)) / 2), 0px);
         margin: 5px auto;
         position: relative;
         border: 1px solid #E9E9E9;
@@ -47,6 +47,13 @@ const componentStyles =  {
             box-shadow: 0px 0px 5px #707070;
         }
         ${props => props.error && "background-color: #FFEEEE;"}
+    `,
+    RegisterInputError: styled.label`
+        margin: -13px 40px 3px 40px;
+        font-size: 11px;
+        color: #CC0000;
+        min-height: 12px;
+        text-align: left;
     `,
     RegisterButton: styled.button`
         margin: 15px auto;

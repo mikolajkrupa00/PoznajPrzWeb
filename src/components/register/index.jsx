@@ -9,23 +9,16 @@ import { useTranslation } from "react-i18next";
 
 const RegisterPage = () => {
     const {t} = useTranslation();
-    const { register, handleSubmit, clearErrors, trigger, getValues, formState: { errors } } = useForm();
-    const { RegisterMain, RegisterFrom, RegisterTitle, RegisterLabel, RegisterInput, RegisterButton,
-        RegisterText, RegisterErrorText } = componentStyles;
+    const { register, handleSubmit, setError, formState: { errors } } = useForm();
+    const { RegisterMain, RegisterFrom, RegisterTitle, RegisterLabel, RegisterInput, RegisterInputError,
+        RegisterButton, RegisterText, RegisterErrorText } = componentStyles;
     const history = useHistory();
-    const [RegisterError, setRegisterError] = useState(0)
-    /* Error codes:
-        0 - no error
-        1 - username taken
-        2 - email taken
-        3 - passwords mismatch (in register form)
-        4 - other (i.e. no response from server)
-    */
+    const [RegisterError, setRegisterError] = useState(false)
    const [awaitingServerResponse, setAwaitingServerResponse] = useState(false)
     const tnm = 'register.form.' //translation namespace
 
     const registerUser = (data) => {
-        setRegisterError(0)
+        setRegisterError(false)
         if (data.password === data.confirmPassword) {
             setAwaitingServerResponse(true)
             Axios.post("/user", {
@@ -38,35 +31,37 @@ const RegisterPage = () => {
                     localStorageService.username = res.data.username
                     localStorageService.token = res.data.token
                     localStorageService.userId = res.data.userId
-                    localStorageService.role = '1'
+                    localStorageService.role = res.data.role
                     history.push("home")
                 } else {
-                    setRegisterError(4)
+                    setRegisterError(true)
                 }
             }).catch((error) => {
                 if (error.response && error.response.status == 400) {
                     switch (error.response.data) {
                         case "Passwords mismatch":
-                            setRegisterError(3)
+                            //setError("password", {type: "pass-mismatch", message: ""})
+                            setError("confirmPassword", {type: "pass-mismatch", message: ""}, {shouldFocus: true})
                             break;
                         case "Username taken":
-                            setRegisterError(1)
+                            setError("username", {type: "username-taken", message: ""}, {shouldFocus: true})
                             break;
                         case "Email taken":
-                            setRegisterError(2)
+                            setError("email", {type: "email-taken", message: ""}, {shouldFocus: true})
                             break;
                         default:
-                            setRegisterError(4)
+                            setRegisterError(true)
                             break;
                     }
                 } else {
-                    setRegisterError(4)
+                    setRegisterError(true)
                 }
             }).then(() =>{
                 setAwaitingServerResponse(false)
             })
         } else {
-            setRegisterError(3)
+            //setError("password", {type: "pass-mismatch", message: ""})
+            setError("confirmPassword", {type: "pass-mismatch", message: ""}, {shouldFocus: true})
         }
     }
 
@@ -76,40 +71,28 @@ const RegisterPage = () => {
             <RegisterMain>
                 <RegisterFrom onSubmit={handleSubmit(registerUser)}>
                     <RegisterTitle>{t(tnm+'title')}</RegisterTitle>
-                    <RegisterLabel error={errors.username || RegisterError == 1}>
-                        {t(tnm+'username-label')}
-                        {errors.username && " - " + t(tnm+'field-required')}
-                        {RegisterError == 1 && " - " + t(tnm+'username-taken')}
-                    </RegisterLabel>
-                    <RegisterInput error={errors.username || RegisterError == 1} type="text" {...register('username', {required: true})}
+                    <RegisterLabel error={errors.username}>{t(tnm+'username-label')}</RegisterLabel>
+                    <RegisterInput error={errors.username} type="text" {...register('username', {required: true})}
                         placeholder={t(tnm+'username-placeholder')} />
+                    <RegisterInputError>{errors.username ? t(tnm+errors.username.type) : null}</RegisterInputError>
                     
-                    <RegisterLabel error={errors.email || RegisterError == 2}>
-                        {t(tnm+'email-label')}
-                        {errors.email && " - " + t(tnm+'field-required')}
-                        {RegisterError == 2 && " - " + t(tnm+'email-taken')}
-                    </RegisterLabel>
-                    <RegisterInput error={errors.email || RegisterError == 2} type="email" {...register('email', {required: true})}
+                    <RegisterLabel error={errors.email}>{t(tnm+'email-label')}</RegisterLabel>
+                    <RegisterInput error={errors.email} type="email" {...register('email', {required: true})}
                         placeholder={t(tnm+'email-placeholder')} />
+                    <RegisterInputError>{errors.email ? t(tnm+errors.email.type) : null}</RegisterInputError>
 
-                    <RegisterLabel error={errors.password || RegisterError == 3}>
-                        {t(tnm+'password-label')}
-                        {errors.password && " - " + t(tnm+'pass-requirements')}
-                    </RegisterLabel>
-                    <RegisterInput error={errors.password || RegisterError == 3} type="password" {...register('password',
+                    <RegisterLabel error={errors.password}>{t(tnm+'password-label')}</RegisterLabel>
+                    <RegisterInput error={errors.password} type="password" {...register('password',
                         {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })}
                         placeholder={t(tnm+'password-placeholder')} />
+                    <RegisterInputError>{errors.password && errors.password.type != "pass-mismatch" ? t(tnm+errors.password.type) : null}</RegisterInputError>
 
-                    <RegisterLabel error={errors.confirmPassword || RegisterError == 3}>
-                        {t(tnm+'repeat-password-label')}
-                        {errors.confirmPassword && " - " + t(tnm+'field-required')}
-                        {RegisterError == 3 && " - " + t(tnm+'pass-mismatch')}
-                    </RegisterLabel>
-                    <RegisterInput error={errors.confirmPassword || RegisterError == 3} type="password" {...register('confirmPassword',
-                        {required: true})}
-                        placeholder={t(tnm+'repeat-password-placeholder')} />
+                    <RegisterLabel error={errors.confirmPassword}>{t(tnm+'repeat-password-label')}</RegisterLabel>
+                    <RegisterInput error={errors.confirmPassword} type="password" {...register('confirmPassword',
+                        {required: true})} placeholder={t(tnm+'repeat-password-placeholder')} />
+                    <RegisterInputError>{errors.confirmPassword ? t(tnm+errors.confirmPassword.type) : null}</RegisterInputError>
 
-                    <RegisterErrorText>{RegisterError == 4 && t(tnm+'other-error')}</RegisterErrorText>
+                    <RegisterErrorText>{RegisterError && t(tnm+'other-error')}</RegisterErrorText>
 
                     <RegisterButton disabled={awaitingServerResponse} type="submit" color="#FFFFFF">{t(tnm+'register-button')}</RegisterButton>
 
