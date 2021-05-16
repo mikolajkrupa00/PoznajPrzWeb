@@ -23,7 +23,6 @@ const PlacePage = (props) => {
 	const [ratings, setRatings] = useState()
 	const [comment, setComment] = useState()
 	const [file, _setFile] = useState(null);
-    const [addComment, setAddComment] = useState(false)
     const [commentSection, setCommentSection] = useState('')
     const [ratingPanelMessage, setRatingPanelMessage] = useState('')
     const [descriptionHeight, setDescriptionHeight] = useState('250px')
@@ -83,6 +82,7 @@ const PlacePage = (props) => {
 		Axios.put(`/user/blockUser/${username}`)
 	}
 
+    //TODO: mozliwosc dodana kilku zdjec
 	const setFile = e => {
 		const { files } = e.target;
 
@@ -125,7 +125,7 @@ const PlacePage = (props) => {
                     </TopBar>
 
                     <PlaceIntro>
-                        <PlaceImg src="logo192.png"/>
+                        <PlaceImg src={place.mainPhoto}/>
                         <PlaceDesc>
                             <PlaceName>{place.name}</PlaceName>
                             <PlaceAddress>{place.address}</PlaceAddress>
@@ -148,12 +148,11 @@ const PlacePage = (props) => {
                     </PlaceIntro>
 
                     <Gallery>
-                        <Photo></Photo>
-                        <Photo></Photo>
-                        <Photo></Photo>
-                        <Photo></Photo>
-                        <Photo></Photo>
-                        <Photo></Photo>
+                        { place.photos && place.photos.map(photo => {
+                            return(
+                                <Photo src={photo}></Photo>
+                            )
+                        })}                        
                     </Gallery>
 
                     <PlaceDescription>
@@ -255,8 +254,8 @@ const PlacePage = (props) => {
                             }
 
 
-                            {ratings.map((rating, index) => 
-                            <Rating>
+                            {ratings.map((rating, id) => 
+                            <Rating key={id}>
                                 
                                 <RatingTop>
                                     <RatingUsername>{rating.username}</RatingUsername>

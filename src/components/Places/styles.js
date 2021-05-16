@@ -114,8 +114,8 @@ const componentStyles = {
     align-items: center;
     `,
     PlaceImg: styled.img`
-    width:70px;
-    height:70px;
+    width:90px;
+    height:90px;
     `,
     PlaceDescription: styled.div`
     `,

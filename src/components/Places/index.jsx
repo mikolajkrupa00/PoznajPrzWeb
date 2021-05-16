@@ -92,7 +92,6 @@ const PlacesPage = () => {
         }
 
         //zostal klikniety nowy guzik
-        console.log("tu dojde w ostatecznosci")
         ReactDOM.findDOMNode(e.target).style.backgroundColor = clicked
         ReactDOM.findDOMNode(clickedCategory).style.backgroundColor = unclicked
         setClickedCategory(e.target)
@@ -106,7 +105,7 @@ const PlacesPage = () => {
         return(
             <Place onClick={() => history.push("place", place.placeId)}>
                 <PlaceImgDiv>
-                    <PlaceImg src="img/logo192.png" />
+                    <PlaceImg src={place.mainPhoto} />
                 </PlaceImgDiv>
                                 
                 <PlaceDesc>

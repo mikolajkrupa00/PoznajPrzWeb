@@ -80,20 +80,19 @@ const componentStyles = {
     // ----- GALLERY ----- //
     Gallery: styled.div`
     background-color: whitesmoke;
-    height: 80px;
+    height: 100px;
     width: 100%;
     padding: 10px 0px;
     overflow-y: scroll;
     white-space: nowrap;
     `,
-    Photo: styled.div`
+    Photo: styled.img`
     height: 80px;
     width: 120px;
     background-color: lightblue;
     margin-right: 4px;
     display: inline-block;
     overflow-y: scroll;
-    
     `,
     
      
