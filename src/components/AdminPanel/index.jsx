@@ -3,11 +3,12 @@ import components from "./styles"
 import {useForm} from "react-hook-form"
 import Axios from "axios";
 import {useState, useEffect} from "react";
+import { BiSleepy } from "react-icons/bi";
 
 const AdminPanel = () => {
 
     const {AdminContainer, BlockUserSubmit, BlockUserInput, PlaceRow, BlockUserContainer, Place, PlaceName, PlaceAddress,
-        PlaceCategory, PlaceDescription, PlaceImg, PlaceDesc, ConfirmButton, BlockedUsers, User, UserName, UserEmail} = components;
+        PlaceCategory, PlaceDescription, PlaceImg, PlaceDesc, ConfirmButton, BlockedUsers, User, UserName, UserEmail, UnlockUserSubmit} = components;
     const {register, handleSubmit} = useForm();
     const[places, setPlaces] = useState();
     const [blockedUsers,setBlockedUsers] = useState();
@@ -21,8 +22,12 @@ const AdminPanel = () => {
     const blockUser = (data) =>{
         console.log(data)
         Axios.put(`/user/blockUser/${data.username}`);
+        Axios.get("/user/blockedUsers").then(res => setBlockedUsers(res.data));
     }
-
+    const handleUnblock = (username) =>{
+        Axios.put(`/user/unblockUser/${username}`);
+        Axios.get("/user/blockedUsers").then(res => setBlockedUsers(res.data));
+    }
     const confirmPlace = (placeId) =>{
         Axios.put(`/place/confirmPlace/${placeId}`).then(res => console.log(res))
     }
@@ -53,6 +58,7 @@ const AdminPanel = () => {
                             <User>
                                 <UserName>Nazwa użytkownika: {user.username}</UserName>
                                 <UserEmail>Email: {user.email}</UserEmail>
+                                <UnlockUserSubmit onClick={()=>handleUnblock(user.username)}>Odblokuj użytkownika</UnlockUserSubmit>
                             </User>
                         )}
                     </BlockedUsers>

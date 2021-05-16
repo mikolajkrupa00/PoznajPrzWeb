@@ -49,8 +49,8 @@ const StatsPage = () => {
             <PlaceInput>
                     <InputPlace type="text" placeholder="Fraza w nazwie miejsca" value={placeName} onChange={(e)=>handleFilterPlaces(e.target.value)}/>
             </PlaceInput>
-            <Counter>{placeName.length>0 || days>0 ? (filteredPlaces.length>0 ? `Zwrócono ${filteredPlaces.length} rekordów` : "Brak wyników") : "Brak kryterium wyszukiwania"}</Counter>
-                {filteredPlaces && filteredPlaces.map(visit => 
+            <Counter>{placeName.length>0 || displayedDays>0 ? (filteredPlaces.length>0 ? `Zwrócono ${filteredPlaces.length} rekordów` : "Brak wyników") : "Brak kryterium wyszukiwania"}</Counter>
+                {filteredPlaces && displayedDays != "" && filteredPlaces.map(visit => 
                     <Place>
                         <PlaceImg src="img/logo192.png" />
                         <PlaceDesc>
