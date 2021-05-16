@@ -2,17 +2,18 @@ import React, {useEffect, useState} from "react";
 import Axios from "axios";
 import Layout from "../Layout/index"
 import componentStyles from "./styles";
-import { BiSleepy } from "react-icons/bi";
 
 const StatsPage = () => {
     const [ratings, setRatings] = useState('')
     const [placeName,setPlaceName] = useState('')
     const [filteredPlaces,setfilteredPlaces] = useState('')
-    const [days,setDays] = useState('')
-    const [displayedDays,setDisplayedDays] = useState('')
+    const [days,setDays] = useState(365)
+    const [displayedDays,setDisplayedDays] = useState(365)
     const { PlacesContainer, Place, PlaceName, PlaceAddress, PlaceNumOfVisits, PlaceDesc, PlaceImg, AverageRating, NumOfComments,Counter, DaysInput, PlaceInput, Input, InputPlace, Button, Stats} = componentStyles;
     
- 
+    useEffect(() => {
+        Axios.get(`/rating/getRatingsStats/${days}`).then(res =>{setRatings(res.data);setfilteredPlaces(res.data)} );
+    },[])
     const handleDays = (e) =>{
         setDays(e.target.value);
         }

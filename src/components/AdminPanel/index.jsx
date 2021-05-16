@@ -3,7 +3,6 @@ import components from "./styles"
 import {useForm} from "react-hook-form"
 import Axios from "axios";
 import {useState, useEffect} from "react";
-import { BiSleepy } from "react-icons/bi";
 
 const AdminPanel = () => {
 
@@ -18,17 +17,15 @@ const AdminPanel = () => {
         Axios.get("/user/blockedUsers").then(res => setBlockedUsers(res.data));
     },[])
 
-
+    const getUnblockedUsers = () =>{
+        Axios.get("/user/blockedUsers").then(res => setBlockedUsers(res.data))
+    }
     const blockUser = (data) =>{
-        Axios.put(`/user/blockUser/${data.username}`).then(
-            Axios.get("/user/blockedUsers").then(res => setBlockedUsers(res.data))
-        );
+        Axios.put(`/user/blockUser/${data.username}`).then(getUnblockedUsers)
     }
     const unblockUser = (username) =>{
-        Axios.put(`/user/unblockUser/${username}`).then(
-            Axios.get("/user/blockedUsers").then(res => setBlockedUsers(res.data))
-        );
-
+        Axios.put(`/user/unblockUser/${username}`).then(getUnblockedUsers)
+        
     }
     const confirmPlace = (placeId) =>{
         Axios.put(`/place/confirmPlace/${placeId}`).then(res => console.log(res))
