@@ -94,10 +94,10 @@ const MarkersLayer = () => {
     const onMarkerClick = (markerObj) => {
 
         setBriefDescription(true)
-        var pos =  [markerObj.longitude, markerObj.latitude]
+        var pos =  [markerObj.latitude, markerObj.longitude]
         //TODO: dodac prawdziwe srodkowanie mapy na 'onMarkerClick', wymaga zmiany wysokosci diva 'mapWrapper'
         //TODO: dodac wyroznienie do kliknietego markera'
-        pos[0] -= 0.003
+        pos[1] -= 0.003
         map.setView(pos)
         console.log(markerObj.placeId)
         localStorage.setItem('clickedMarker', JSON.stringify(markerObj))
@@ -131,14 +131,14 @@ const MarkersLayer = () => {
 
                         if(placeCategory === 'all'){
                             return(
-                                <Marker key={id} position={[marker.longitude, marker.latitude]} icon={Icon(iconSize, marker)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
+                                <Marker key={id} position={[marker.latitude, marker.longitude]} icon={Icon(iconSize, marker)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
                             )
                         }
                         else{
                             
                             if(marker.categoryName === placeCategory){
                                 return(
-                                    <Marker key={id} position={[marker.longitude, marker.latitude]} icon={Icon(iconSize, marker)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
+                                    <Marker key={id} position={[marker.latitude, marker.longitude]} icon={Icon(iconSize, marker)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
                                 )
                             }
     
@@ -150,14 +150,14 @@ const MarkersLayer = () => {
 
                             if(placeCategory === 'all'){
                                 return(
-                                    <Marker key={id} position={[marker.longitude, marker.latitude]} icon={Icon(iconSize, marker)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
+                                    <Marker key={id} position={[marker.latitude, marker.longitude]} icon={Icon(iconSize, marker)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
                                 )
                             }
                             else{
                                 
                                 if(marker.categoryName === placeCategory){
                                     return(
-                                        <Marker key={id} position={[marker.longitude, marker.latitude]} icon={Icon(iconSize, marker)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
+                                        <Marker key={id} position={[marker.latitude, marker.longitude]} icon={Icon(iconSize, marker)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
                                     )
                                 }
         

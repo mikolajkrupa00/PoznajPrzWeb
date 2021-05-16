@@ -16,7 +16,7 @@ const Map = () => {
         
     const { MapWrapper } = componentStyles;
     const style = {height: '100%'}
-    const rzeszow_location = [50.041187, 21.999121]
+    const rzeszow_location = [50.041187, 21.999121] //latitude longitude
     const default_zoom = 13
 
        

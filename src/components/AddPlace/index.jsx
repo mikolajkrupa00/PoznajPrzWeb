@@ -6,11 +6,13 @@ import { useEffect, useState } from "react";
 import { localStorageService } from "../../services/localStorageService";
 
 const AddPlacePage = () => {
-    const { register, handleSubmit, errors, reset} = useForm();
+    const { register, handleSubmit, errors, reset, setValue} = useForm();
     const [categories, setCategories] = useState();
     const [mainPhoto, setMainPhoto] = useState(null);
     const [addedPhotos, setAddedPhotos] = useState([]);
-    const { AddPlaceMain, AddPlaceForm, AddPlaceLabel, AddPlaceInput, AddPlaceSubmit, AddPlaceTextArea, DropDownList, DropDownOption, FileInput, FileInputLabel} = componentStyles;
+    const [geolocationMessage, setGeolocationMessage] = useState('');
+    const { AddPlaceMain, AddPlaceForm, AddPlaceLabel, AddPlaceInput, AddPlaceSubmit, AddPlaceTextArea, DropDownList, DropDownOption, 
+        FileInput, FileInputLabel, MessageLabel, Button} = componentStyles;
 
 
     useEffect(() => {
@@ -65,8 +67,29 @@ const AddPlacePage = () => {
             if(e.target.files.length > 0){
                 setAddedPhotos(Object.values(e.target.files));
             }      
-        }
-                 
+        }  
+    }
+
+    const geolocationSuccess = (position) =>  {
+        const latitude  = position.coords.latitude
+        const longitude = position.coords.longitude
+        setGeolocationMessage('')
+        setValue('latitude', latitude)
+        setValue('longitude', longitude)
+    }
+
+    const geolocationError = () => {
+        setGeolocationMessage('Unable to retrieve your location')
+    }
+    
+    
+    const geolocation = () => {
+        if(!navigator.geolocation) {
+            setGeolocationMessage('Geolocation is not supported by your browser')
+          } else {
+            setGeolocationMessage('Locating…')
+            navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError);
+          }
     }
 
 
@@ -74,10 +97,14 @@ const AddPlacePage = () => {
         <Layout>
             <AddPlaceMain>
                 <AddPlaceForm onSubmit={handleSubmit()}>
+
+                    <MessageLabel>{geolocationMessage}</MessageLabel>
                     <AddPlaceLabel>Szerokość geograficzna</AddPlaceLabel>
                     <AddPlaceInput type="number" step="any" {...register('latitude')} placeholder="Szerokość geograficzna" />
-                    <AddPlaceLabel>Wysokość geograficzna</AddPlaceLabel>
+                    <AddPlaceLabel>Długość geograficzna</AddPlaceLabel>
                     <AddPlaceInput type="number" step="any" {...register('longitude')} placeholder="Długość geograficzna" />
+                    <Button onClick={geolocation}>Moja lokalizacja</Button>
+
                     <AddPlaceLabel>Nazwa miejsca</AddPlaceLabel>
                     <AddPlaceInput type="text" {...register('name')} placeholder="Nazwa miejsca" />
                     <AddPlaceLabel>Adres</AddPlaceLabel>
