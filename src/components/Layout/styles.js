@@ -38,8 +38,8 @@ const componentStyles = {
     
     LogoWrapper: styled.div`
     display: flex;
-    background-color: lightblue;
     cursor: pointer;
+    align-items: center;
     `,
     
     LogoImg: styled.img`
@@ -91,7 +91,7 @@ const componentStyles = {
     top: var(--top_navbar_height);
     overflow-y: scroll;
     padding: 25px 0px;
-    z-index: 10;
+    z-index: 11;
     `,
     ListMenuRecord: styled.div`
     text-align: center;
