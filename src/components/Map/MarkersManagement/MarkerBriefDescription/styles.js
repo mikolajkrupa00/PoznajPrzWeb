@@ -4,8 +4,8 @@ import styled from "styled-components";
 const componentStyles = {
 
     BriefDescriptionWrapper: styled.div`
-    height: 210px;
-    width: calc(100% - 30px);
+    height: 220px;
+    //width: calc(100% - 30px);
     position: absolute;
     bottom: 0px;
     z-index: 1001;
