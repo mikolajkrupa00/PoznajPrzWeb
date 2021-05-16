@@ -50,8 +50,13 @@ const StatsPage = () => {
                     <InputPlace type="text" placeholder="Fraza w nazwie miejsca" value={placeName} onChange={(e)=>handleFilterPlaces(e.target.value)}/>
             </PlaceInput>
             <Counter>{placeName.length>0 || displayedDays>0 ? (filteredPlaces.length>0 ? `Zwrócono ${filteredPlaces.length} rekordów` : "Brak wyników") : "Brak kryterium wyszukiwania"}</Counter>
+<<<<<<< Updated upstream
                 {filteredPlaces && displayedDays != "" && filteredPlaces.map(visit => 
                     <Place>
+=======
+                {filteredPlaces && displayedDays!="" && filteredPlaces.map(visit => 
+                    <Place key={`key${visit.placeId}`}>
+>>>>>>> Stashed changes
                         <PlaceImg src="img/logo192.png" />
                         <PlaceDesc>
                             <PlaceName>{visit.name}</PlaceName>

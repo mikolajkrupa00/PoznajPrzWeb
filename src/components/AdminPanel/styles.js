@@ -52,8 +52,17 @@ export default{
     justify-content: center;
     `,
     User:styled.div`
+<<<<<<< Updated upstream
     
     margin-top: 15px;
+=======
+    border-top: solid 1px #d0d0d0;
+    margin-top: 15px;
+    padding: 15px 0;
+    &:last-child{
+        border-bottom: solid 1px #d0d0d0;
+    }
+>>>>>>> Stashed changes
     `,
     UserName: styled.div`
     margin-bottom: 5px;

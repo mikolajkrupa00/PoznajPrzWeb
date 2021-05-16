@@ -20,6 +20,7 @@ const AdminPanel = () => {
 
 
     const blockUser = (data) =>{
+<<<<<<< Updated upstream
         console.log(data)
         Axios.put(`/user/blockUser/${data.username}`);
         Axios.get("/user/blockedUsers").then(res => setBlockedUsers(res.data));
@@ -27,6 +28,16 @@ const AdminPanel = () => {
     const handleUnblock = (username) =>{
         Axios.put(`/user/unblockUser/${username}`);
         Axios.get("/user/blockedUsers").then(res => setBlockedUsers(res.data));
+=======
+        Axios.put(`/user/blockUser/${data.username}`).then(
+            Axios.get("/user/blockedUsers").then(res => setBlockedUsers(res.data))
+        );
+    }
+    const unblockUser = (username) =>{
+        Axios.put(`/user/unblockUser/${username}`).then(
+            Axios.get("/user/blockedUsers").then(res => setBlockedUsers(res.data))
+        );
+>>>>>>> Stashed changes
     }
     const confirmPlace = (placeId) =>{
         Axios.put(`/place/confirmPlace/${placeId}`).then(res => console.log(res))
@@ -55,10 +66,17 @@ const AdminPanel = () => {
                     <BlockedUsers>
                         <h3>Zablokowani użytkownicy</h3>
                         {blockedUsers && blockedUsers.map(user=>
+<<<<<<< Updated upstream
                             <User>
                                 <UserName>Nazwa użytkownika: {user.username}</UserName>
                                 <UserEmail>Email: {user.email}</UserEmail>
                                 <UnlockUserSubmit onClick={()=>handleUnblock(user.username)}>Odblokuj użytkownika</UnlockUserSubmit>
+=======
+                            <User key={`key${user.userid}`}>
+                                <UserName>Nazwa użytkownika: {user.username}</UserName>
+                                <UserEmail>Email: {user.email}</UserEmail>
+                                <UnlockUserSubmit onClick={()=>unblockUser(user.username)}>Odblokuj użytkownika</UnlockUserSubmit>
+>>>>>>> Stashed changes
                             </User>
                         )}
                     </BlockedUsers>

@@ -12,7 +12,6 @@ const componentStyles = {
     `,
     DaysInput: styled.div`
     margin-top: 50px;
-    
     `,
     PlaceInput: styled.div`
     margin-top: 5px;
@@ -29,7 +28,7 @@ const componentStyles = {
     padding: 10px;
     border: solid 1px #d0d0d0;
     border-radius:1em;
-    width: 230px;
+    width: 255px;
     outline: none;
     `,
     Button: styled.button`
