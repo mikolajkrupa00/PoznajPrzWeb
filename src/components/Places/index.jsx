@@ -113,7 +113,7 @@ const PlacesPage = () => {
                     <PlaceName>{place.name}</PlaceName>
                     <PlaceAddress>{place.address}</PlaceAddress>
                     <PlaceCategory>kategoria:  {place.categoryName}</PlaceCategory>
-                    <Navigation href={`https://www.google.com/maps/search/?api=1&query=${place.attitude},${place.latitude}`} target="_blank">Wyznacz trasę</Navigation>                           
+                    <Navigation href={`https://www.google.com/maps/search/?api=1&query=${place.latitude},${place.longitude}`} target="_blank">Wyznacz trasę</Navigation>                           
                 </PlaceDesc>
             </Place>
         )

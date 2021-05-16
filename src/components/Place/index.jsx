@@ -134,7 +134,7 @@ const PlacePage = (props) => {
                             <ButtonsWrapper>
                                 <Button>
                                     {/* TODO: dodac pozycje uzytkownika do url w Google zeby szukalo drogi zjego lokalizacji*/}
-                                    <Navigation href={`https://www.google.com/maps/search/?api=1&query=${place.attitude},${place.latitude}`} target="_blank">Nawiguj</Navigation>
+                                    <Navigation href={`https://www.google.com/maps/search/?api=1&query=${place.latitude},${place.longitude}`} target="_blank">Nawiguj</Navigation>
                                 </Button>
 
                                 <Button inputColor="green">Cos jeszcze?</Button>
