@@ -11,7 +11,7 @@ const Profile = () => {
 
     useEffect(() => {
         Axios.get(`/user/${userId}`).then(res => setUserData(res.data))
-    })
+    }, [])
 
     return(
         <Layout>
