@@ -33,7 +33,8 @@
             "log-in-button": "Log in",       
             "account-question": "You don't have an account yet?",
             "register-button": "Register",
-            "login-fail-message": "Incorrect username or password!"
+            "login-fail-message1": "Incorrect username or password!",
+            "login-fail-message2": "Error occured, try again later"
         }
     },
 
@@ -52,10 +53,13 @@
             "register-button": "Register",
             "account-question": "Already have an account?",
             "log-in-button": "Log in",
-            "field-required": "field is required",
-            "pass-requirements": "min. 6 characters, including: digit, small and big letter",
+            "required": "Field is required",
+            "pattern": "Must contain: digit, small and big letter",
+            "minLength": "Min. 6 characters",
             "pass-mismatch": "Entered passwords are not identical!",
-            "username-taken": "Username already taken!"
+            "username-taken": "Username already taken!",
+            "email-taken": "E-mail already taken!",
+            "other-error": "Error occured, try again later"
         }
     }
        

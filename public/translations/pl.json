@@ -32,7 +32,8 @@
             "log-in-button": "Zaloguj się",       
             "account-question": "Nie masz jeszcze konta?",
             "register-button": "Zarejestruj się",
-            "login-fail-message": "Nieprawidłowa nazwa użytkownika lub hasło!"
+            "login-fail-message1": "Nieprawidłowa nazwa użytkownika lub hasło!",
+            "login-fail-message2": "Wystąpił problem, spróbuj ponownie później"
         }
     },
 
@@ -46,15 +47,18 @@
             "email-placeholder": "E-mail",
             "password-label": "Hasło",
             "password-placeholder": "Hasło",
-            "repeat-password-label": "Hasło",
+            "repeat-password-label": "Powtórz hasło",
             "repeat-password-placeholder": "Powtórz hasło",
             "register-button": "Zarejestruj się",
             "account-question": "Masz już konto?",
             "log-in-button": "Zaloguj się",
-            "field-required": "pole jest wymagane",
-            "pass-requirements": "min. 6 znaków, w tym: cyfra, mała i duża litera",
+            "required": "Pole jest wymagane",
+            "pattern": "Musi zawierać: cyfrę, małą i dużą literę",
+            "minLength": "Min. 6 znaków",
             "pass-mismatch": "Wpisane hasła nie są identyczne!",
-            "username-taken": "Podana nazwa użytkownika jest już zajęta!"
+            "username-taken": "Podana nazwa użytkownika jest już zajęta!",
+            "email-taken": "Podany e-mail jest już zajęty!",
+            "other-error": "Wystąpił problem, spróbuj ponownie później"
         }
     }
 
