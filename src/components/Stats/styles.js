@@ -28,7 +28,7 @@ const componentStyles = {
     padding: 10px;
     border: solid 1px #d0d0d0;
     border-radius:1em;
-    width: 255px;
+    width: 230px;
     outline: none;
     `,
     Button: styled.button`
