@@ -13,7 +13,7 @@ const AdminPanel = () => {
 
     useEffect(() => {
         Axios.get("/place/getNotConfirmedPlaces").then(res => setPlaces(res.data));
-    })
+    }, [])
 
 
     const blockUser = (data) =>{

@@ -17,7 +17,7 @@ const AddPlacePage = () => {
     useEffect(() => {
         //console.log(localStorageService.token)
         Axios.get("/category").then(res => setCategories(res.data));
-    },[])
+    }, [])
 
     const fileInputHandler = (e) => {
         
@@ -43,8 +43,6 @@ const AddPlacePage = () => {
     const addPlace = (data) => {
 		var request = new FormData();
 		
-        //JSON.stringify({ latitude: data.latitude})
-        //request.append(JSON.stringify({ latitude: data.latitude}))
 		request.append('latitude', data.latitude);
 		request.append('longitude', data.longitude);
 		request.append('name', data.name);
@@ -71,40 +69,6 @@ const AddPlacePage = () => {
 
 		reset();
 	}
-
-    const addPlace2 = (data) => {
-        Axios.post("/place", {
-            latitude: data.latitude,
-            longitude: data.longitude,
-            name: data.name,
-            description: data.desc,
-            address: data.address,
-            categoryId: data.categoryId
-        }).then(res => console.log(res)).catch(er => console.log(er))
-    }
-
-    const addPlace3 = (data) => {
-
-        Axios.request({
-            url: "/place",
-            method: 'post',
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-            data: {
-                latitude: JSON.stringify({d: data.latitude}),
-                longitude: data.longitude,
-                name: data.name,
-                description: data.desc,
-                address: data.address,
-                categoryId: data.categoryId
-            },
-            onUploadProgress: e => console.log(e)
-        })
-        .then(res => console.log(res)).catch(er => console.log(er));
-    }
-   
-
     
     return(
         <Layout>
