@@ -7,6 +7,7 @@ export default{
     BlockUserInput: styled.input`
     `,
     BlockUserContainer: styled.div`
+    margin-top: 30px;
     `,
     BlockUserSubmit: styled.button`
     `,
@@ -36,5 +37,18 @@ export default{
     `,
     ConfirmButton:styled.button`
     `,
-
+    BlockedUsers:styled.div`
+    margin-top: 50px;
+    `,
+    User:styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 15px;
+    `,
+    UserName: styled.div`
+    margin-bottom: 5px;
+    `,
+    UserEmail: styled.div`
+    `,
 }

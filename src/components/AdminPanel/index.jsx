@@ -7,13 +7,15 @@ import {useState, useEffect} from "react";
 const AdminPanel = () => {
 
     const {AdminContainer, BlockUserSubmit, BlockUserInput, PlaceRow, BlockUserContainer, Place, PlaceName, PlaceAddress,
-        PlaceCategory, PlaceDescription, PlaceImg, PlaceDesc, ConfirmButton} = components;
+        PlaceCategory, PlaceDescription, PlaceImg, PlaceDesc, ConfirmButton, BlockedUsers, User, UserName, UserEmail} = components;
     const {register, handleSubmit} = useForm();
     const[places, setPlaces] = useState();
+    const [blockedUsers,setBlockedUsers] = useState();
 
     useEffect(() => {
         Axios.get("/place/getNotConfirmedPlaces").then(res => setPlaces(res.data));
-    })
+        Axios.get("/user/blockedUsers").then(res => setBlockedUsers(res.data));
+    },[])
 
 
     const blockUser = (data) =>{
@@ -45,7 +47,15 @@ const AdminPanel = () => {
                         </PlaceDesc>
                     </Place>
                     )}
-
+                    <BlockedUsers>
+                        <h3>Zablokowani użytkownicy</h3>
+                        {blockedUsers && blockedUsers.map(user=>
+                            <User>
+                                <UserName>Nazwa użytkownika: {user.username}</UserName>
+                                <UserEmail>Email: {user.email}</UserEmail>
+                            </User>
+                        )}
+                    </BlockedUsers>
             </AdminContainer>
         </Layout>
     )
