@@ -12,21 +12,36 @@ const componentStyles = {
     `,
     DaysInput: styled.div`
     margin-top: 50px;
+    `,
+    PlaceInput: styled.div`
+    margin-top: 5px;
     margin-bottom: 20px;
     `,
     Input: styled.input`
     padding: 10px;
     border: solid 1px #d0d0d0;
+    border-top-left-radius:1em;
+    border-bottom-left-radius:1em;
+    outline: none;
     `,
-    Button: styled.button`
+    InputPlace: styled.input`
     padding: 10px;
     border: solid 1px #d0d0d0;
+    border-radius:1em;
+    width: 255px;
+    outline: none;
+    `,
+    Button: styled.button`
+    width: 60px;
+    padding: 10px;
+    border: solid 1px #d0d0d0;
+    border-top-right-radius:1em;
+    border-bottom-right-radius:1em;
     &:hover{
         background-color: #d0d0d0;
     }
     `,
     Place: styled.div`
-    width: 100%;
     margin:10px 0px;
     display:flex;
     background-color: #fafafa;
@@ -34,11 +49,11 @@ const componentStyles = {
     text-align: left;
     border-bottom: 2px solid #d0d0d0;
     `,
-    PlaceName:styled.h3`
+    PlaceName:styled.div`
+    font-size: 20px;
+    font-weight:bold;
     `,
     PlaceAddress: styled.div`
-    `,
-    PlaceCategory: styled.div`
     `,
     PlaceNumOfVisits: styled.div`
     `,
@@ -48,12 +63,15 @@ const componentStyles = {
     PlaceImg: styled.img`
     margin-top:10px;
     margin-left:10px;
-    width: 20vw;
-    max-height:20vw;
+    width: 70px;
+    height:70px;
     `,
-    Stats: styled.h4`
+    Stats: styled.div`
+    margin-top: 8px;
     margin-bottom: 5px;
     font-weight: bold;
+    `,
+    Counter:styled.div`
     `,
     NumOfComments: styled.div`
     `,

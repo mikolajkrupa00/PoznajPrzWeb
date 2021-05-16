@@ -4,30 +4,41 @@ import Layout from "../Layout/index"
 import componentStyles from "./styles";
 
 const StatsPage = () => {
-    const[visits, setVisits] = useState()
     const [ratings, setRatings] = useState('')
-    const [days,setDays] = useState('')
-    const [filteredDays,setFilteredDays] = useState('')
-    const { PlacesContainer, Place, PlaceName, PlaceAddress, PlaceCategory, PlaceNumOfVisits, PlaceDesc, PlaceImg, AverageRating, NumOfComments, DaysInput, Input, Button, Stats} = componentStyles;
-    
+    const [placeName,setPlaceName] = useState('')
+    const [filteredPlaces,setfilteredPlaces] = useState('')
+    const [days,setDays] = useState(365)
+    const [displayedDays,setDisplayedDays] = useState(365)
+    const { PlacesContainer, Place, PlaceName, PlaceAddress, PlaceNumOfVisits, PlaceDesc, PlaceImg, AverageRating, NumOfComments,Counter, DaysInput, PlaceInput, Input, InputPlace, Button, Stats} = componentStyles;
+
+    useEffect(() => {
+        Axios.get(`/rating/getRatingsStats/${days}`).then(res =>{setRatings(res.data);setfilteredPlaces(res.data)} );
+    },[])
     const handleDays = (e) =>{
         setDays(e.target.value);
         }
     const handleFilterDays = () =>{
-        setFilteredDays(days);
-        Axios.get(`/visit/getStats/${days}`).then(res => setVisits(res.data));
-        Axios.get(`/rating/getRatingsStats/${days}`).then(res => setRatings(res.data));
+        
+        Axios.get(`/rating/getRatingsStats/${days}`).then(res =>{setRatings(res.data);setfilteredPlaces(res.data)} );
+        setDisplayedDays(days);
+        setPlaceName("");
+        
     }
+    const handleFilterPlaces = (placeName) =>{
+        setPlaceName(placeName);
+        setfilteredPlaces(ratings);
+        if(placeName=="")
+        {
+            setfilteredPlaces(ratings);
+        }
+        else{
+            const filtered = filteredPlaces.filter(item => item.name.toLowerCase().includes(placeName.toLowerCase()) || item.address.toLowerCase().includes(placeName.toLowerCase()));
+            setfilteredPlaces(filtered);
+        }
+        
+    }
+
     
-    const stats = (placeId) =>{
-        const record = ratings.filter(item=>item.placeId==placeId)
-        return(
-            <>
-               <NumOfComments>Liczba komentarzy: {record[0].numOfComments}</NumOfComments>
-                <AverageRating>Średnia ocena: {record[0].averageValue}</AverageRating>
-            </>
-        )
-    }
     return(
         <Layout>
             
@@ -36,17 +47,26 @@ const StatsPage = () => {
                     <Input type="text" placeholder="Liczba dni" value={days} onChange={handleDays}/>
                     <Button onClick={handleFilterDays}>Filtruj</Button>
             </DaysInput>
-                {visits && visits.map(visit => 
-                    <Place>
+            
+            <PlaceInput>
+                    <InputPlace type="text" placeholder="Fraza w nazwie miejsca" value={placeName} onChange={(e)=>handleFilterPlaces(e.target.value)}/>
+            </PlaceInput>
+
+            <Counter>{placeName.length>0 || displayedDays>0 ? (filteredPlaces.length>0 ? `Zwrócono ${filteredPlaces.length} rekordów` : "Brak wyników") : "Brak kryterium wyszukiwania"}</Counter>
+
+            {filteredPlaces && displayedDays!="" && filteredPlaces.map(visit => 
+
+                    <Place key={`key${visit.placeId}`}>
                         <PlaceImg src="img/logo192.png" />
                         <PlaceDesc>
-                            <PlaceName>{visit.categoryName}</PlaceName>
+                            <PlaceName>{visit.name}</PlaceName>
                             <PlaceAddress>{visit.address}</PlaceAddress>
-                            <PlaceCategory>Kategoria :  {visit.categoryName}</PlaceCategory>
-                            <Stats> Statystyki z ostatnich {filteredDays} dni:</Stats>
-                            <PlaceNumOfVisits>Liczba odwiedzin  {visit.numOfVisits}</PlaceNumOfVisits>
-                            {ratings && stats(visit.placeId)}
                             
+                            <Stats> Statystyki z ostatnich {displayedDays} dni:</Stats>
+                            <PlaceNumOfVisits>Liczba odwiedzin  {visit.numOfVisits}</PlaceNumOfVisits>
+                            <NumOfComments>Liczba komentarzy: {visit.numOfComments}</NumOfComments>
+                            <AverageRating>Ĺšrednia ocena: {visit.averageValue}</AverageRating>
+
                         </PlaceDesc>
                     </Place>
                 )}
