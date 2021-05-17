@@ -95,18 +95,18 @@ const PlacePage = (props) => {
 
     const openCommentSection = () =>{
 
-        if(!username){
+        if(!username){           
             if(ratingPanelMessage === ""){
                 setRatingPanelMessage("Musisz być zalogowany, żeby dodać komentarz!")
                 setTimeout(() => {setRatingPanelMessage("")}, 3000)
-            }
+            }           
             return
         }
 
-        if(role === 2){
+        if(role === 2 || role === "2"){
             if(ratingPanelMessage === ""){
-                setRatingPanelMessage("Możliwość dodawania komentarzy została dla Ciebie zablokowana. Powód: ...{powód blokady}...")
-                setTimeout(() => {setRatingPanelMessage("")}, 6000)
+                setRatingPanelMessage("Możliwość dodawania komentarzy została dla Ciebie zablokowana.")
+                setTimeout(() => {setRatingPanelMessage("")}, 4500)
             }
             return
         }
