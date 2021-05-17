@@ -11,9 +11,7 @@ const StatsPage = () => {
     const [displayedDays,setDisplayedDays] = useState("")
     const { PlacesContainer, Place, PlaceName, PlaceAddress, PlaceNumOfVisits, PlaceDesc, PlaceImg, AverageRating, NumOfComments,Counter, DaysInput, PlaceInput, Input, InputPlace, Button, Stats} = componentStyles;
 
-    useEffect(() => {
-        Axios.get(`/rating/getRatingsStats/${days}`).then(res =>{setRatings(res.data);setfilteredPlaces(res.data)} );
-    },[])
+    
     const handleDays = (e) =>{
         setDays(e.target.value);
         }
@@ -65,7 +63,7 @@ const StatsPage = () => {
                             <Stats> Statystyki z ostatnich {displayedDays} dni:</Stats>
                             <PlaceNumOfVisits>Liczba odwiedzin  {visit.numOfVisits}</PlaceNumOfVisits>
                             <NumOfComments>Liczba komentarzy: {visit.numOfComments}</NumOfComments>
-                            <AverageRating>Ĺšrednia ocena: {visit.averageValue}</AverageRating>
+                            <AverageRating>Średnia ocena: {visit.averageValue}</AverageRating>
 
                         </PlaceDesc>
                     </Place>
