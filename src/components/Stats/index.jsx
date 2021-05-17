@@ -7,8 +7,8 @@ const StatsPage = () => {
     const [ratings, setRatings] = useState('')
     const [placeName,setPlaceName] = useState('')
     const [filteredPlaces,setfilteredPlaces] = useState('')
-    const [days,setDays] = useState(365)
-    const [displayedDays,setDisplayedDays] = useState(365)
+    const [days,setDays] = useState("")
+    const [displayedDays,setDisplayedDays] = useState("")
     const { PlacesContainer, Place, PlaceName, PlaceAddress, PlaceNumOfVisits, PlaceDesc, PlaceImg, AverageRating, NumOfComments,Counter, DaysInput, PlaceInput, Input, InputPlace, Button, Stats} = componentStyles;
 
     useEffect(() => {
@@ -18,11 +18,11 @@ const StatsPage = () => {
         setDays(e.target.value);
         }
     const handleFilterDays = () =>{
-        
-        Axios.get(`/rating/getRatingsStats/${days}`).then(res =>{setRatings(res.data);setfilteredPlaces(res.data)} );
-        setDisplayedDays(days);
-        setPlaceName("");
-        
+        if(days){
+            Axios.get(`/rating/getRatingsStats/${days}`).then(res =>{setRatings(res.data);setfilteredPlaces(res.data)} );
+            setDisplayedDays(days);
+            setPlaceName("");
+        }
     }
     const handleFilterPlaces = (placeName) =>{
         setPlaceName(placeName);
