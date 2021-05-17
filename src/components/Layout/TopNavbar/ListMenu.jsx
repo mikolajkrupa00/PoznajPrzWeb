@@ -27,6 +27,8 @@ const ListMenu = ({closeListMenu}) => {
         localStorageService.username = ''
         localStorageService.token = ''
         window.location.reload(false);
+        closeListMenu()
+        history.push("home");
     }
 
     return(
