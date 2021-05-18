@@ -9,9 +9,11 @@ const componentStyles = {
     flex-direction:column;
     justify-content: center;
     background-color: #f0f0f0;
+    padding-bottom:15px;
     `,
     DaysInput: styled.div`
     margin-top: 50px;
+    display:block;
     `,
     PlaceInput: styled.div`
     margin-top: 5px;
@@ -23,6 +25,7 @@ const componentStyles = {
     border-top-left-radius:1em;
     border-bottom-left-radius:1em;
     outline: none;
+    transition: .5s;
     `,
     InputPlace: styled.input`
     padding: 10px;
@@ -30,15 +33,18 @@ const componentStyles = {
     border-radius:1em;
     width: 255px;
     outline: none;
+    transition: .5s;
     `,
     Button: styled.button`
     width: 60px;
-    padding: 10px;
+    padding: 10px 5px;
     border: solid 1px #d0d0d0;
     border-top-right-radius:1em;
     border-bottom-right-radius:1em;
+    background-color: #d0d0d0;
+    transition: .5s;
     &:hover{
-        background-color: #d0d0d0;
+        background-color: #e0e0e0;
     }
     `,
     Place: styled.div`
@@ -48,6 +54,8 @@ const componentStyles = {
     padding: 20px;
     text-align: left;
     border-bottom: 2px solid #d0d0d0;
+    
+    transition:.5s;
     `,
     PlaceName:styled.div`
     font-size: 20px;
@@ -77,6 +85,14 @@ const componentStyles = {
     `,
     AverageRating: styled.div`
     `,
+    AverageRating: styled.div`
+    `,
+    Message: styled.span`
+    color: firebrick;
+    font-weight: bold;
+    margin-bottom: 10px;
+    transition:.5s;
+    `
 }
 
 export default componentStyles
