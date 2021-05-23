@@ -100,19 +100,19 @@ const AddPlacePage = () => {
 
                     <MessageLabel>{geolocationMessage}</MessageLabel>
                     <AddPlaceLabel>Szerokość geograficzna</AddPlaceLabel>
-                    <AddPlaceInput type="number" step="any" {...register('latitude')} placeholder="Szerokość geograficzna" />
+                    <AddPlaceInput type="number" step="any" {...register('latitude', {required: true})} placeholder="Szerokość geograficzna" />
                     <AddPlaceLabel>Długość geograficzna</AddPlaceLabel>
-                    <AddPlaceInput type="number" step="any" {...register('longitude')} placeholder="Długość geograficzna" />
+                    <AddPlaceInput type="number" step="any" {...register('longitude', {required: true})} placeholder="Długość geograficzna" />
                     <Button onClick={geolocation}>Moja lokalizacja</Button>
 
                     <AddPlaceLabel>Nazwa miejsca</AddPlaceLabel>
-                    <AddPlaceInput type="text" {...register('name')} placeholder="Nazwa miejsca" />
+                    <AddPlaceInput type="text" {...register('name', {required: true})} placeholder="Nazwa miejsca" />
                     <AddPlaceLabel>Adres</AddPlaceLabel>
-                    <AddPlaceInput type="textarea" {...register('desc')} placeholder="Adres" />
+                    <AddPlaceInput type="textarea" {...register('desc', {required: true})} placeholder="Adres" />
                     <AddPlaceLabel>Opis</AddPlaceLabel>
-                    <AddPlaceTextArea type="textarea" {...register('address')} placeholder="Opis" />
+                    <AddPlaceTextArea type="textarea" {...register('address', {required: true})} placeholder="Opis" />
                     <AddPlaceLabel>Kategoria</AddPlaceLabel>
-                    <DropDownList {...register('categoryId')}>
+                    <DropDownList {...register('categoryId', {required: true})}>
                         {categories && categories.map( (category, id) => {
                             return( <DropDownOption key={id} value={category.categoryId}>{category.name}</DropDownOption> )
                         })}

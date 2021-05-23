@@ -4,9 +4,11 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
 import Layout from "../Layout/index"
 
+
 import componentStyles from "./styles";
 import ReactHtmlParser from 'react-html-parser';
 import { localStorageService } from "../../services/localStorageService"
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BiLeftArrowAlt } from 'react-icons/bi';
 import { VscChromeClose } from 'react-icons/vsc'
 import { BsThreeDots } from 'react-icons/bs'
@@ -22,12 +24,15 @@ const PlacePage = (props) => {
 	const [place, setPlace] = useState(true)
 	const [ratings, setRatings] = useState()
 	const [comment, setComment] = useState()
+    const [bigGalery, setBigGalery] = useState(false)
 	const [file, _setFile] = useState(null);
     const [commentSection, setCommentSection] = useState('')
     const [ratingPanelMessage, setRatingPanelMessage] = useState('')
     const [descriptionHeight, setDescriptionHeight] = useState('250px')
     
-	const { PlacePageContainer, TopBar, GoBack, PlaceIntro, Gallery, Photo, PlaceName, PlaceAddress, 
+	const { PlacePageContainer, TopBar, GoBack, PlaceIntro,
+        SmallGallery, BigGallery, SmallPhoto, BigPhoto, CloseBigGallery, StyledCarousel, StyledItem, StyledImg,
+        PlaceName, PlaceAddress, 
         PlaceCategory, PlaceNumOfVisits, PlaceDesc, PlaceImg, PlaceDescription, 
         DescriptionContent,  DescriptionButton,
         RatingsContainer, RatingsPanel, RatingsPanelMessages, AddRatingContainer, RatingSubmitWrapper, RatingFormTopPanel,
@@ -147,13 +152,43 @@ const PlacePage = (props) => {
                         </PlaceDesc>
                     </PlaceIntro>
 
-                    <Gallery>
+                    <SmallGallery>
                         { place.photos && place.photos.map(photo => {
                             return(
-                                <Photo src={photo}></Photo>
+                                <SmallPhoto src={photo} onClick={() => setBigGalery(true)}></SmallPhoto>
                             )
                         })}                        
-                    </Gallery>
+                    </SmallGallery>
+
+                    {bigGalery && 
+                        <BigGallery>
+
+                            <StyledCarousel>
+                                {place.photos.map((item, key) => {
+                                    return (
+                                        <StyledItem
+                                            key={key}
+                                        >
+                                            <StyledImg
+                                                className="d-block w-100"
+                                                src={item}
+                                                alt="Rzeszów"
+                                            />
+                                        </StyledItem>
+                                    )
+                                })}
+                            </StyledCarousel>
+
+                            {/* <BigPhoto width={window.innerWidth*0.9} height={window.innerWidth * 0.5625*0.9}></BigPhoto> */}
+                            <CloseBigGallery onClick={() => setBigGalery(false)}>
+                                <VscChromeClose style={{ color: 'white', fontSize: "25px" }}/>
+                            </CloseBigGallery>
+                        </BigGallery>
+
+                        
+                    }
+                    
+
 
                     <PlaceDescription>
                         <DescriptionContent inputHeigh={descriptionHeight}>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Carousel} from "react-bootstrap";
 
 
 const componentStyles = {
@@ -78,7 +79,7 @@ const componentStyles = {
 
 
     // ----- GALLERY ----- //
-    Gallery: styled.div`
+    SmallGallery: styled.div`
     background-color: whitesmoke;
     height: 100px;
     width: 100%;
@@ -86,7 +87,7 @@ const componentStyles = {
     overflow-y: scroll;
     white-space: nowrap;
     `,
-    Photo: styled.img`
+    SmallPhoto: styled.img`
     height: 80px;
     width: 120px;
     background-color: lightblue;
@@ -94,6 +95,63 @@ const componentStyles = {
     display: inline-block;
     overflow-y: scroll;
     `,
+
+    BigGallery: styled.div`    
+    background-color: black;
+    z-index: 10;
+    width: 100%;
+    height 100%;
+    top: 0px;
+    position: fixed;
+
+    display: flex;
+    flex-direction: column;
+    aligin-items: center;
+    justify-content: center;
+    align-items: center;
+    `,
+    BigPhoto: styled.img`
+    height: ${props => props.height || '160px'};
+    width: ${props => props.width || '240px'};
+    background-color: lightblue;
+    margin-right: 4px;
+    display: inline-block;
+    overflow-y: scroll;
+    `,
+    CloseBigGallery: styled.div`
+
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 5px 15px;
+    background-color: black;
+    `,
+
+    StyledCarousel: styled(Carousel)`
+	height: 300px;
+    margin-top: 18px
+    `,
+
+    StyledItem: styled(Carousel.Item)`
+	height: 300px;
+
+	&:before {
+		content:"";
+		display:block;
+		position:absolute;
+		top:0;
+		bottom:0;
+		left:0;
+		right:0;
+		background:rgba(0,0,0,0.4);
+	}
+    `,
+
+    StyledImg: styled.img`
+        height: 100%;
+        object-fit: cover;
+    `,
+
     
      
     // ----- PLACE DESCRIPTION ----- //
