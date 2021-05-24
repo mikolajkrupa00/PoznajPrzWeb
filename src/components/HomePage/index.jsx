@@ -39,21 +39,19 @@ const Home = () => {
 	const [items, setItems] = useState([]);
 	const [place, setPlace] = useState(null);
 
-	useEffect(() => {
-        //TEGO NIE MA JESZCZE NA GALEZI MAIN W BACKENDZIE
-        //PO DODANIU TRZEBA ODKOMENTOWAC
-		// axios.get('/rating/getRatingsStats/365')
-		// .then(res => {
-		// 	const { data } = res;
+	useEffect(() => {        
+		axios.get('/rating/getRatingsStats/365')
+		.then(res => {
+			const { data } = res;
 
-		// 	const sorted = data.sort(
-		// 		(a, b) => a.numOfVisits < b.numOfVisits
-		// 	);
+			const sorted = data.sort(
+				(a, b) => a.numOfVisits < b.numOfVisits
+			);
 
-		// 	const limited = sorted.slice(0, 4);
+			const limited = sorted.slice(0, 4);
 
-		// 	setItems(limited);
-		// })
+			setItems(limited);
+		})
 	}, []);
 
 	useEffect(() => {
