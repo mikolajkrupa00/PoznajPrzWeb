@@ -128,12 +128,12 @@ const componentStyles = {
     `,
 
     StyledCarousel: styled(Carousel)`
-	height: 300px;
+	//height: 300px;
     margin-top: 18px
     `,
 
     StyledItem: styled(Carousel.Item)`
-	height: 300px;
+	//height: 300px;
 
 	&:before {
 		content:"";
@@ -143,10 +143,11 @@ const componentStyles = {
 		bottom:0;
 		left:0;
 		right:0;
-		background:rgba(0,0,0,0.4);
+		background:rgba(0,0,0,0.1);
 	}
     `,
 
+    // TODO: na telefonie jest git, na komputerze dziwnie sie zachowuje
     StyledImg: styled.img`
         height: 100%;
         object-fit: cover;

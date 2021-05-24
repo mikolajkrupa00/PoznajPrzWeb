@@ -25,6 +25,7 @@ const PlacePage = (props) => {
 	const [ratings, setRatings] = useState()
 	const [comment, setComment] = useState()
     const [bigGalery, setBigGalery] = useState(false)
+    const [clickedPhoto, setClickedPhoto] = useState(undefined)
 	const [file, _setFile] = useState(null);
     const [commentSection, setCommentSection] = useState('')
     const [ratingPanelMessage, setRatingPanelMessage] = useState('')
@@ -153,22 +154,19 @@ const PlacePage = (props) => {
                     </PlaceIntro>
 
                     <SmallGallery>
-                        { place.photos && place.photos.map(photo => {
+                        { place.photos && place.photos.map((photo, id) => {
                             return(
-                                <SmallPhoto src={photo} onClick={() => setBigGalery(true)}></SmallPhoto>
+                                <SmallPhoto src={photo} onClick={() => {setBigGalery(true); setClickedPhoto(id)}}></SmallPhoto>
                             )
                         })}                        
                     </SmallGallery>
 
                     {bigGalery && 
-                        <BigGallery>
-
-                            <StyledCarousel>
+                        <BigGallery>                            
+                            <StyledCarousel defaultActiveIndex={clickedPhoto} interval={null}>
                                 {place.photos.map((item, key) => {
                                     return (
-                                        <StyledItem
-                                            key={key}
-                                        >
+                                        <StyledItem key={key} >
                                             <StyledImg
                                                 className="d-block w-100"
                                                 src={item}
@@ -179,7 +177,6 @@ const PlacePage = (props) => {
                                 })}
                             </StyledCarousel>
 
-                            {/* <BigPhoto width={window.innerWidth*0.9} height={window.innerWidth * 0.5625*0.9}></BigPhoto> */}
                             <CloseBigGallery onClick={() => setBigGalery(false)}>
                                 <VscChromeClose style={{ color: 'white', fontSize: "25px" }}/>
                             </CloseBigGallery>
@@ -237,7 +234,10 @@ const PlacePage = (props) => {
 
                             <RatingsPanel>                                
                                 <Button inputColor='#777'>Sortuj?</Button>
-                                <Button inputColor='#555'>??????</Button>
+                                {/* TODO: dodać endpoint, który zwraca wszystkie zdjecia w komenarzach dla danego miejsca
+                                          i wyświrtlić je jako galerie zdjęć
+                                */}
+                                <Button inputColor='#555'>Zdjęcia</Button>
                                 <Button inputColor='black' onClick={openCommentSection}>Dodaj komentarz</Button>                               
                             </RatingsPanel>
 
