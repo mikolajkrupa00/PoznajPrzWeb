@@ -38,10 +38,13 @@ const ListMenu = ({closeListMenu}) => {
             
 
             <ListMenuRecord onClick={() => {history.push("home"); closeListMenu()}}>{t('list-menu.home-page')}</ListMenuRecord>
+            
+            {username && <ListMenuRecord onClick={() => {history.push("userpanel"); closeListMenu()}}>{t('list-menu.userpanel')}</ListMenuRecord>}
             <ListMenuRecord onClick={() => {history.push("map"); closeListMenu()}}>{t('list-menu.map')}</ListMenuRecord>
             <ListMenuRecord onClick={() => {history.push("places"); closeListMenu()}}>{t('list-menu.places')}</ListMenuRecord>
             {username && <ListMenuRecord onClick={() => {history.push("addPlace"); closeListMenu()}}>{t('list-menu.add-place')}</ListMenuRecord>}
             {!username &&
+            
             <>
                 <ListMenuRecord onClick={() => {history.push("login"); closeListMenu()}}>{t('list-menu.log-in')}</ListMenuRecord>
                 <ListMenuRecord onClick={() => {history.push("register"); closeListMenu()}}>{t('list-menu.register')}</ListMenuRecord>

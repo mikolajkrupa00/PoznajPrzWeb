@@ -3,6 +3,7 @@
 
     "list-menu":{
         "home-page": "Home Page",
+        "userpanel": "User panel",
         "map": "Map",
         "places": "Places",
         "add-place": "Add place",

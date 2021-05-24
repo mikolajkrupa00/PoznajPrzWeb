@@ -8,6 +8,8 @@ import PlacePage from "./components/Place/index"
 import StatsPage from "./components/Stats/index"
 import ChangeLanguage from "./components/ChangeLanguage/index"
 import AdminPanel from "./components/AdminPanel/index"
+import UserPanel from "./components/UserPanel/index"
+import EditProfile from "./components/EditProfile/index"
 import Profile from "./components/Profile/index";
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { setupAxiosInterceptors } from './services/interceptor';
@@ -30,6 +32,8 @@ function App() {
       <Route path="/place" component={PlacePage} />
       <Route path="/changeLanguage" component={ChangeLanguage} />
       <Route path="/adminPanel" component={AdminPanel} />
+      <Route path="/userPanel" component={UserPanel} />
+      <Route path="/editprofile" component={EditProfile} />
       <Route path="/profile" component={Profile} />
     </Switch>
     </BrowserRouter>
