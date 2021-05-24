@@ -128,12 +128,12 @@ const componentStyles = {
     `,
 
     StyledCarousel: styled(Carousel)`
-	//height: 300px;
+	height: 300px;
     margin-top: 18px
     `,
 
     StyledItem: styled(Carousel.Item)`
-	//height: 300px;
+	height: 300px;
 
 	&:before {
 		content:"";
