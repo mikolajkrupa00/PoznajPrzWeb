@@ -78,7 +78,7 @@ const componentStyles = {
     `,
 
 
-    // ----- GALLERY ----- //
+    // ----- PLACE GALLERY ----- //
     SmallGallery: styled.div`
     background-color: whitesmoke;
     height: 100px;
@@ -178,16 +178,19 @@ const componentStyles = {
     `,
 
 
-    // ----- RAITINGS CONTAINER ----- //
-    RatingsContainer: styled.div`
+    // ----- MANAGEMENT CONTAINER ----- //
+    ManagementPanel: styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     background-color: whitesmoke;
     padding: 20px 10px;
+    padding-bottom: 0px;
     `,
 
     RatingsPanel: styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 15px;
     `,
 
     RatingsPanelMessages: styled.div`
@@ -197,7 +200,14 @@ const componentStyles = {
     line-height: 18px;
     padding: 2px 5px;
     color: red;
-    margin-bottom: 25px;
+    margin-top: 25px;
+    `,
+
+
+    // ----- RAITINGS CONTAINER ----- //        
+    RatingsContainer: styled.div`
+    background-color: whitesmoke;
+    padding: 20px 10px;
     `,
 
     RatingForm: styled.form`
@@ -301,7 +311,15 @@ const componentStyles = {
     margin-left: 15px;
     width:70px;
     `,
-    
+
+    // ----- RAITING GALLERY ----- //
+    RatingGaleryWrapper: styled.div`
+    height: 400px;
+    font-size: 20px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    `,
 }
 
 export default componentStyles;

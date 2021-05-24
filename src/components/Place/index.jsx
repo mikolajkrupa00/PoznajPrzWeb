@@ -28,6 +28,7 @@ const PlacePage = (props) => {
     const [clickedPhoto, setClickedPhoto] = useState(undefined)
 	const [file, _setFile] = useState(null);
     const [commentSection, setCommentSection] = useState('')
+    const [commentPhotosSection, setCommentPhotosSection] = useState(false)
     const [ratingPanelMessage, setRatingPanelMessage] = useState('')
     const [descriptionHeight, setDescriptionHeight] = useState('250px')
     
@@ -36,11 +37,13 @@ const PlacePage = (props) => {
         PlaceName, PlaceAddress, 
         PlaceCategory, PlaceNumOfVisits, PlaceDesc, PlaceImg, PlaceDescription, 
         DescriptionContent,  DescriptionButton,
+        ManagementPanel,
         RatingsContainer, RatingsPanel, RatingsPanelMessages, AddRatingContainer, RatingSubmitWrapper, RatingFormTopPanel,
         Rating, RatingComment, RatingDate, RatingUsername, RatingValue, RatingTop, 
         RatingBottom, RatingOptions, EditButton, Navigation,AddRatingInput,  RatingFormLable,
         RatingFormRaitingWrapper, RatingFormAddImageWrapper, FileInput,
-        RaitingTextarea, RatingForm, RatingSubmit, Button, ButtonsWrapper} = componentStyles;
+        RaitingTextarea, RatingForm, RatingSubmit, Button, ButtonsWrapper,
+        RatingGaleryWrapper} = componentStyles;
 
 	const { role, username, userId } = localStorageService // 0 admin
 	useEffect(() => {
@@ -119,6 +122,105 @@ const PlacePage = (props) => {
 
         setCommentSection(true)
 
+    }
+
+
+
+
+    const RaitingsWrapper = () => {
+
+        return(
+            ratings &&
+                <>
+                    <RatingsContainer>
+
+                        {/* 0-admin     1-user      2-zablokowany */}
+                        {/* COMMENT SECTION */}
+                        {(role !== "2" && username && commentSection) &&
+                        <RatingForm onSubmit={handleSubmit(addRating)}>
+                            
+                            <RatingFormTopPanel>
+                                <VscChromeClose style={iconStyles} onClick={() => {setCommentSection(false)}}/>
+                            </RatingFormTopPanel>
+                            
+                            <RatingFormRaitingWrapper>
+                                <RatingFormLable>Ocena:</RatingFormLable>
+                                <AddRatingInput type="number" {...register('value', {required:true})}/>
+                                <AddRatingInput defaultValue={place.placeId} type="hidden" {...register('placeId')}/>
+                            </RatingFormRaitingWrapper>
+                            
+                        
+                            <RatingFormLable>Komentarz: </RatingFormLable>                         
+                            <RaitingTextarea 
+                                placeholder={"Co sadzisz o tym miejscu?"} 
+                                onChange={(e) => {console.log(e.target.value); setComment(e.target.value)}}>
+                            </RaitingTextarea>
+
+                            <RatingFormLable>Dodaj zdjęcie: </RatingFormLable>
+                            <RatingFormAddImageWrapper>
+                                <FileInput
+                                        type='file'
+                                        id='file'
+                                        name='file'
+                                        accept='image/*'
+                                        onChange={ e => setFile(e) }
+                                />									
+                            </RatingFormAddImageWrapper>
+                           
+
+                            <RatingSubmitWrapper>
+                                {/* TODO: Po dodaniu komentarza strona w nieprawidlowy sposb pokazuje jego dodanie
+                                    mozna wymusic przeladowanie strony po dodaniu komentarzajej dodaniu */}
+                                <RatingSubmit type="submit">Dodaj komentarz</RatingSubmit>
+                            </RatingSubmitWrapper>
+                            
+                            
+                        </RatingForm> 
+                        }
+
+
+                        {ratings.map((rating, id) => 
+                        <Rating key={id}>
+                            
+                            <RatingTop>
+                                <RatingUsername>{rating.username}</RatingUsername>
+                                <RatingValue>Ocena: {rating.value}</RatingValue>                                    
+                            </RatingTop>
+
+                            <RatingComment>                     
+                                {rating.isVisible ? <>{ReactHtmlParser(rating.comment)}</> : "Użytkownik zablokowany"}
+                            </RatingComment>
+                            
+                            {/* TODO: Komponent umozliwiajacy podglad zdjecia po jego kliknieciu  */}
+                            {rating.filePath == null ? '' :       
+                            <img style={{height: '50px', width: '50px'}}src={rating.filePath} alt=""/>
+                            }                                
+
+                            <RatingBottom>
+                                <RatingDate>{rating.ratingDate}</RatingDate>
+
+                                <RatingOptions>
+                                    {(role==='0' || username===rating.username) &&<EditButton onClick={() => deleteRating(rating.ratingId)}>Usuń</EditButton>}
+                                    {role==='0' && <EditButton onClick={() => blockUser(rating.username)}>Zablokuj</EditButton>}
+                                </RatingOptions>
+                            </RatingBottom>
+
+                        </Rating>
+                        )}
+                    </RatingsContainer>
+
+                    
+
+                </>
+                
+        )
+    }
+
+    const ComentPhotosWrapper = () => {
+
+        return(          
+            <RatingGaleryWrapper>TU BEDZIE GALERIA ZDJEC</RatingGaleryWrapper>
+        )
     }
 
     return(
@@ -225,104 +327,25 @@ const PlacePage = (props) => {
                         }
                         
                     </PlaceDescription>
-
                     
-
-                    {ratings &&
-                    <>
-                        <RatingsContainer>
-
-                            <RatingsPanel>                                
+                    <ManagementPanel>
+                        <RatingsPanel>                                
                                 <Button inputColor='#777'>Sortuj?</Button>
                                 {/* TODO: dodać endpoint, który zwraca wszystkie zdjecia w komenarzach dla danego miejsca
-                                          i wyświrtlić je jako galerie zdjęć
+                                        i wyświrtlić je jako galerie zdjęć
                                 */}
-                                <Button inputColor='#555'>Zdjęcia</Button>
+                                <Button inputColor='#555' onClick={() => setCommentPhotosSection(!commentPhotosSection)}>Zdjęcia</Button>
                                 <Button inputColor='black' onClick={openCommentSection}>Dodaj komentarz</Button>                               
                             </RatingsPanel>
 
-                            <RatingsPanelMessages>{ratingPanelMessage}</RatingsPanelMessages>
+                        <RatingsPanelMessages>{ratingPanelMessage}</RatingsPanelMessages>
+                    </ManagementPanel>
+                    
+                    {commentPhotosSection === true ? ComentPhotosWrapper() : RaitingsWrapper()}
+                   
+                    {/* {RaitingsWrapper} */}
+                    {/* {ComentPhotosWrapper} */}
 
-
-                            {/* 0-admin     1-user      2-zablokowany */}
-                            {/* COMMENT SECTION */}
-                            {(role !== "2" && username && commentSection) &&
-                            <RatingForm onSubmit={handleSubmit(addRating)}>
-                                
-                                <RatingFormTopPanel>
-                                    <VscChromeClose style={iconStyles} onClick={() => {setCommentSection(false)}}/>
-                                </RatingFormTopPanel>
-                                
-                                <RatingFormRaitingWrapper>
-                                    <RatingFormLable>Ocena:</RatingFormLable>
-                                    <AddRatingInput type="number" {...register('value', {required:true})}/>
-                                    <AddRatingInput defaultValue={place.placeId} type="hidden" {...register('placeId')}/>
-                                </RatingFormRaitingWrapper>
-                                
-                            
-                                <RatingFormLable>Komentarz: </RatingFormLable>                         
-                                <RaitingTextarea 
-                                    placeholder={"Co sadzisz o tym miejscu?"} 
-                                    onChange={(e) => {console.log(e.target.value); setComment(e.target.value)}}>
-                                </RaitingTextarea>
-
-                                <RatingFormLable>Dodaj zdjęcie: </RatingFormLable>
-                                <RatingFormAddImageWrapper>
-									<FileInput
-											type='file'
-											id='file'
-											name='file'
-											accept='image/*'
-											onChange={ e => setFile(e) }
-									/>									
-                                </RatingFormAddImageWrapper>
-                               
-
-                                <RatingSubmitWrapper>
-                                    {/* TODO: Po dodaniu komentarza strona w nieprawidlowy sposb pokazuje jego dodanie
-                                        mozna wymusic przeladowanie strony po dodaniu komentarzajej dodaniu */}
-                                    <RatingSubmit type="submit">Dodaj komentarz</RatingSubmit>
-                                </RatingSubmitWrapper>
-                                
-                                
-                            </RatingForm> 
-                            }
-
-
-                            {ratings.map((rating, id) => 
-                            <Rating key={id}>
-                                
-                                <RatingTop>
-                                    <RatingUsername>{rating.username}</RatingUsername>
-                                    <RatingValue>Ocena: {rating.value}</RatingValue>                                    
-                                </RatingTop>
-
-                                <RatingComment>                     
-                                    {rating.isVisible ? <>{ReactHtmlParser(rating.comment)}</> : "Użytkownik zablokowany"}
-                                </RatingComment>
-                                
-                                {/* TODO: Komponent umozliwiajacy podglad zdjecia po jego kliknieciu  */}
-                                {rating.filePath == null ? '' :       
-                                <img style={{height: '50px', width: '50px'}}src={rating.filePath} alt=""/>
-                                }                                
-
-                                <RatingBottom>
-                                    <RatingDate>{rating.ratingDate}</RatingDate>
-
-                                    <RatingOptions>
-                                        {(role==='0' || username===rating.username) &&<EditButton onClick={() => deleteRating(rating.ratingId)}>Usuń</EditButton>}
-                                        {role==='0' && <EditButton onClick={() => blockUser(rating.username)}>Zablokuj</EditButton>}
-                                    </RatingOptions>
-                                </RatingBottom>
-
-                            </Rating>
-                            )}
-                        </RatingsContainer>
-
-                        
-
-                    </>
-                    }
                 </PlacePageContainer>
             }
                        
