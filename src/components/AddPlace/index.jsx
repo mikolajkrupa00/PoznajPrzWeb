@@ -4,6 +4,8 @@ import componentStyles from "./styles";
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import { localStorageService } from "../../services/localStorageService";
+import {MapContainer,TileLayer,useMapEvent} from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
 const AddPlacePage = () => {
     const { register, handleSubmit, errors, reset, setValue} = useForm();
@@ -12,7 +14,10 @@ const AddPlacePage = () => {
     const [addedPhotos, setAddedPhotos] = useState([]);
     const [geolocationMessage, setGeolocationMessage] = useState('');
     const { AddPlaceMain, AddPlaceForm, AddPlaceLabel, AddPlaceInput, AddPlaceSubmit, AddPlaceTextArea, DropDownList, DropDownOption, 
-        FileInput, FileInputLabel, MessageLabel, Button} = componentStyles;
+        FileInput, FileInputLabel, MessageLabel, Button,ButtonsArea, Map} = componentStyles;
+    const [map,setMap] = useState(false);
+
+    
 
 
     useEffect(() => {
@@ -103,8 +108,27 @@ const AddPlacePage = () => {
                     <AddPlaceInput type="number" step="any" {...register('latitude', {required: true})} placeholder="Szerokość geograficzna" />
                     <AddPlaceLabel>Długość geograficzna</AddPlaceLabel>
                     <AddPlaceInput type="number" step="any" {...register('longitude', {required: true})} placeholder="Długość geograficzna" />
-                    <Button onClick={geolocation}>Moja lokalizacja</Button>
-
+                    <ButtonsArea>
+                        <Button onClick={geolocation}>Moja lokalizacja</Button>
+                        <Button onClick={()=>setMap(!map)}>{map?"Zamknij mapę":"Pokaż mapę"}</Button>
+                    </ButtonsArea>
+                    {map && <Map>
+                    
+                        <MapContainer 
+                        style={{height:'400px'}}
+                        center={[50.0445, 22.003]} 
+                        zoom={14} 
+                        scrollWheelZoom={false}
+                        >
+                            
+                        <TileLayer
+                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                            <MyComponent setValue={setValue}/>
+                        </MapContainer>
+            
+                </Map>}
                     <AddPlaceLabel>Nazwa miejsca</AddPlaceLabel>
                     <AddPlaceInput type="text" {...register('name', {required: true})} placeholder="Nazwa miejsca" />
                     <AddPlaceLabel>Adres</AddPlaceLabel>
@@ -146,3 +170,13 @@ const AddPlacePage = () => {
 }
 
 export default AddPlacePage;
+
+const MyComponent = (props)=> {
+    useMapEvent({
+      click: (e) => {
+            props.setValue('latitude',e.latlng.lat)
+            props.setValue('longitude',e.latlng.lng)
+    },
+  })
+  return null
+}
