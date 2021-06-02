@@ -8,11 +8,9 @@ const componentStyles = {
     flex-grow:1;
     flex-direction:column;
     justify-content: center;
-    background-color: #f0f0f0;
-    padding-bottom:15px;
+    padding-bottom:5px;
     `,
     DaysInput: styled.div`
-    margin-top: 50px;
     display:block;
     `,
     PlaceInput: styled.div`
