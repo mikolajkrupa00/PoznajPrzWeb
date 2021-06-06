@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import Layout from "../Layout/index";
-import { set, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import {useHistory} from 'react-router-dom'
 import componentStyles from "./styles";
 import Axios from "axios";
@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 const LoginPage = () => {
 
     const {t} = useTranslation();
-    const { register, handleSubmit, errors } = useForm();
+    const { register, handleSubmit } = useForm();
     const { LoginMain, LoginFrom, LoginTitle, LoginLabel, LoginInput, LoginButton, LoginText, LoginErrorText } = componentStyles;
     const history = useHistory();
     const tnm = 'log-in.form.'  //translation namespace
@@ -30,7 +30,7 @@ const LoginPage = () => {
             password: data.password
         }).then((res) => {
             console.log(res)
-            if (res.status == 200 && res.data) {
+            if (res.status === 200 && res.data) {
                 localStorageService.username = res.data.username
                 localStorageService.token = res.data.token
                 localStorageService.userId = res.data.userId
@@ -40,7 +40,7 @@ const LoginPage = () => {
                 setLoginError(2)
             }
         }).catch((error) => {
-            if (error.response && error.response.status == 401) {
+            if (error.response && error.response.status === 401) {
                 setLoginError(1)
             } else {
                 setLoginError(2)
@@ -57,12 +57,12 @@ const LoginPage = () => {
             <LoginMain>
                 <LoginFrom onSubmit={handleSubmit(loginUser)}>
                     <LoginTitle>{t(tnm+'title')}</LoginTitle>
-                    <LoginLabel error={loginError == 1 ? "error" : ""}>{t(tnm+'username-label')}</LoginLabel>
-                    <LoginInput error={loginError == 1 ? "error" : ""} type="text" name="username" 
+                    <LoginLabel error={loginError === 1 ? "error" : ""}>{t(tnm+'username-label')}</LoginLabel>
+                    <LoginInput error={loginError === 1 ? "error" : ""} type="text" name="username" 
                         {...register('username')} placeholder={t(tnm+'username-placeholder')} 
                         onChange={() => setLoginError(0)} />
-                    <LoginLabel error={loginError == 1 ? "error" : ""}>{t(tnm+'password-label')}</LoginLabel>
-                    <LoginInput error={loginError == 1 ? "error" : ""} type="password" 
+                    <LoginLabel error={loginError === 1 ? "error" : ""}>{t(tnm+'password-label')}</LoginLabel>
+                    <LoginInput error={loginError === 1 ? "error" : ""} type="password" 
                         {...register('password')} placeholder={t(tnm+'password-placeholder')} 
                         onChange={() => setLoginError(0)} />
                     <LoginErrorText>{loginError > 0 ? t(tnm+'login-fail-message'+loginError) : null}</LoginErrorText>

@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import componentStyles from "./styles";
 import Axios from "axios";
 import { useEffect, useState } from "react";
-import { localStorageService } from "../../services/localStorageService";
 import {MapContainer,TileLayer,useMapEvent} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 

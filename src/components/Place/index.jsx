@@ -33,12 +33,12 @@ const PlacePage = (props) => {
     const [descriptionHeight, setDescriptionHeight] = useState('250px')
     
 	const { PlacePageContainer, TopBar, GoBack, PlaceIntro,
-        SmallGallery, BigGallery, SmallPhoto, BigPhoto, CloseBigGallery, StyledCarousel, StyledItem, StyledImg,
+        SmallGallery, BigGallery, SmallPhoto, CloseBigGallery, StyledCarousel, StyledItem, StyledImg,
         PlaceName, PlaceAddress, 
-        PlaceCategory, PlaceNumOfVisits, PlaceDesc, PlaceImg, PlaceDescription, 
-        DescriptionContent,  DescriptionButton,
+        PlaceCategory, PlaceDesc, PlaceImg, PlaceDescription, 
+        DescriptionContent, 
         ManagementPanel,
-        RatingsContainer, RatingsPanel, RatingsPanelMessages, AddRatingContainer, RatingSubmitWrapper, RatingFormTopPanel,
+        RatingsContainer, RatingsPanel, RatingsPanelMessages, RatingSubmitWrapper, RatingFormTopPanel,
         Rating, RatingComment, RatingDate, RatingUsername, RatingValue, RatingTop, 
         RatingBottom, RatingOptions, EditButton, Navigation,AddRatingInput,  RatingFormLable,
         RatingFormRaitingWrapper, RatingFormAddImageWrapper, FileInput,
@@ -53,7 +53,7 @@ const PlacePage = (props) => {
 
 	const deleteRating = (ratingId) => {
 		Axios.delete(`/rating/${ratingId}`);
-		setRatings(ratings.filter(x => x.ratingId != ratingId));
+		setRatings(ratings.filter(x => x.ratingId !== ratingId));
 	}
 
 	const addRating = (data) => {

@@ -1,10 +1,7 @@
-import React, {useEffect, useState} from "react";
-import Axios from "axios";
+
 import Layout from "../Layout/index"
 import componentStyles from "./styles";
 
-
-import {L} from 'leaflet';
 import {MapContainer,TileLayer} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import OnScreenButtons from './OnMapButtons/OnScreenButtons'
@@ -13,20 +10,10 @@ import MarkersLayer from './MarkersManagement/MarkersLayer'
 
 const Map = () => {
 
-        
     const { MapWrapper } = componentStyles;
     const style = {height: '100%'}
     const rzeszow_location = [50.041187, 21.999121] //latitude longitude
     const default_zoom = 13
-
-       
-    
-    useEffect(() => {
-        //Axios.get("/place/getPlaces").then(res => setPlaces(res.data))
-    },[])
-
-
-
 
     return(
         <Layout>

@@ -83,8 +83,6 @@ const componentStyles = {
     `,
     AverageRating: styled.div`
     `,
-    AverageRating: styled.div`
-    `,
     Message: styled.span`
     color: firebrick;
     font-weight: bold;

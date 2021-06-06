@@ -27,7 +27,7 @@ const RegisterPage = () => {
                 password: data.password,
                 confirmPassword:data.confirmPassword
             }).then((res) => {
-                if (res.status == 201 && res.data) {
+                if (res.status === 201 && res.data) {
                     localStorageService.username = res.data.username
                     localStorageService.token = res.data.token
                     localStorageService.userId = res.data.userId
@@ -37,7 +37,7 @@ const RegisterPage = () => {
                     setRegisterError(true)
                 }
             }).catch((error) => {
-                if (error.response && error.response.status == 400) {
+                if (error.response && error.response.status === 400) {
                     switch (error.response.data) {
                         case "Passwords mismatch":
                             //setError("password", {type: "pass-mismatch", message: ""})
@@ -85,7 +85,7 @@ const RegisterPage = () => {
                     <RegisterInput error={errors.password} type="password" {...register('password',
                         {required: true, pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minLength: 6 })}
                         placeholder={t(tnm+'password-placeholder')} />
-                    <RegisterInputError>{errors.password && errors.password.type != "pass-mismatch" ? t(tnm+errors.password.type) : null}</RegisterInputError>
+                    <RegisterInputError>{errors.password && errors.password.type !== "pass-mismatch" ? t(tnm+errors.password.type) : null}</RegisterInputError>
 
                     <RegisterLabel error={errors.confirmPassword}>{t(tnm+'repeat-password-label')}</RegisterLabel>
                     <RegisterInput error={errors.confirmPassword} type="password" {...register('confirmPassword',
