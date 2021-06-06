@@ -49,7 +49,6 @@ const ListMenu = ({closeListMenu}) => {
             </> }
             {role=='0' && 
             <>
-                <ListMenuRecord onClick={() => {history.push("stats"); closeListMenu()}}>Statystyki</ListMenuRecord>
                 <ListMenuRecord onClick={() => {history.push("adminPanel"); closeListMenu()}}>Panel admina</ListMenuRecord>
             </>}
             

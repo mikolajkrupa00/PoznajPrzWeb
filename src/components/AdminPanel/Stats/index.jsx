@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import Axios from "axios";
-import Layout from "../Layout/index"
 import componentStyles from "./styles";
 
 const StatsPage = () => {
@@ -34,7 +33,7 @@ const StatsPage = () => {
         {
             setMessage(false);
             setfilteredPlaces(ratings);
-        if(placeName=="")
+        if(placeName==="")
         {
             setfilteredPlaces(ratings);
         }
@@ -51,7 +50,7 @@ const StatsPage = () => {
 
     
     return(
-        <Layout>
+        <>
             
             <PlacesContainer>
             
@@ -67,7 +66,7 @@ const StatsPage = () => {
             <Message>{message && "Podaj poprawną liczbę dni"}</Message>
             <Counter>{placeName.length>0 || displayedDays>0 ? (filteredPlaces.length>0 ? `Zwrócono ${filteredPlaces.length} rekordów` : "Brak wyników") : "Brak kryterium wyszukiwania"}</Counter>
 
-            {filteredPlaces && displayedDays!="" && filteredPlaces.map(visit => 
+            {filteredPlaces && displayedDays!=="" && filteredPlaces.map(visit => 
 
                     <Place key={`key${visit.placeId}`}>
                         <PlaceImg src="img/logo192.png" />
@@ -85,7 +84,7 @@ const StatsPage = () => {
                 )}
             </PlacesContainer>
             
-        </Layout>
+        </>
     )
 }
 
