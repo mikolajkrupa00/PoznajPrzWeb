@@ -5,7 +5,7 @@ const componentStyles = {
     Wrapper: styled.div`
     margin: 80px 0px;
     font-size: 40px;
-    color: lightblue;
+    color: #333;
     text-align: center;
     justify-content: center;
 
@@ -20,7 +20,9 @@ const componentStyles = {
     justify-content: center;
     font-size: 18px;
     color: black;
-    border: 1px solid black;
+    border-radius: 5px;
+    border: 1px solid #999;
+    background-color: #FFF;
 
     &:first-child{
         margin-top: 45px;
