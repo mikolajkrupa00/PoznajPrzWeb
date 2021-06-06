@@ -17,16 +17,25 @@ const componentStyles = {
     }
     `,
 
-    Icon : styled.div`
-    width: 50px;
-    padding: 5px;
-    `,
-    
+    MenuItem: styled.div`    
+    width: 75px;
+    margin: 0px 5px;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    place-items: center;
+    border-bottom: 2px solid whitesmoke;
+    padding-bottom: 3px;
+    white-space: normal;
+    color: rgb(0, 123, 255);
+    `,    
+
     Img: styled.img`
     width: 20px;
-    `,
+    padding: 5px 0px;
+    `,   
 
-    LinkLabel: styled.div`
+    Label: styled.div`
     font-size: 12px;
     height: 30px;
     line-height: 15px;
