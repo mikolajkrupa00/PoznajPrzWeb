@@ -33,13 +33,15 @@ const componentStyles = {
     Img: styled.img`
     width: 20px;
     padding: 5px 0px;
+    padding-bottom: 7px;
     `,   
 
     Label: styled.div`
     font-size: 12px;
-    height: 30px;
+    height: 37px;
     line-height: 15px;
-    margin-top: 5px;
+    padding-top: 7px;
+    width: 100%;
     `,
 
 }

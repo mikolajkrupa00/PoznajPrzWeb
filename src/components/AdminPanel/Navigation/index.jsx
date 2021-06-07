@@ -12,37 +12,38 @@ const Navigation = ({changeSection}) => {
     const highlightIitem = (item) =>{
            
         if (section === item) 
-            return {borderBottom:'2px solid #444'};
+            return {borderTop:'2px solid #444'};
         else
-            return {borderBottom:'0px'};
+            return {borderTop:'2px solid whitesmoke'};
+
     }
 
     return ( 
         <Menu>
                 
-                <MenuItem onClick={() => {changeSection("statistics"); setSection("statistics")}} style={ highlightIitem("statistics") }>
+                <MenuItem onClick={() => {changeSection("statistics"); setSection("statistics")}} >
                     <Img src={stats} alt="Statystyki"/>
-                    <Label>Statystyki</Label>
+                    <Label style={ highlightIitem("statistics") } >Statystyki</Label>
                 </MenuItem>
 
-                <MenuItem onClick={() => {changeSection("usersManagement"); setSection("usersManagement")}} style={ highlightIitem("usersManagement") }>
+                <MenuItem onClick={() => {changeSection("usersManagement"); setSection("usersManagement")}} >
                     <Img src={block_user} alt="Zablokowani użytkownicy"/>
-                    <Label>Zarządzaj użytkownikami</Label>
+                    <Label style={ highlightIitem("usersManagement") }>Zarządzaj użytkownikami</Label>
                 </MenuItem>
 
-                <MenuItem onClick={() => {changeSection("placeSuggestions"); setSection("placeSuggestions")}} style={ highlightIitem("placeSuggestions") }>
+                <MenuItem onClick={() => {changeSection("placeSuggestions"); setSection("placeSuggestions")}} >
                     <Img src={confirm_place} alt=''/>
-                    <Label>Propozycje miejsc</Label>
+                    <Label style={ highlightIitem("placeSuggestions")} >Propozycje miejsc</Label>
                 </MenuItem>
 
-                <MenuItem onClick={() => { changeSection(""); setSection("???")}} style={ highlightIitem("???") }>
+                <MenuItem onClick={() => { changeSection(""); setSection("???")}} >
                     <Img src={confirm_place} alt=''/>
-                    <Label>TO JEST DIV</Label>    
+                    <Label style={ highlightIitem("???") } >TO JEST DIV</Label>    
                 </MenuItem>
 
-                <MenuItem onClick={() => {changeSection("");  setSection("???")}} style={ highlightIitem("fwfefeff")}>
+                <MenuItem onClick={() => {changeSection("");  setSection("???")}} >
                     <Img src={confirm_place} alt=''/>
-                    <Label>TO JEST DIV</Label>    
+                    <Label style={ highlightIitem("fwfefeff")} >TO JEST DIV</Label>    
                 </MenuItem>
 
         </Menu>
