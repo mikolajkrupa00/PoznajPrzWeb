@@ -1,55 +1,57 @@
-import React, { useState } from "react";
 import components from "./styles";
 import block_user from '../../../assets/admin_panel_icons/block-user.png';
 import confirm_place from '../../../assets/admin_panel_icons/signal.png';
 import stats from '../../../assets/admin_panel_icons/line-graph.png';
 
-const Navigation = ({changeSection}) => {
-    const {Menu, MenuItem, Img, Label} = components;
- 
-    const [section, setSection] = useState("statistics");
+const Navigation = ({changeSection,activeSection}) => {
+    const {Menu,Img,LinkLabel} = components;
 
-    const highlightIitem = (item) =>{
-           
-        if (section === item) 
-            return {borderBottom:'2px solid #444'};
-        else
-            return {borderBottom:'0px'};
-    }
+    //history.push("home");
 
+    const NavLinkStyles = {
+
+        width: "84px",
+        margin: "0px 5px",
+        display: "flex",
+        flexDirection : "column",
+        justifyContent: "center",
+        justifyItems: "center",
+        alignItems: "center",
+        padding: "5px",
+        whiteSpace: "normal"
+        }
+    
     return ( 
         <Menu>
-                
-                <MenuItem onClick={() => {changeSection("statistics"); setSection("statistics")}} style={ highlightIitem("statistics") }>
+               
+
+                <div onClick={() => changeSection("statistics")} style={NavLinkStyles} className={activeSection==="statistics" ? "active" : "noactive"}>
                     <Img src={stats} alt="Statystyki"/>
-                    <Label>Statystyki</Label>
-                </MenuItem>
+                    <LinkLabel>Statystyki</LinkLabel>
+                </div>
 
-                <MenuItem onClick={() => {changeSection("usersManagement"); setSection("usersManagement")}} style={ highlightIitem("usersManagement") }>
+                <div onClick={() => changeSection("usersManagement")} style={NavLinkStyles} className={activeSection==="usersManagement" ? "active" : "noactive"}>
                     <Img src={block_user} alt="Zablokowani użytkownicy"/>
-                    <Label>Zarządzaj użytkownikami</Label>
-                </MenuItem>
+                    <LinkLabel>Zarządzaj użytkownikami</LinkLabel>
+                </div>
 
-                <MenuItem onClick={() => {changeSection("placeSuggestions"); setSection("placeSuggestions")}} style={ highlightIitem("placeSuggestions") }>
+                <div onClick={() => changeSection("placeSuggestions")} style={NavLinkStyles} className={activeSection==="placeSuggestions" ? "active" : "noactive"}>
                     <Img src={confirm_place} alt=''/>
-                    <Label>Propozycje miejsc</Label>
-                </MenuItem>
+                    <LinkLabel>Propozycje miejsc</LinkLabel>
+                </div>
 
-                <MenuItem onClick={() => { changeSection(""); setSection("???")}} style={ highlightIitem("???") }>
+                <div onClick={() => changeSection("")} style={NavLinkStyles} className={activeSection==="" ? "active" : "noactive"}>
                     <Img src={confirm_place} alt=''/>
-                    <Label>TO JEST DIV</Label>    
-                </MenuItem>
+                    <LinkLabel>TO JEST DIV</LinkLabel>    
+                </div>
 
-                <MenuItem onClick={() => {changeSection("");  setSection("???")}} style={ highlightIitem("fwfefeff")}>
+                <div onClick={() => changeSection("1")} style={NavLinkStyles} className={activeSection==="1" ? "active" : "noactive"}>
                     <Img src={confirm_place} alt=''/>
-                    <Label>TO JEST DIV</Label>    
-                </MenuItem>
-
+                    <LinkLabel>TO JEST DIV</LinkLabel>    
+                </div>
         </Menu>
 
      )
 }
  
 export default Navigation;
-
-

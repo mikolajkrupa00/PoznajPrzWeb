@@ -18,7 +18,7 @@ const AdminPanel = () => {
             
             <AdminContainer>
 
-                <Navigation changeSection={(arg) => setOpenSection(arg)}/>
+                <Navigation changeSection={(arg) => setOpenSection(arg)} activeSection={openSection}/>
                 
                 {openSection === "statistics" ? <StatsPage></StatsPage> : ""}
                 {openSection === "usersManagement" ? <BlockUser></BlockUser> : ""}
