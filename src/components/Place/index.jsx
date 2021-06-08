@@ -30,25 +30,28 @@ const PlacePage = (props) => {
     const [commentSection, setCommentSection] = useState('')
     const [commentPhotosSection, setCommentPhotosSection] = useState(false)
     const [ratingPanelMessage, setRatingPanelMessage] = useState('')
+    const [isEdited, setIsEdited] = useState(false)
     const [descriptionHeight, setDescriptionHeight] = useState('250px')
+    const [categories, setCategories] = useState();
     
 	const { PlacePageContainer, TopBar, GoBack, PlaceIntro,
         SmallGallery, BigGallery, SmallPhoto, CloseBigGallery, StyledCarousel, StyledItem, StyledImg,
         PlaceName, PlaceAddress, 
         PlaceCategory, PlaceDesc, PlaceImg, PlaceDescription, 
         DescriptionContent, 
-        ManagementPanel,
+        ManagementPanel,EditPlaceSubmit,
         RatingsContainer, RatingsPanel, RatingsPanelMessages, RatingSubmitWrapper, RatingFormTopPanel,
         Rating, RatingComment, RatingDate, RatingUsername, RatingValue, RatingTop, 
         RatingBottom, RatingOptions, EditButton, Navigation,AddRatingInput,  RatingFormLable,
-        RatingFormRaitingWrapper, RatingFormAddImageWrapper, FileInput,
-        RaitingTextarea, RatingForm, RatingSubmit, Button, ButtonsWrapper,
-        RatingGaleryWrapper} = componentStyles;
+        RatingFormRaitingWrapper, RatingFormAddImageWrapper, FileInput,DropDownList,DropDownOption,
+        RaitingTextarea, RatingForm, RatingSubmit, Button, ButtonsWrapper,EditPlaceForm,
+        RatingGaleryWrapper, EditPlacePageContainer, EditPlaceLabel, EditPlaceInput, EditPlaceTextArea,} = componentStyles;
 
 	const { role, username, userId } = localStorageService // 0 admin
 	useEffect(() => {
 		Axios.get(`/place/${placeId}`).then(res => setPlace(res.data))
 		Axios.get(`/rating/getRatings/${placeId}`).then(res => setRatings(res.data))
+        Axios.get("/category").then(res => setCategories(res.data));
 	}, [])
 
 	const deleteRating = (ratingId) => {
@@ -223,10 +226,29 @@ const PlacePage = (props) => {
         )
     }
 
+    const setEditPlaceFlag = (placeId) => {
+        setIsEdited(true);
+    }
+
+    const editPlace = (data) => {
+        const request = {
+            placeId: place.placeId,
+            latitude: `${place.latitude}`, 
+            longitude: `${place.longitude}`,
+            name: data.name,
+            description: data.desc,
+            address: data.address,
+        }
+        Axios.put("/place", request).then(res => {
+            setIsEdited(false)
+            setPlace( request)
+        })
+        console.log(request);
+    }
+
     return(
         <Layout>
-
-            { place  &&
+            { place  && !isEdited ?
                 <PlacePageContainer>
                     <TopBar>
                         <GoBack onClick={() => history.goBack()}><BiLeftArrowAlt style={iconStyles} /></GoBack>
@@ -245,7 +267,7 @@ const PlacePage = (props) => {
                                     <Navigation href={`https://www.google.com/maps/search/?api=1&query=${place.latitude},${place.longitude}`} target="_blank">Nawiguj</Navigation>
                                 </Button>
 
-                                <Button inputColor="green">Cos jeszcze?</Button>
+                                {role  && <Button onClick={() => setEditPlaceFlag(place.placeId)}>Edytuj</Button>}
                                 <Button inputColor="orange">Kolejny BTN?</Button>
                                 <Button inputColor="purple">Ostatni BTN?</Button>
 
@@ -346,9 +368,17 @@ const PlacePage = (props) => {
                     {/* {RaitingsWrapper} */}
                     {/* {ComentPhotosWrapper} */}
 
-                </PlacePageContainer>
-            }
-                       
+                </PlacePageContainer> :
+                <EditPlaceForm onSubmit={handleSubmit(editPlace)}>
+                    <EditPlaceLabel>Nazwa miejsca</EditPlaceLabel>
+                    <EditPlaceInput defaultValue={place.name} type="text" {...register('name', {required: true})} placeholder="Nazwa miejsca" />
+                    <EditPlaceLabel>Opis</EditPlaceLabel>
+                    <EditPlaceInput defaultValue={place.address}  type="textarea" {...register('address', {required: true})} placeholder="Adres" />
+                    <EditPlaceLabel>Adres</EditPlaceLabel>
+                    <EditPlaceTextArea defaultValue={place.description} type="textarea" {...register('desc', {required: true})} placeholder="Opis" />
+                    <EditPlaceSubmit type="submit" onClick={handleSubmit((data) => editPlace(data))}>edytuj miejsce</EditPlaceSubmit>
+                </EditPlaceForm>
+            }   
         </Layout>
     )
 

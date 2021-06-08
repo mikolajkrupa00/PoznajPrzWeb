@@ -320,6 +320,25 @@ const componentStyles = {
     flex-direction: column;
     justify-content: center;
     `,
+    EditPlaceForm: styled.div`
+    display:flex;
+    flex-direction:column;
+    
+    `,
+    EditPlaceLabel: styled.label`
+    `,
+    EditPlaceInput: styled.input`
+    `,
+    EditPlaceSubmit: styled.button`
+    `,
+    EditPlaceTextArea: styled.textarea`
+    `,
+    DropDownList: styled.select`
+    `,
+    DropDownOption: styled.option`
+    `,
+    EditPlaceSubmit: styled.button`
+    `,
 }
 
 export default componentStyles;

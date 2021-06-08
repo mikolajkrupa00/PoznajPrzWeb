@@ -22,9 +22,7 @@ const AdminPanel = () => {
                 
                 {openSection === "statistics" ? <StatsPage></StatsPage> : ""}
                 {openSection === "usersManagement" ? <BlockUser></BlockUser> : ""}
-                {openSection === "placesManagement" ? "" : ""}
                 {openSection === "placeSuggestions" ? <ConfirmPlace></ConfirmPlace> : ""}
-               
                 
 
             </AdminContainer>

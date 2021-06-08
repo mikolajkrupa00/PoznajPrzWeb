@@ -23,6 +23,7 @@ const LoginPage = () => {
     const [awaitingServerResponse, setAwaitingServerResponse] = useState(false)
 
     const loginUser = (data) => {
+        console.log(data);
         setAwaitingServerResponse(true)
         setLoginError(0)
         Axios.post("/user/authenticate", {

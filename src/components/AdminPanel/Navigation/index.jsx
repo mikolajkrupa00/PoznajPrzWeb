@@ -36,11 +36,6 @@ const Navigation = ({changeSection}) => {
                     <Label style={ highlightIitem("placeSuggestions")} >Propozycje miejsc</Label>
                 </MenuItem>
 
-                <MenuItem onClick={() => { changeSection(""); setSection("???")}} >
-                    <Img src={confirm_place} alt=''/>
-                    <Label style={ highlightIitem("???") } >TO JEST DIV</Label>    
-                </MenuItem>
-
                 <MenuItem onClick={() => {changeSection("");  setSection("???")}} >
                     <Img src={confirm_place} alt=''/>
                     <Label style={ highlightIitem("fwfefeff")} >TO JEST DIV</Label>    
