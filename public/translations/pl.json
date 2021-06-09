@@ -3,6 +3,7 @@
 
     "list-menu":{
         "home-page": "Strona główna",
+        "userpanel": "Panel użytkownika",
         "map": "Mapa",
         "places": "Miejsca",
         "add-place": "Dodaj miejsce",
@@ -55,14 +56,41 @@
             "required": "Pole jest wymagane",
             "pattern": "Musi zawierać: cyfrę, małą i dużą literę",
             "minLength": "Min. 6 znaków",
-            "pass-mismatch": "Wpisane hasła nie są identyczne!",
-            "username-taken": "Podana nazwa użytkownika jest już zajęta!",
-            "email-taken": "Podany e-mail jest już zajęty!",
+            "pass-mismatch": "Wpisane hasła nie są identyczne",
+            "username-taken": "Podana nazwa użytkownika jest już zajęta",
+            "email-taken": "Podany e-mail jest już zajęty",
             "other-error": "Wystąpił problem, spróbuj ponownie później"
         }
+    },
+
+    "edit-profile": {
+        "user-details": {
+            "change-details": "Zmiana danych",
+            "username": "Nazwa użytkownika",
+            "email": "E-mail"
+        },
+        "password": {
+            "change-password": "Zmiana hasła",
+            "current-password": "Obecne hasło",
+            "new-password": "Nowe hasło",
+            "repeat-new-password": "Powtórz nowe hasło"
+        },
+        "common": {
+            "save-changes": "Zapisz zmiany",
+            "exit": "Wyjście",
+            "update-success": "Pomyślnie zapisano zmiany"
+        },
+        "errors": {
+            "required": "Pole jest wymagane",
+            "pattern": "Musi zawierać: cyfrę, małą i dużą literę",
+            "minLength": "Min. 6 znaków",
+            "username-taken": "Podana nazwa użytkownika jest już zajęta",
+            "email-taken": "Podany email jest już zajęty",
+            "passwords-mismatch": "Wpisane hasła nie są identyczne!",
+            "wrong-password": "Podane hasło jest nieprawidłowe",
+            "unauthorized": "Wyloguj się i zaloguj się ponownie w celu zapisania zmian",
+            "other": "Wystąpił problem, spróbuj ponownie później"
+        }
     }
-
-        
-
 }
 

@@ -3,6 +3,7 @@
 
     "list-menu":{
         "home-page": "Home Page",
+        "userpanel": "User panel",
         "map": "Map",
         "places": "Places",
         "add-place": "Add place",
@@ -56,16 +57,41 @@
             "required": "Field is required",
             "pattern": "Must contain: digit, small and big letter",
             "minLength": "Min. 6 characters",
-            "pass-mismatch": "Entered passwords are not identical!",
-            "username-taken": "Username already taken!",
-            "email-taken": "E-mail already taken!",
+            "pass-mismatch": "Entered passwords are not identical",
+            "username-taken": "Username already taken",
+            "email-taken": "E-mail already taken",
             "other-error": "Error occured, try again later"
         }
+    },
+
+    "edit-profile": {
+        "user-details": {
+            "change-details": "Change details",
+            "username": "Username",
+            "email": "E-mail"
+        },
+        "password": {
+            "change-password": "Change password",
+            "current-password": "Current password",
+            "new-password": "New password",
+            "repeat-new-password": "Repeat new password"
+        },
+        "common": {
+            "save-changes": "Save changes",
+            "exit": "Exit",
+            "update-success": "Successfully saved changes"
+        },
+        "errors": {
+            "required": "Field is required",
+            "pattern": "Must contain: digit, small and big letter",
+            "minLength": "Min. 6 characters",
+            "username-taken": "Username already taken",
+            "email-taken": "E-mail already taken",
+            "passwords-mismatch": "Entered passwords are not identical",
+            "wrong-password": "Wrong password",
+            "unauthorized": "Log-out and log-in again to save changes",
+            "other": "Error occured, try again later"
+        }
     }
-       
-        
-
-
-
 }
 

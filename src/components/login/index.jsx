@@ -30,7 +30,6 @@ const LoginPage = () => {
             username: data.username,
             password: data.password
         }).then((res) => {
-            console.log(res)
             if (res.status === 200 && res.data) {
                 localStorageService.username = res.data.username
                 localStorageService.token = res.data.token
