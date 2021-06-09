@@ -200,7 +200,7 @@ const PlacePage = (props) => {
                             }                                
 
                             <RatingBottom>
-                                <RatingDate>{rating.ratingDate.replace("T", " ")}</RatingDate>
+                                <RatingDate>{rating.ratingDate}</RatingDate>
                                 
                                 <RatingOptions>
                                     {(role==='0' || username===rating.username) &&<EditButton onClick={() => deleteRating(rating.ratingId)}>Usuń</EditButton>}
