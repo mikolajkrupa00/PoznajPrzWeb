@@ -61,13 +61,13 @@ const PlacePage = (props) => {
 
 	const addRating = (data) => {
 		var request = new FormData();
-		request.append('ratingDate', new Date().toDateString());
+		request.append('ratingDate', new Date().toISOString());
 		request.append('comment', comment);
 		request.append('value', data.value);
 		request.append('userId', userId);
 		request.append('placeId', placeId);
 		request.append('file', file);
-
+        
 		Axios.request({
 			url: "/rating",
 			method: 'post',
@@ -78,10 +78,10 @@ const PlacePage = (props) => {
 			onUploadProgress: e => console.log(e)
 		})
 		.then(res => setRatings([...ratings, {
-			ratingDate: new Date().toDateString(),
+			ratingDate: new Date().toISOString().split('.').shift().replace("T", " "),
 			ratingId: res.data.ratingId,
-			comment: request.comment,
-			value: +request.value,
+			comment: comment,
+			value: data.value,
 			username: username,
 			isVisible: true
 		}]));
@@ -200,8 +200,8 @@ const PlacePage = (props) => {
                             }                                
 
                             <RatingBottom>
-                                <RatingDate>{rating.ratingDate}</RatingDate>
-
+                                <RatingDate>{rating.ratingDate.replace("T", " ")}</RatingDate>
+                                
                                 <RatingOptions>
                                     {(role==='0' || username===rating.username) &&<EditButton onClick={() => deleteRating(rating.ratingId)}>Usuń</EditButton>}
                                     {role==='0' && <EditButton onClick={() => blockUser(rating.username)}>Zablokuj</EditButton>}
