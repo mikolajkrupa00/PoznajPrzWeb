@@ -353,7 +353,7 @@ const PlacePage = (props) => {
                         <RatingsPanel>                                
                                 <Button inputColor='#777'>Sortuj?</Button>
                                 {/* TODO: dodać endpoint, który zwraca wszystkie zdjecia w komenarzach dla danego miejsca
-                                        i wyświrtlić je jako galerie zdjęć
+                                        i wyświetlić je jako galerie zdjęć
                                 */}
                                 <Button inputColor='#555' onClick={() => setCommentPhotosSection(!commentPhotosSection)}>Zdjęcia</Button>
                                 <Button inputColor='black' onClick={openCommentSection}>Dodaj komentarz</Button>                               
@@ -368,7 +368,11 @@ const PlacePage = (props) => {
                     {/* {ComentPhotosWrapper} */}
 
                 </PlacePageContainer> :
+
                 <EditPlaceForm onSubmit={handleSubmit(editPlace)}>
+                    <TopBar>
+                        <GoBack onClick={() => setIsEdited(false)}><BiLeftArrowAlt style={iconStyles} /></GoBack>
+                    </TopBar>
                     <EditPlaceLabel>Nazwa miejsca</EditPlaceLabel>
                     <EditPlaceInput defaultValue={place.name} type="text" {...register('name', {required: true})} placeholder="Nazwa miejsca" />
                     <EditPlaceLabel>Opis</EditPlaceLabel>
