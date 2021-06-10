@@ -266,8 +266,7 @@ const PlacePage = (props) => {
                                     {/* TODO: dodac pozycje uzytkownika do url w Google zeby szukalo drogi zjego lokalizacji*/}
                                     <Navigation href={`https://www.google.com/maps/search/?api=1&query=${place.latitude},${place.longitude}`} target="_blank">Nawiguj</Navigation>
                                 </Button>
-
-                                {role  && <Button onClick={() => setEditPlaceFlag(place.placeId)}>Edytuj</Button>}
+                                {role === '0' ? <Button onClick={() => setEditPlaceFlag(place.placeId)}>Edytuj</Button> : ""}
                                 <Button inputColor="orange">Kolejny BTN?</Button>
                                 <Button inputColor="purple">Ostatni BTN?</Button>
 

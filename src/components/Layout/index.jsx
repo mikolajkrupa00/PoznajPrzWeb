@@ -24,7 +24,7 @@ const Layout = (props) => {
                     </LogoWrapper>
                 </TopNavbarLeftSide>
                 <TopNavbarRightSide>     
-                    {username && <ProfileButton onClick={() => history.push("/profile")}>{username}</ProfileButton>}              
+                    {username && <ProfileButton onClick={() => history.push("/userPanel")}>{username}</ProfileButton>}              
                     {fullScreenState ?
                         <FullScreenImg src="img/minimize.jpg" onClick={() =>{ document.exitFullscreen(); setFullScreenState(false)}}/> :
                         <FullScreenImg src="img/fullscreen.png" onClick={() =>{ document.documentElement.requestFullscreen(); setFullScreenState(true)}}/>

@@ -44,6 +44,7 @@ const UserPanel = (user, place) => {
     useEffect(() => {
         Axios.get("/place/getPlaces").then(res => setPlaces(res.data))
         Axios.get("/Category").then(res => setPlaceCategryTpes(res.data))
+        Axios.get(`/user/${userId}`).then(res => setUserData(res.data))
     },[])
 
     const MyPlaces = () => {
@@ -123,8 +124,7 @@ const UserPanel = (user, place) => {
     }
 
 
-    // const searchFunction = (input, source) => {
-        
+    // const searchFunction = (input, source) => {  
     //     if(source === "input"){
     //         console.log('test1')
     //         if(clickedCategory !== "" && clickedCategory !== undefined){
@@ -248,8 +248,9 @@ const UserPanel = (user, place) => {
                     <div style={{display:"flex",justifyContent:"left",width:"100%"}}>
                          <h3>Ostatnia aktywność: 24.05.2021</h3>
                     </div>
+                   
                     <div style={{display:"flex",justifyContent:"left",width:"100%"}}>
-                        <h3> E-mail: {username}@gmail.com{user.email} </h3>
+                        {userData && <h3>E-mail: {userData.email} </h3> }                        
                     </div>
                 </div>
                 <div>
