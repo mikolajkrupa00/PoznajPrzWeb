@@ -5,12 +5,14 @@ import { BiLeftArrowAlt } from 'react-icons/bi';
 import './OtherCategoriesTab.css'
 
 import Axios from "axios";
-// import {grouped_categories} from '../Data'
+import { useTranslation } from "react-i18next";
 import CategoryCard from './CategoryCard'
 
 const OtherCategoriesTab = ({closeOtherCategories, changePlaceCategory}) => {
 
    const map = useMap()
+   const {t} = useTranslation();
+   const tnm = 'map.'  //translation namespace
    const [groupedCategories, setGroupedCategories] = useState([])
    let iconStyles = { color: '#303030', fontSize: "25px" };
 
@@ -69,6 +71,7 @@ const OtherCategoriesTab = ({closeOtherCategories, changePlaceCategory}) => {
                 console.log(parsedData[index])
                 parsedData[index].groupName = item.categoryTypeName
                 parsedData[index].groupCategories = []
+                parsedData[index].groupCategories.push({ category: item.name})
             }
             else{
 
@@ -90,7 +93,7 @@ const OtherCategoriesTab = ({closeOtherCategories, changePlaceCategory}) => {
            
             <div className='managmentWrapper'>
                 <div className='closeCategoryWrapper' onClick={closeOtherCategories}> <BiLeftArrowAlt style={iconStyles}/></div>
-                <div className='otherCategoriesWrapperTitle'>Pozostałe Kategorie</div>
+                <div className='otherCategoriesWrapperTitle'>{t(tnm+"main_title")}</div>
                 <div style={{width: '30px', height: '30px'}}></div>
             </div>
             

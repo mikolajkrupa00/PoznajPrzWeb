@@ -97,8 +97,9 @@
     "map":{
         "main_all": "All",
         "main_more": "••• More",
+        "main_title": "Others Categories",
 
-        "main_restauracje": "Restauracje",
+        "main_restauracje": "Restaurants",
             "pub": "pub",
             "kawiarnia": "café",
             "bar": "bar",

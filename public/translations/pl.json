@@ -98,6 +98,7 @@
     "map":{
         "main_all": "Wszystko",
         "main_more": "••• Więcej",
+        "main_title": "Pozostałe Kategorie",
 
         "main_restauracje": "Restauracje",
             "pub": "pub",
@@ -105,7 +106,7 @@
             "bar": "bar",
             "restauracja": "restauracja",
             
-       "main_zabytki": "Kultura",
+       "main_zabytki": "Zabytki",
             "pomnik": "pominik",
             "zamki": "zamki",
             "kamienice": "kamienice",
