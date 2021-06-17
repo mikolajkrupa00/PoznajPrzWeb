@@ -1,15 +1,18 @@
-import { useEffect} from 'react'
+import { useEffect, useState} from 'react'
 import {useMap} from 'react-leaflet'
 import { BiLeftArrowAlt } from 'react-icons/bi';
 
 import './OtherCategoriesTab.css'
 
-import {grouped_categories} from '../Data'
+import Axios from "axios";
+// import {grouped_categories} from '../Data'
 import CategoryCard from './CategoryCard'
 
 const OtherCategoriesTab = ({closeOtherCategories, changePlaceCategory}) => {
 
    const map = useMap()
+   const [groupedCategories, setGroupedCategories] = useState([])
+
    let iconStyles = { color: '#303030', fontSize: "25px" };
 
     useEffect(() => {
@@ -22,7 +25,9 @@ const OtherCategoriesTab = ({closeOtherCategories, changePlaceCategory}) => {
         map.boxZoom.disable();
         map.keyboard.disable();
         console.log('useEffect on component mount')
+
         //TODO: add Axios request
+        Axios.get("/category").then(res => {parseData(res.data); console.log()})
 
         return () => {
             // Anything in here is fired on component unmount.
@@ -47,8 +52,38 @@ const OtherCategoriesTab = ({closeOtherCategories, changePlaceCategory}) => {
         
     }
 
-   
+    const parseData = (data) => {
 
+        let parsedData = []
+        let currCategoryName = '';
+        let index
+       
+        console.log("parseData:")       
+       
+        data.map((item ) => {
+
+            if(currCategoryName !== item.categoryTypeName){
+                parsedData.push({})
+                currCategoryName = item.categoryTypeName
+                index = parsedData.push() - 1;
+                console.log("index: ", index)
+                console.log(parsedData[index])
+                parsedData[index].groupName = item.categoryTypeName
+                parsedData[index].groupCategories = []
+            }
+            else{
+
+                parsedData[index].groupCategories.push({ category: item.name, label: item.name})
+            }
+
+        })
+
+        console.log("parsedData:", parsedData)
+
+        setGroupedCategories(parsedData)
+    
+    }
+    
    
     return(
         <div className='otherCategoriesCardWrapper'>
@@ -61,7 +96,7 @@ const OtherCategoriesTab = ({closeOtherCategories, changePlaceCategory}) => {
             </div>
             
             {
-                grouped_categories.map((group, id) => {
+                groupedCategories.map((group, id) => {
 
                     return(
                         <CategoryCard 
