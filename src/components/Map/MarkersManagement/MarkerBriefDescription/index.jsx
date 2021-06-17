@@ -34,7 +34,7 @@ const MarkerBriefDescription = ({closeBriefDescription, goToDescription, clicked
 
 
             <MiddleDiv>
-                <PlaceImg></PlaceImg>
+                <PlaceImg src={clickedMarker.mainPhoto}></PlaceImg>
 
                 <PlaceDescription>
                 Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w 

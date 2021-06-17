@@ -42,7 +42,7 @@ const componentStyles = {
     align-items: center;
     `,
 
-    PlaceImg: styled.div`
+    PlaceImg: styled.img`
     height: 135px;
     width: 135px;
     background-color: lightblue;
