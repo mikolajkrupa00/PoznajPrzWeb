@@ -52,7 +52,7 @@ const MarkersLayer = () => {
     const changePlaceCategory = (category) =>{
 
         console.log('changePlaceCategory to:', category )
-        if(category === 'more')
+        if(category === 'main_more')
             setOtherCategories('on')
         else
             setPlaceCategory(category)
@@ -129,7 +129,7 @@ const MarkersLayer = () => {
                     
                     if(marker.zoom <= 10){
 
-                        if(placeCategory === 'all'){
+                        if(placeCategory === 'main_all'){
                             return(
                                 <Marker key={id} position={[marker.latitude, marker.longitude]} icon={Icon(iconSize, marker)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
                             )
@@ -148,7 +148,7 @@ const MarkersLayer = () => {
 
                         if(map.getZoom() >= marker.zoom){
 
-                            if(placeCategory === 'all'){
+                            if(placeCategory === 'main_all'){
                                 return(
                                     <Marker key={id} position={[marker.latitude, marker.longitude]} icon={Icon(iconSize, marker)} eventHandlers={{ click: (e) => onMarkerClick(marker) }} />
                                 )

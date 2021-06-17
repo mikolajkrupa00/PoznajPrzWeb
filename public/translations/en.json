@@ -92,6 +92,42 @@
             "unauthorized": "Log-out and log-in again to save changes",
             "other": "Error occured, try again later"
         }
+    },
+
+    "map":{
+        "main_all": "All",
+        "main_more": "••• More",
+
+        "main_restauracje": "Restauracje",
+            "pub": "pub",
+            "kawiarnia": "café",
+            "bar": "bar",
+            "restauracja": "restaurants",
+            
+       "main_zabytki": "Monuments",
+            "pomnik": "statues",
+            "zamki": "castles",
+            "kamienice": "tenements",
+            "palace": "palace",
+
+        "main_rozrywka": "Entertainment",
+            "kabarety": "cabaret",
+            "rozrywka": "fun",
+            "taniec": "disco",
+            "kluby nocne": "night clubs",
+
+        "main_kultura": "Culture",
+            "teatry": "theatre",
+            "filharmonia": "philharmonic hall",
+            "kina": "cinema",
+            "muzeum": "museum",
+
+
+        "main_sport": "Sport",
+            "siatkówka": "volleyball",
+            "koszykówka": "basketball",
+            "piłka nożna": "football",
+            "sport": "sport"       
     }
 }
 

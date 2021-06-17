@@ -12,7 +12,6 @@ const OtherCategoriesTab = ({closeOtherCategories, changePlaceCategory}) => {
 
    const map = useMap()
    const [groupedCategories, setGroupedCategories] = useState([])
-
    let iconStyles = { color: '#303030', fontSize: "25px" };
 
     useEffect(() => {
@@ -73,7 +72,7 @@ const OtherCategoriesTab = ({closeOtherCategories, changePlaceCategory}) => {
             }
             else{
 
-                parsedData[index].groupCategories.push({ category: item.name, label: item.name})
+                parsedData[index].groupCategories.push({ category: item.name})
             }
 
         })

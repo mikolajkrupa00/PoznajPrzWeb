@@ -18,15 +18,15 @@ const MarkersLayerControler = ({changePlaceCategory}) => {
     return(
         <div className='markers_layer_controler_wrapper'>
             
-            <MarkersLayerControlerItem key={'all'} category={'all'} label={'Wszystko'} changePlaceCategory={changePlaceCategory}/>
+            <MarkersLayerControlerItem key={'all'} category={'main_all'}  changePlaceCategory={changePlaceCategory}/>
 
             {
                 markersCategories.map((category, id) => (
-                    <MarkersLayerControlerItem key={id} category={category.name} label={category.name} changePlaceCategory={changePlaceCategory}/>
+                    <MarkersLayerControlerItem key={id} category={category.name}  changePlaceCategory={changePlaceCategory}/>
                 ))
             }
 
-            <MarkersLayerControlerItem key={'more'} category={'more'} label={'••• Więcej'} changePlaceCategory={changePlaceCategory}/>
+            <MarkersLayerControlerItem key={'more'} category={'main_more'}  changePlaceCategory={changePlaceCategory}/>
             
         </div>
     )
