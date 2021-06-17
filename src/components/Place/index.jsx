@@ -117,7 +117,7 @@ const PlacePage = (props) => {
 
         if(role === 2 || role === "2"){
             if(ratingPanelMessage === ""){
-                setRatingPanelMessage("Możliwość dodawania komentarzy została dla Ciebie zablokowana.")
+                setRatingPanelMessage("Możliwość dodawania komentarzy została dla Ciebie zablokowana. Skontaktuj sie z administratorem.")
                 setTimeout(() => {setRatingPanelMessage("")}, 4500)
             }
             return
@@ -204,7 +204,7 @@ const PlacePage = (props) => {
                                 
                                 <RatingOptions>
                                     {(role==='0' || username===rating.username) &&<EditButton onClick={() => deleteRating(rating.ratingId)}>Usuń</EditButton>}
-                                    {role==='0' && <EditButton onClick={() => blockUser(rating.username)}>Zablokuj</EditButton>}
+                                    {role==='0' && rating.isVisible && <EditButton onClick={() => blockUser(rating.username)}>Zablokuj</EditButton>}
                                 </RatingOptions>
                             </RatingBottom>
 
