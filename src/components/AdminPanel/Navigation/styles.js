@@ -7,7 +7,7 @@ const componentStyles = {
     margin: 30px 0px;
     margin-bottom: 100px;
     width: 100%;
-    justify-content: space-around;
+    justify-content: center;
     overflow-y: scroll;
     -ms-overflow-style: none;   /* IE and Edge */
     scrollbar-width: none;      /* Firefox */
