@@ -7,9 +7,14 @@ import {useState, useEffect} from "react";
 const BlockUser = () => {
     const {register, handleSubmit} = useForm();
     const [blockedUsers,setBlockedUsers] = useState();
-    const [blockError, setBlockError] = useState("")
+    const [blockMessage, setBlockMessage] = useState("")
+    const [messageStyle, setMessageStyle] = useState()
     const [unBlockMessage, setUnblockMassage] = useState("")
-    const {BlockUserSubmit, BlockUserInput, BlockUserContainer, BlockedUsers, User, UserName, UserEmail, UnlockUserSubmit} = components;
+    const {BlockUserSubmit, BlockUserInput, BlockUserContainer, BlockedUsers, User, UserName, UserEmail, UnlockUserSubmit,
+        UnblockMessageDiv, BlockMessageDiv} = components;
+
+    const errorMessage = {color: 'firebrick'};
+    const successMessage = {color: 'green'}
 
     useEffect(() => {
         Axios.get("/user/blockedUsers").then(res => setBlockedUsers(res.data));
@@ -21,30 +26,39 @@ const BlockUser = () => {
     const blockUser = (data) =>{
         Axios.put(`/user/blockUser/${data.username}`).then((res)=>{
             if (res.status === 200 && res.data) {
-                setBlockError(1)
+                setBlockMessage('Użytkownik został zablokowany')
+                setMessageStyle(successMessage)
             } 
             else {
-                setBlockError(2)
+                setBlockMessage('Użytkownik nie istnieje lub został już zablokowany')
+                setMessageStyle(errorMessage)
             }
+
+            setTimeout(()=>{ setBlockMessage('') }, 3500)           
+
         }).catch(() => {
-            setBlockError(2)
+            setBlockMessage('Użytkownik nie istnieje lub został już zablokowany')
+            setMessageStyle(errorMessage)
+            setTimeout(()=>{ setBlockMessage('') }, 3500)
         }).then(getUnblockedUsers);
     }
     const unblockUser = (username) =>{
         Axios.put(`/user/unblockUser/${username}`).then(getUnblockedUsers)
         setUnblockMassage(`Użytkownik ${username} został odblokowany`);
+        setTimeout(()=>{ setUnblockMassage('') }, 3500)        
     }
     return ( 
         <>
             <BlockUserContainer>
                         <BlockUserInput type="text" {...register('username', {required:true})}/>
                         <BlockUserSubmit onClick={handleSubmit(data => blockUser(data))}>Zablokuj</BlockUserSubmit>
-                        {blockError===1 ? <p style={{color:'green',paddingTop:'15px'}}>Użytkownik został zablokowany</p> : null}
-                        {blockError===2 ? <p style={{color:'firebrick',paddingTop:'15px'}}>Użytkownik nie istnieje lub został już zablokowany</p> : null}
+                        <BlockMessageDiv style={messageStyle}>{blockMessage}</BlockMessageDiv>                
             </BlockUserContainer>
+
             <BlockedUsers>
                 <h3>Zablokowani użytkownicy</h3>
-                {unBlockMessage && <p style={{color:'green',paddingTop:'15px'}}>{unBlockMessage}</p>}
+                <UnblockMessageDiv style={successMessage}>{unBlockMessage}</UnblockMessageDiv>
+                
                 {blockedUsers && blockedUsers.map(user=>
                     <User key={`key${user.userId}`}>
                         <UserName>Nazwa użytkownika: {user.username}</UserName>

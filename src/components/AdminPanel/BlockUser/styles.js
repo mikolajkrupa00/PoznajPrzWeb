@@ -16,8 +16,9 @@ const componentStyles ={
     border-top-right-radius:1em;
     border-bottom-right-radius:1em;
     `,
+
     BlockedUsers:styled.div`
-    margin-top: 50px;
+    margin-top: 35px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -42,5 +43,16 @@ const componentStyles ={
     border: solid 1px #d0d0d0;
     border-radius:1em;
     `,
+    UnblockMessageDiv: styled.div`
+    margin: 15px 0px;
+    height: 20px;
+    line-height: 20px;
+    `,
+    BlockMessageDiv: styled.div`
+    margin: 15px 0px;
+    height: 20px;
+    line-height: 20px;
+    `,
+
 }
 export default componentStyles;
