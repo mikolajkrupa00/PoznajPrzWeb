@@ -1,274 +1,199 @@
-import ReactDOM from 'react-dom';
-import React, {render, useEffect, useState, useRef} from "react";
+import React, {useEffect, useState} from "react";
 import Axios from "axios";
-import { useForm } from 'react-hook-form';
 import Layout from "../Layout/index"
 import componentStyles from "./styles";
 import { localStorageService } from "../../services/localStorageService"
 import {useHistory} from "react-router-dom"
-import {BiSearch} from "react-icons/bi"
-import MyPlacesComponent from "../Places/index"
-import MyPlacesStyles from "../Places/styles"
-import MyCommentsComponent from "../Place/index"
-import MyCommentsStyles from "../Place/styles"
+//import MyPlacesComponent from "../Places/index"
+//import MyPlacesStyles from "../Places/styles"
 
 
 
-const UserPanel = (user, place) => {
+const UserPanel = () => {
     ///kopiowanie//
     
-    let iconStyles = { fontSize: "20px" };
     
-    const inputRef = useRef();
     const history = useHistory();
     const [wybor, setWybor] = useState(0);
-    const [places, setPlaces] = useState()
-    const [placeCategryTpes, setPlaceCategryTpes] = useState()
-    const [filteredPlaces, setFilteredPlaces] = useState([])
-    const [filterMessage, setFilterMessage] = useState("")
-    const [searchTerm, setSearchTerm] = useState("")
-    const [clickedCategory, setClickedCategory] = useState("")
     //to było na dole nad komentarze
-    const {username,userId} = localStorageService
+    const {role, username,userId} = localStorageService
     const[userData, setUserData] = useState();
+    const[visitedPlaces, setVistedPlaces] = useState("");
+    const[ratedPlaces, setRatedPlaces] = useState("");
     
-    const {Wrapper,ProfileIntro, Photo, ProfileName, ProfileActive, 
-        ProfileEmail, ProfileDesc, ProfileImg,  Button, ButtonsWrapper} = componentStyles
-    //
-    const { CategoriesFilterContainer, CategoriesFilterItem, SearchBarContainer, SearchBarRow, SearchBarInput, SearchBarButton,
-        PlacesContainer, Place, PlaceName, PlaceAddress, PlaceCategory, PlaceNumOfVisits, PlaceDesc, PlaceImgDiv, PlaceImg, Navigation, 
-        } = MyCommentsStyles;
+    const {ProfileIntro,Button, Down, ButtonsWrapper,ButtonsWrapper2,  PlaceDetails, PlaceComment, PlaceLabel, PlaceRating, PlacesContainer, Place, PlaceName, PlaceAddress, PlaceImgDiv, PlaceImg, } = componentStyles
     
 
 
     useEffect(() => {
-        Axios.get("/place/getPlaces").then(res => setPlaces(res.data))
-        Axios.get("/Category").then(res => setPlaceCategryTpes(res.data))
         Axios.get(`/user/${userId}`).then(res => setUserData(res.data))
+        Axios.get(`/visit/getVisitedPlaces/${userId}`).then(res => setVistedPlaces(res.data))
+        Axios.get(`/rating/getRatedPlaces/${userId}`).then(res => setRatedPlaces(res.data))
     },[])
 
     const MyPlaces = () => {
         return(
-            <div>
-                <div style={{
-                 margin: "30px",
-             }}>Miejsca odwiedzone przez Ciebie!</div>
-    <div/>
- <MyPlacesComponent/>
-            </div>
-           
-        )
-    }
-    // const MyPlaces =(place) => {
-    //     return(
-    //     <div>
-    //         <div style={{
-    //             margin: "30px",
-    //         }}>Miejsca odwiedzone przez Ciebie!</div>
-    //         <CategoriesFilterContainer>
-    //                 {placeCategryTpes && placeCategryTpes.map(category => 
-    //                     <CategoriesFilterItem onClick={(e) => {categoryFilter(e)}}> {category.name} </CategoriesFilterItem>                        
-    //                 )}               
-    //             </CategoriesFilterContainer>
-    
-    
-    //             <SearchBarContainer>
-    //                 <SearchBarRow>
-    //                     <SearchBarInput ref={inputRef} onChange={(e) => {searchFunction(e.target.value, 'input')}}></SearchBarInput>
-    //                     <SearchBarButton onClick={() => {console.log(inputRef.current)}}><BiSearch style={iconStyles}/></SearchBarButton>
-    //                 </SearchBarRow>
-    
-    //                 <SearchBarRow>
-    //                     {filterMessage}
-    //                 </SearchBarRow>
-    //             </SearchBarContainer>
-    
-                     
-    
-    //             <PlacesContainer>
-                    
-    //                 {(filteredPlaces.length > 0) ?  
-    //                     (
-    //                         filteredPlaces.map(place => renderPlaceCard(place))                                 
-    //                     ) 
-    //                 : 
-    //                     (
-                            
-    //                         (filteredPlaces.length === 0 && searchTerm.length) > 0 ?
-    //                         (
-    //                             ''  //message: brak wynikow
-    //                         )
-    //                         :
-    //                         (
-    //                             places && places.map(place => renderPlaceCard(place))
-    //                         )
-                            
-    //                     )
-    //                 }
-    //             </PlacesContainer>
-    //     </div>
-    //     )
-    // }
-
-
-    const MyComments = () =>
-    {
-        return(
-            <div>
-                <div style={{
+        <div>
+            <div style={{
                 margin: "30px",
-            }}>Komentarze dodane przez Ciebie!</div>
-    {/* <MyCommentsComponent/> */}
-            </div>
+            }}>Miejsca odwiedzone przez Ciebie:</div>
+            
+    
+                <PlacesContainer>
+                    {visitedPlaces ? visitedPlaces.map(place => 
+                    <Place  onClick={() => history.push("place", place.placeId)}>
+                    <PlaceImgDiv>
+                        <PlaceImg src="img/logo192.png" />
+                    </PlaceImgDiv>
+                        <PlaceDetails>
+                            <PlaceName>
+                            {place.name}
+                            </PlaceName>
+                            <PlaceAddress>
+                            {place.address}
+                            </PlaceAddress>
+                        </PlaceDetails>
+                    </Place>)
+                    :"Nie odwiedziłeś jeszcze żadnego miejsca!"
+                        
+                    }
+                    
+                </PlacesContainer>
+        </div>
         )
     }
 
 
-    // const searchFunction = (input, source) => {  
-    //     if(source === "input"){
-    //         console.log('test1')
-    //         if(clickedCategory !== "" && clickedCategory !== undefined){
-    //             console.log('test2')
-    //             ReactDOM.findDOMNode(clickedCategory).style.backgroundColor = "white"
-    //             setClickedCategory(undefined)
-    //         }               
-    //     }
-       
-
-    //     input = input.toLowerCase()
-    //     setSearchTerm(input);
-        
-    //     if (input === undefined || input === "" ){
-    //         setFilteredPlaces([])
-    //         setFilterMessage("")
-    //         return
-    //     }
-
-    //     const filtered  = places.filter(place =>    place.name.toLowerCase().includes(input) || 
-    //                                                 place.categoryName.toLowerCase().includes(input) || 
-    //                                                 place.address.toLowerCase().includes(input))
-
+    const MyComments = () => {
+        return(
+        <div>
+            <div style={{
+                margin: "30px",
+            }}>Miejsca skomentowane przez Ciebie:</div>
+            
     
-    //     if(filtered.length){
-    //         setFilteredPlaces(filtered)
-    //         setFilterMessage("Pasujące wyniki: " + filtered.length)
-    //     }
-    //     else{
-    //         setFilteredPlaces([])
-    //         setFilterMessage("Brak wyników")     
-    //     }
-        
-    // }
-    
-
-    // const categoryFilter = (e) => {
-        
-    //     const unclicked = "white"
-    //     const clicked = "rgb(237, 246, 255)"
-
-
-        
-
-    //     //pierwsze klikniecie nic nie ma znaczenia
-    //     if(clickedCategory === "" || clickedCategory === undefined){
-    //         ReactDOM.findDOMNode(e.target).style.backgroundColor = clicked
-    //         setClickedCategory(e.target)
-    //         searchFunction(e.target.innerText)
-    //         inputRef.current.value = e.target.innerText
-    //         return
-    //     }
-
-    //     //odklikniecie tego co bylo klikniete        
-    //     if(clickedCategory === e.target){
-    //         setClickedCategory(undefined)
-    //         searchFunction("")
-    //         inputRef.current.value = ""
-    //         ReactDOM.findDOMNode(e.target).style.backgroundColor = unclicked
-    //         return
-    //     }
-
-    //     //zostal klikniety nowy guzik
-    //     console.log("tu dojde w ostatecznosci")
-    //     ReactDOM.findDOMNode(e.target).style.backgroundColor = clicked
-    //     ReactDOM.findDOMNode(clickedCategory).style.backgroundColor = unclicked
-    //     setClickedCategory(e.target)
-    //     searchFunction(e.target.innerText)
-    //     inputRef.current.value = e.target.innerText
-           
-    // }
-    // const renderPlaceCard = (place) => {
-
-    //     return(
-    //         <Place onClick={() => history.push("place", place.placeId)}>
-    //             <PlaceImgDiv>
-    //                 <PlaceImg src="img/logo192.png" />
-    //             </PlaceImgDiv>
-                                
-    //             <PlaceDesc>
-    //                 <PlaceName>{place.name}</PlaceName>
-    //                 <PlaceAddress>{place.address}</PlaceAddress>
-    //                 <PlaceCategory>kategoria:  {place.categoryName}</PlaceCategory>
-    //                 <Navigation href={`https://www.google.com/maps/search/?api=1&query=${place.attitude},${place.latitude}`} target="_blank">Wyznacz trasę</Navigation>                           
-    //             </PlaceDesc>
-    //         </Place>
-    //     )
-    // }
-    
-    
-
-    
-
+                <PlacesContainer>
+                    {ratedPlaces ? ratedPlaces.map(place => 
+                    <Place  onClick={() => history.push("place", place.placeId)}>
+                    <PlaceImgDiv>
+                        <PlaceImg src="img/logo192.png" />
+                    </PlaceImgDiv>
+                        <PlaceDetails>
+                            <PlaceName>
+                                {place.name}
+                            </PlaceName>
+                            <PlaceAddress>
+                                <PlaceLabel>Adres</PlaceLabel><br/>
+                                {place.address}
+                            </PlaceAddress>
+                            <PlaceComment>
+                                <PlaceLabel>Komentarz: </PlaceLabel><br/>{place.comment}
+                            </PlaceComment>
+                            <PlaceRating>
+                                <PlaceLabel>Ocena</PlaceLabel><br/> 
+                                {place.value}
+                            </PlaceRating>
+                        </PlaceDetails>
+                    </Place>)
+                    :"Nie skomentowałeś jeszcze żadnego miejsca!"
+                        
+                    }
+                    
+                </PlacesContainer>
+        </div>
+        )
+    }
 
   
     return(
         
         <Layout>
+            
+            
+            
             <div>
             <ProfileIntro>
+            <Down>
+            <ButtonsWrapper>
+            <Button 
+            onClick={() => history.push("profile")}
+            inputColor="white"><img style={{width:"33px", height:"33px",borderRadius:"80px"}}
+            src="https://cdn2.iconfinder.com/data/icons/web-ui-16/33/ui-05-512.png"
+            alt="zdjecie blokady"/></Button>
+            </ButtonsWrapper>
+            </Down>
                 <div style={{
                     display:"flex",
                     justifyContent:"center",
-                    margin:"0px 0px",
+                    margin:"10px 10px",
                     width:"100%",
-                    borderBotto:"0px solid grey",
+                    borderBotto:"10px whitesmoke",
                 }}>
                     <img style={{width:"160px", height:"160px",borderRadius:"80px"}}
-                    src="https://ukorzeni.pl/wp-content/uploads/2020/01/dojrza%C5%82y-m%C4%99%C5%BCczyzna.png"/>
+                    src="https://image.flaticon.com/icons/png/512/50/50050.png"
+                    alt="zdjecie profilowe"/>
                 </div>
-
-            </ProfileIntro>
-            <h1>{username}</h1>
+                <Down>
+            <ButtonsWrapper>
             <Button 
             onClick={() => history.push("editprofile")}
-            inputColor="blue"> Edytuj profil</Button>
-            <div>
-                    <div style={{display:"flex",justifyContent:"left",width:"100%"}}>
-                        <h3>Status: Aktywny</h3>
-                    </div>
-                    <div style={{display:"flex",justifyContent:"left",width:"100%"}}>
-                         <h3>Ostatnia aktywność: 24.05.2021</h3>
-                    </div>
-                   
-                    <div style={{display:"flex",justifyContent:"left",width:"100%"}}>
-                        {userData && <h3>E-mail: {userData.email} </h3> }                        
-                    </div>
+            inputColor="white"> <img style={{width:"33px", height:"33px",borderRadius:"80px"}}
+            src="https://www.iconpacks.net/icons/2/free-settings-icon-3110-thumb.png"
+            alt="zdjecie ustawien"/></Button>
+             </ButtonsWrapper>
+            </Down>
+            
+            
+            </ProfileIntro>
+            <Down>
+            <h1>{username}</h1>
+            </Down>
+                <div>
+                    <h4 style={{background:"whitesmoke",display:"flex",justifyContent:"center",width:"100%"}}>
+                        TWOJE STATYSTYKI
+                    </h4>
                 </div>
                 <div>
-                    <ButtonsWrapper>
+                {wybor === 0 && 
+                <ButtonsWrapper2>
                     <Button 
-                    inputColor="green"
+                    inputColor="gray"
                     className="ButtonMyComments"
-                    onClick={() => setWybor(1)}>Moje komentarze</Button>
+                    onClick={() => setWybor(1)}><img style={{width:"30px", height:"30px",borderRadius:"80px"}}
+                    src="https://cdn0.iconfinder.com/data/icons/free-daily-icon-set/512/Comments-512.png"
+                    alt="zdjecie komentarzy"/>Dodane komentarze</Button>
                     <Button 
-                    inputColor="green"
+                    inputColor="silver"
                     className="ButtonMyPlaces"
-                    onClick={() => setWybor(0)}>Odwiedzone miejsca</Button>
-                    </ButtonsWrapper>
+                    onClick={() => setWybor(0)}><img style={{width:"30px", height:"30px",borderRadius:"80px"}}
+                    src="https://img.icons8.com/pastel-glyph/2x/place-marker--v2.png"
+                    alt="zdjecie miejsc"/>Odwiedzone miejsca</Button>
+                </ButtonsWrapper2>
+                }
+                {wybor === 1 && 
+                <ButtonsWrapper2>
+                    <Button 
+                    inputColor="silver"
+                    className="ButtonMyComments"
+                    onClick={() => setWybor(1)}><img style={{width:"30px", height:"30px",borderRadius:"80px"}}
+                    src="https://cdn0.iconfinder.com/data/icons/free-daily-icon-set/512/Comments-512.png"
+                    alt="zdjecie komentarzy"/>Dodane komentarze</Button>
+                    <Button 
+                    inputColor="gray"
+                    className="ButtonMyPlaces"
+                    onClick={() => setWybor(0)}><img style={{width:"30px", height:"30px",borderRadius:"80px"}}
+                    src="https://img.icons8.com/pastel-glyph/2x/place-marker--v2.png"
+                    alt="zdjecie miejsc"/>Odwiedzone miejsca</Button>
+                </ButtonsWrapper2>
+                }
+                    
                 </div>
-            </div>
             
-        {wybor == 0 && <MyPlaces></MyPlaces>}
-        {wybor == 1 && <MyComments/>}
+        {wybor === 0 && <MyPlaces></MyPlaces>
+        }
+        {wybor === 1 && <MyComments></MyComments>
+        }
+        </div>
         </Layout>
     )
 }
