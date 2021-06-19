@@ -12,6 +12,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BiLeftArrowAlt } from 'react-icons/bi';
 import { VscChromeClose } from 'react-icons/vsc'
 import { BsThreeDots } from 'react-icons/bs'
+import { GoCheck } from 'react-icons/go'
+
+
 import { MdKeyboardArrowUp } from 'react-icons/md'
 
 const PlacePage = (props) => {
@@ -31,6 +34,7 @@ const PlacePage = (props) => {
     const [commentPhotosSection, setCommentPhotosSection] = useState(false)
     const [ratingPanelMessage, setRatingPanelMessage] = useState('')
     const [isEdited, setIsEdited] = useState(false)
+    const [isVisitedFlag, setIsVisitedFlag] = useState(0)
     const [descriptionHeight, setDescriptionHeight] = useState('250px')
     const [categories, setCategories] = useState();
     
@@ -44,7 +48,7 @@ const PlacePage = (props) => {
         Rating, RatingComment, RatingDate, RatingUsername, RatingValue, RatingTop, 
         RatingBottom, RatingOptions, EditButton, Navigation,AddRatingInput,  RatingFormLable,
         RatingFormRaitingWrapper, RatingFormAddImageWrapper, FileInput,DropDownList,DropDownOption,
-        RaitingTextarea, RatingForm, RatingSubmit, Button, ButtonsWrapper,EditPlaceForm,
+        RaitingTextarea, RatingForm, RatingSubmit, Button, PlaceIsVisited,PlaceNotVisited, ButtonsWrapper,EditPlaceForm,
         RatingGaleryWrapper, EditPlacePageContainer, EditPlaceLabel, EditPlaceInput, EditPlaceTextArea,} = componentStyles;
 
 	const { role, username, userId } = localStorageService // 0 admin
@@ -52,6 +56,7 @@ const PlacePage = (props) => {
 		Axios.get(`/place/${placeId}`).then(res => setPlace(res.data))
 		Axios.get(`/rating/getRatings/${placeId}`).then(res => setRatings(res.data))
         Axios.get("/category").then(res => setCategories(res.data));
+        Axios.get(`/visit/checkIsVisited/${placeId}/${userId}`).then(res => {setIsVisitedFlag(res.data.isVisited); console.log(res.data)})
 	}, [])
 
 	const deleteRating = (ratingId) => {
@@ -246,6 +251,24 @@ const PlacePage = (props) => {
         console.log(request);
     }
 
+    const addPlaceToVisitedPlaces = () =>{
+        
+        const request = {
+            placeId: place.placeId,
+            userId: userId,
+            visitDate: new Date().toISOString()
+        }
+
+        console.log(request.date)
+        
+        console.log("addPlaceToVisitedPlaces")
+        Axios.post("/visit", request).then(res => {
+            console.log("POST visit:", res);
+            setIsVisitedFlag(1)
+        })
+              
+    }
+
     return(
         <Layout>
             { place  && !isEdited ?
@@ -259,22 +282,23 @@ const PlacePage = (props) => {
                         <PlaceDesc>
                             <PlaceName>{place.name}</PlaceName>
                             <PlaceAddress>{place.address}</PlaceAddress>
-                            <PlaceCategory>Kategoria :  {place.categoryName}</PlaceCategory>
-                            
-                            <ButtonsWrapper>
-                                <Button>
-                                    {/* TODO: dodac pozycje uzytkownika do url w Google zeby szukalo drogi zjego lokalizacji*/}
-                                    <Navigation href={`https://www.google.com/maps/search/?api=1&query=${place.latitude},${place.longitude}`} target="_blank">Nawiguj</Navigation>
-                                </Button>
-                                {role === '0' ? <Button onClick={() => setEditPlaceFlag(place.placeId)}>Edytuj</Button> : ""}
-                                <Button inputColor="orange">Kolejny BTN?</Button>
-                                <Button inputColor="purple">Ostatni BTN?</Button>
-
-                            </ButtonsWrapper>
-                            
-
+                            <PlaceCategory>Kategoria :  {place.categoryName}</PlaceCategory>                          
                         </PlaceDesc>
+
                     </PlaceIntro>
+
+                    <ButtonsWrapper>
+                        <Button>
+                             {/* TODO: dodac pozycje uzytkownika do url w Google zeby szukalo drogi zjego lokalizacji*/}
+                            <Navigation href={`https://www.google.com/maps/search/?api=1&query=${place.latitude},${place.longitude}`} target="_blank">Nawiguj</Navigation>
+                         </Button>
+                        {role === '0' ? <Button onClick={() => setEditPlaceFlag(place.placeId)}>Edytuj</Button> : ""}
+                        <Button inputColor="purple" onClick={() => {setBigGalery(true)}}>Galeria</Button>
+                        {role === '1' && isVisitedFlag === 0 ? <PlaceNotVisited onClick={() => {addPlaceToVisitedPlaces()}}>Dodaj do odwiedzonych</PlaceNotVisited> : ''}
+                        {role === '1' && isVisitedFlag !== 0 ? <PlaceIsVisited ><GoCheck/> Odwiedzone</PlaceIsVisited> : ''}
+                    
+                    </ButtonsWrapper>
+
 
                     <SmallGallery>
                         { place.photos && place.photos.map((photo, id) => {

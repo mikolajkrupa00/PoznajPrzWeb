@@ -27,7 +27,7 @@ const componentStyles = {
     display:flex;
     flex-direction:row;
     background-color: white;
-    padding: 25px 10px;
+    padding: 25px 10px 10px 10px;
     `,
     PlaceImg: styled.img`
     width: 100px;
@@ -54,23 +54,41 @@ const componentStyles = {
 
 
     ButtonsWrapper: styled.div`
-    margin-top: 10px;
     overflow-y: scroll;
     white-space: nowrap;
     width: calc(100%);
+    padding: 20px 10px;
     `,
     Button: styled.button`
     background-color: ${props => props.inputColor || "rgb(0, 110, 230)"};
     border-radius: 10px;
-    padding: 5px 10px;
+    padding: 4px 7px;
     border 0px;
     color: white;
     display: inline-block;
-    margin-right: 5px;
+    margin-right: 8px;
 
     :hover{
         cursor: pointer;
     }
+    `,
+    PlaceIsVisited: styled.div`
+    border: 1px solid green;
+    border-radius: 10px;
+    padding: 3px 6px;
+    background-color: whte;
+    color: green;
+    display: inline-block;
+    
+    `,
+    PlaceNotVisited: styled.div`
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 3px 6px;
+    background-color: whte;
+    color: black;
+    display: inline-block;
+    
     `,
     Navigation:styled.a`
     text-decoration: none;
