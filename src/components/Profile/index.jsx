@@ -4,14 +4,13 @@ import Axios from "axios"
 import {useEffect, useState} from "react"
 import componentStyles from "./styles";
 import { localStorageService } from "../../services/localStorageService"
-import {useHistory} from "react-router-dom"
+
 
 const Profile = () => {
 
     const{role, username, userId} = localStorageService;
     const[userData, setUserData] = useState();
-    const{Button} = componentStyles
-    const history = useHistory();
+  
     useEffect(() => {
         Axios.get(`/user/${userId}`).then(res => setUserData(res.data))
     }, [])

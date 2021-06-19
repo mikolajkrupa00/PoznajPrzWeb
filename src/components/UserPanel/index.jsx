@@ -4,26 +4,29 @@ import Layout from "../Layout/index"
 import componentStyles from "./styles";
 import { localStorageService } from "../../services/localStorageService"
 import {useHistory} from "react-router-dom"
-//import MyPlacesComponent from "../Places/index"
-//import MyPlacesStyles from "../Places/styles"
+
+
+import {VscLocation, VscComment} from "react-icons/vsc"
+
+
 
 
 
 const UserPanel = () => {
-    ///kopiowanie//
+  
     
     
     const history = useHistory();
     const [wybor, setWybor] = useState(0);
-    //to było na dole nad komentarze
     const {role, username,userId} = localStorageService
     const[userData, setUserData] = useState();
     const[visitedPlaces, setVistedPlaces] = useState("");
     const[ratedPlaces, setRatedPlaces] = useState("");
     
-    const {ProfileIntro,Button, Down, ButtonsWrapper,ButtonsWrapper2,  PlaceDetails, PlaceComment, PlaceLabel, PlaceRating, PlacesContainer, Place, PlaceName, PlaceAddress, PlaceImgDiv, PlaceImg, } = componentStyles
+    const {ProfileIntro,Button, Button2, Down, ButtonsWrapper,ButtonsWrapper2,  PlaceDetails, PlaceComment, PlaceLabel, PlaceRating, PlacesContainer, Place, PlaceName, PlaceAddress, PlaceImgDiv, PlaceImg, } = componentStyles
     
 
+    const iconStyles = {fontSize: "20px", marginRight: "5px"}
 
     useEffect(() => {
         Axios.get(`/user/${userId}`).then(res => setUserData(res.data))
@@ -115,7 +118,7 @@ const UserPanel = () => {
             <ProfileIntro>
             <Down>
             <ButtonsWrapper>
-            <Button 
+            <Button
             onClick={() => history.push("profile")}
             inputColor="white"><img style={{width:"33px", height:"33px",borderRadius:"80px"}}
             src="https://cdn2.iconfinder.com/data/icons/web-ui-16/33/ui-05-512.png"
@@ -149,44 +152,29 @@ const UserPanel = () => {
             <h1>{username}</h1>
             </Down>
                 <div>
-                    <h4 style={{background:"whitesmoke",display:"flex",justifyContent:"center",width:"100%"}}>
+                    <h4 style={{background:"whitesmoke",display:"flex",justifyContent:"center",width:"100%", marginTop:"10px"}}>
                         TWOJE STATYSTYKI
                     </h4>
                 </div>
                 <div>
-                {wybor === 0 && 
-                <ButtonsWrapper2>
-                    <Button 
-                    inputColor="gray"
+                
+                <ButtonsWrapper2>   
+                    <Button2 
+                    inputColor={ wybor === 1 ? "rgb(0, 110, 230)" : "grey"}
                     className="ButtonMyComments"
-                    onClick={() => setWybor(1)}><img style={{width:"30px", height:"30px",borderRadius:"80px"}}
-                    src="https://cdn0.iconfinder.com/data/icons/free-daily-icon-set/512/Comments-512.png"
-                    alt="zdjecie komentarzy"/>Dodane komentarze</Button>
-                    <Button 
-                    inputColor="silver"
+                    onClick={() => setWybor(1)}>
+                        <VscComment style={iconStyles}/>                      
+                        Dodane komentarze</Button2>
+                        
+                    <Button2 
+                    inputColor={ wybor === 0 ? "rgb(0, 110, 230)" : "grey"}
                     className="ButtonMyPlaces"
-                    onClick={() => setWybor(0)}><img style={{width:"30px", height:"30px",borderRadius:"80px"}}
-                    src="https://img.icons8.com/pastel-glyph/2x/place-marker--v2.png"
-                    alt="zdjecie miejsc"/>Odwiedzone miejsca</Button>
+                    onClick={() => setWybor(0)}>
+                        <VscLocation style={iconStyles}/>
+                        
+                    Odwiedzone miejsca</Button2>
                 </ButtonsWrapper2>
-                }
-                {wybor === 1 && 
-                <ButtonsWrapper2>
-                    <Button 
-                    inputColor="silver"
-                    className="ButtonMyComments"
-                    onClick={() => setWybor(1)}><img style={{width:"30px", height:"30px",borderRadius:"80px"}}
-                    src="https://cdn0.iconfinder.com/data/icons/free-daily-icon-set/512/Comments-512.png"
-                    alt="zdjecie komentarzy"/>Dodane komentarze</Button>
-                    <Button 
-                    inputColor="gray"
-                    className="ButtonMyPlaces"
-                    onClick={() => setWybor(0)}><img style={{width:"30px", height:"30px",borderRadius:"80px"}}
-                    src="https://img.icons8.com/pastel-glyph/2x/place-marker--v2.png"
-                    alt="zdjecie miejsc"/>Odwiedzone miejsca</Button>
-                </ButtonsWrapper2>
-                }
-                    
+                                    
                 </div>
             
         {wybor === 0 && <MyPlaces></MyPlaces>

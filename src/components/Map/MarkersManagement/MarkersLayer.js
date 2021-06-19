@@ -34,7 +34,7 @@ const MarkersLayer = () => {
 
     const [iconSize, setIconSize] = useState([20, 20])
     const [markers, setMarkers] = useState();
-    const [placeCategory, setPlaceCategory] = useState('all')
+    const [placeCategory, setPlaceCategory] = useState('main_all')
     const [otherCategories, setOtherCategories] = useState('off')
     const [briefDescription, setBriefDescription] = useState(false)
     const [clickedMarker, setClickedMarker] = useState('');

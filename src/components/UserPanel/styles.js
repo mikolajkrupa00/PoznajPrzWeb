@@ -4,7 +4,6 @@ const componentStyles = {
 
     ButtonsWrapper: styled.div`
     margin-top: 0px;
-    overflow-y: scroll;
     width: calc(100%);
     background-color: white;
     text-align: left;
@@ -15,9 +14,9 @@ const componentStyles = {
     `,
 
     ButtonsWrapper2: styled.div`
-    margin-top: 10px;
-    overflow-y: scroll;
-    white-space: nowrap;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
     width: calc(100%);
     background-color: whitesmoke;
     `,
@@ -35,6 +34,27 @@ const componentStyles = {
     }
     `,
 
+    Button2: styled.div`
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 0px 8px;
+    height: 30px;
+    background-color: whte;
+    border-color: ${props => props.inputColor || "black"};
+    color: ${props => props.inputColor || "black"};
+    font-size: 14px;
+    
+
+    & > img{
+        width: 26px;
+        height: 26px;
+    }
+    `,
+
+   
     ProfileIntro: styled.div`
     display:flex;
     flex-direction:row;
