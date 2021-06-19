@@ -10,6 +10,9 @@ const componentStyles = {
     margin-top: 25px;
     overflow-y: scroll;
     white-space: nowrap;
+
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
     `,
 
     CategoriesFilterItem:styled.div`
@@ -45,15 +48,12 @@ const componentStyles = {
     justify-content: space-between;
 
     &:nth-child(2){
-        //width: 65%;
-        //padding: 0px 30px;
         margin-top: 10px;
         justify-content: center;
     }
     `,
 
     SearchBarInput: styled.input`
-    width: 65%;
     height: 35px;
     border-radius: 20px;
     border: 1px solid #DDD;
@@ -107,7 +107,10 @@ const componentStyles = {
     display: flex;
     flex-direction: column;
     overflow-y: hidden;
-    white-space: nowrap
+    white-space: nowrap;
+
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
     `,
     PlaceImgDiv: styled.div`
     display:flex;

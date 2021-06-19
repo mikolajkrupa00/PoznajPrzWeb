@@ -15,6 +15,8 @@ import { BsThreeDots } from 'react-icons/bs'
 import { GoCheck } from 'react-icons/go'
 
 
+
+
 import { MdKeyboardArrowUp } from 'react-icons/md'
 
 const PlacePage = (props) => {
@@ -24,7 +26,7 @@ const PlacePage = (props) => {
 	let iconStyles = { color: '#303030', fontSize: "25px" };
 	const placeId = props.location.state;
 	const history = useHistory();
-	const [place, setPlace] = useState(true)
+	const [place, setPlace] = useState(false)
 	const [ratings, setRatings] = useState()
 	const [comment, setComment] = useState()
     const [bigGalery, setBigGalery] = useState(false)
@@ -56,7 +58,10 @@ const PlacePage = (props) => {
 		Axios.get(`/place/${placeId}`).then(res => setPlace(res.data))
 		Axios.get(`/rating/getRatings/${placeId}`).then(res => setRatings(res.data))
         Axios.get("/category").then(res => setCategories(res.data));
-        Axios.get(`/visit/checkIsVisited/${placeId}/${userId}`).then(res => {setIsVisitedFlag(res.data.isVisited); console.log(res.data)})
+
+        console.log(userId)
+        if(userId !== '')
+            Axios.get(`/visit/checkIsVisited/${placeId}/${userId}`).then(res => {setIsVisitedFlag(res.data.isVisited); console.log(res.data)})
 	}, [])
 
 	const deleteRating = (ratingId) => {
@@ -336,33 +341,26 @@ const PlacePage = (props) => {
 
                     <PlaceDescription>
                         <DescriptionContent inputHeigh={descriptionHeight}>
-                            {/* {place.description} */}
-                            <p>
-                            Lorem Ipsum jest tekstem stosowanym jako przykładowy
-                            wypełniacz w przemyśle poligraficznym. Został po raz
-                            pierwszy użyty w XV w. przez nieznanego drukarza do
-                            wypełnienia tekstem próbnej książki. Pięć wieków później
-                            zaczął być używany przemyśle elektronicznym, pozostając
-                            praktycznie niezmienionym. Spopularyzował się w latach 60.
-                            XX w. wraz z publikacją arkuszy Letrasetu, zawierających
-                            fragmenty Lorem Ipsum, a ostatnio z zawierającym różne
-                            wersje Lorem Ipsum oprogramowaniem przeznaczonym do
-                            realizacji druków na komputerach osobistych, jak Aldus
-                            PageMaker.
-                            </p>
-                            <p>
-                            Lorem Ipsum jest tekstem stosowanym jako przykładowy
-                            wypełniacz w przemyśle poligraficznym. Został po raz
-                            pierwszy użyty w XV w. przez nieznanego drukarza do
-                            wypełnienia tekstem próbnej książki. Pięć wieków później
-                            zaczął być używany przemyśle elektronicznym, pozostając
-                            praktycznie niezmienionym. Spopularyzował się w latach 60.
-                            XX w. wraz z publikacją arkuszy Letrasetu, zawierających
-                            fragmenty Lorem Ipsum, a ostatnio z zawierającym różne
-                            wersje Lorem Ipsum oprogramowaniem przeznaczonym do
-                            realizacji druków na komputerach osobistych, jak Aldus
-                            PageMaker.
-                            </p>
+
+                            {place.description.length > 100 ? ReactHtmlParser(place.description) : 
+                            
+                                <p>
+                                Lorem Ipsum jest tekstem stosowanym jako przykładowy
+                                wypełniacz w przemyśle poligraficznym. Został po raz
+                                pierwszy użyty w XV w. przez nieznanego drukarza do
+                                wypełnienia tekstem próbnej książki. Pięć wieków później
+                                zaczął być używany przemyśle elektronicznym, pozostając
+                                praktycznie niezmienionym. Spopularyzował się w latach 60.
+                                XX w. wraz z publikacją arkuszy Letrasetu, zawierających
+                                fragmenty Lorem Ipsum, a ostatnio z zawierającym różne
+                                wersje Lorem Ipsum oprogramowaniem przeznaczonym do
+                                realizacji druków na komputerach osobistych, jak Aldus
+                                PageMaker.
+                                </p>
+                            
+                            }                          
+                           
+
                         </DescriptionContent>
                         
                         {descriptionHeight === '250px' ?
