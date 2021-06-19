@@ -61,7 +61,7 @@ const PlacePage = (props) => {
 
         console.log(userId)
         if(userId !== '')
-            Axios.get(`/visit/checkIsVisited/${placeId}/${userId}`).then(res => {setIsVisitedFlag(res.data.isVisited); console.log(res.data)})
+            Axios.get(`/visit/checkIsVisited/${placeId}/${userId}`).then(res => {setIsVisitedFlag(res.data.isVisited); console.log(res.data); })
 	}, [])
 
 	const deleteRating = (ratingId) => {
@@ -268,8 +268,10 @@ const PlacePage = (props) => {
         
         console.log("addPlaceToVisitedPlaces")
         Axios.post("/visit", request).then(res => {
+            
             console.log("POST visit:", res);
-            setIsVisitedFlag(1)
+            if(res.status === 200)
+                setIsVisitedFlag(1)
         })
               
     }
@@ -299,8 +301,8 @@ const PlacePage = (props) => {
                          </Button>
                         {role === '0' ? <Button onClick={() => setEditPlaceFlag(place.placeId)}>Edytuj</Button> : ""}
                         <Button inputColor="purple" onClick={() => {setBigGalery(true)}}>Galeria</Button>
-                        {role === '1' && isVisitedFlag === 0 ? <PlaceNotVisited onClick={() => {addPlaceToVisitedPlaces()}}>Dodaj do odwiedzonych</PlaceNotVisited> : ''}
-                        {role === '1' && isVisitedFlag !== 0 ? <PlaceIsVisited ><GoCheck/> Odwiedzone</PlaceIsVisited> : ''}
+                        {userId !== '' && isVisitedFlag === 0 ? <PlaceNotVisited onClick={() => {addPlaceToVisitedPlaces()}}>Dodaj do odwiedzonych</PlaceNotVisited> : ''}
+                        {userId !== '' && isVisitedFlag !== 0 ? <PlaceIsVisited ><GoCheck/> Odwiedzone</PlaceIsVisited> : ''}
                     
                     </ButtonsWrapper>
 
