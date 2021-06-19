@@ -5,17 +5,20 @@ import StatsPage from './Stats/index';
 import BlockUser from './BlockUser/index';
 import ConfirmPlace from './ConfirmPlace/index';
 import React, { useState } from "react";
+import { localStorageService } from "../../services/localStorageService"
 import components from "./styles";
 
 const AdminPanel = () => {
 
-    const {AdminContainer} = components;
+    const {AdminContainer, ForbiddenAccess} = components;
+    const {role} = localStorageService
 
     const [openSection, setOpenSection] = useState("statistics");
    
     return(
         <Layout>
             
+            {role === '0' ? 
             <AdminContainer>
 
                 <Navigation changeSection={(arg) => setOpenSection(arg)}/>
@@ -24,8 +27,11 @@ const AdminPanel = () => {
                 {openSection === "usersManagement" ? <BlockUser></BlockUser> : ""}
                 {openSection === "placeSuggestions" ? <ConfirmPlace></ConfirmPlace> : ""}
                 
-
             </AdminContainer>
+
+            :
+            <ForbiddenAccess>{'Unauthorized access is prohibited!'}</ForbiddenAccess>
+            }
             
         </Layout>
     )
