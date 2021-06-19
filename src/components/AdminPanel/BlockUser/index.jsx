@@ -39,7 +39,7 @@ const BlockUser = () => {
             <BlockUserContainer>
                         <BlockUserInput type="text" {...register('username', {required:true})}/>
                         <BlockUserSubmit onClick={handleSubmit(data => blockUser(data))}>Zablokuj</BlockUserSubmit>
-                        {blockError===1 ? <p style={{color:'green',paddingTop:'15px'}}>Użytkownik zablokowany</p> : null}
+                        {blockError===1 ? <p style={{color:'green',paddingTop:'15px'}}>Użytkownik został zablokowany</p> : null}
                         {blockError===2 ? <p style={{color:'firebrick',paddingTop:'15px'}}>Użytkownik nie istnieje lub został już zablokowany</p> : null}
             </BlockUserContainer>
             <BlockedUsers>
