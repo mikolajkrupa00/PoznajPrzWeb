@@ -29,7 +29,6 @@ const componentStyles = {
     color: black;
     display: inline-flex;
     margin-right: 5px;
-
     :hover{
         cursor: pointer;
     }
@@ -54,7 +53,6 @@ const componentStyles = {
     padding: 5px;
     background-color: white;
     border-bottom: 1px solid #CCC;
-
     //width: calc(100% - 30px);
      
     `,
@@ -80,11 +78,9 @@ const componentStyles = {
     `,
 
     PlaceComment:styled.div`
-
     `,
 
     PlaceRating:styled.div`
-
     `,
 
     PlaceDesc: styled.div`
@@ -98,10 +94,16 @@ const componentStyles = {
     PlaceImgDiv: styled.div`
     display:flex;
     align-items: center;
+    justify-content: center;
     `,
     PlaceImg: styled.img`
     width:70px;
     height:70px;
+    `,
+    PlaceImgComment: styled.img`
+    width:70px;
+    height:70px;
+    
     `,
     PlaceDescription: styled.div`
     `,

@@ -4,24 +4,20 @@ import Layout from "../Layout/index"
 import componentStyles from "./styles";
 import { localStorageService } from "../../services/localStorageService"
 import {useHistory} from "react-router-dom"
-//import MyPlacesComponent from "../Places/index"
-//import MyPlacesStyles from "../Places/styles"
 
 
 
 const UserPanel = () => {
-    ///kopiowanie//
     
     
     const history = useHistory();
     const [wybor, setWybor] = useState(0);
-    //to było na dole nad komentarze
     const {role, username,userId} = localStorageService
     const[userData, setUserData] = useState();
     const[visitedPlaces, setVistedPlaces] = useState("");
     const[ratedPlaces, setRatedPlaces] = useState("");
     
-    const {ProfileIntro,Button, Down, ButtonsWrapper,ButtonsWrapper2,  PlaceDetails, PlaceComment, PlaceLabel, PlaceRating, PlacesContainer, Place, PlaceName, PlaceAddress, PlaceImgDiv, PlaceImg, } = componentStyles
+    const {ProfileIntro,PlaceImgComment, Button, Down, ButtonsWrapper,ButtonsWrapper2,  PlaceDetails, PlaceComment, PlaceLabel, PlaceRating, PlacesContainer, Place, PlaceName, PlaceAddress, PlaceImgDiv, PlaceImg, } = componentStyles
     
 
 
@@ -43,7 +39,7 @@ const UserPanel = () => {
                     {visitedPlaces ? visitedPlaces.map(place => 
                     <Place  onClick={() => history.push("place", place.placeId)}>
                     <PlaceImgDiv>
-                        <PlaceImg src="img/logo192.png" />
+                    <PlaceImg src="img/logo192.png" />
                     </PlaceImgDiv>
                         <PlaceDetails>
                             <PlaceName>
@@ -75,13 +71,14 @@ const UserPanel = () => {
                 <PlacesContainer>
                     {ratedPlaces ? ratedPlaces.map(place => 
                     <Place  onClick={() => history.push("place", place.placeId)}>
-                    <PlaceImgDiv>
-                        <PlaceImg src="img/logo192.png" />
-                    </PlaceImgDiv>
+                    
                         <PlaceDetails>
                             <PlaceName>
                                 {place.name}
                             </PlaceName>
+                            <PlaceImgDiv>
+                        <PlaceImgComment src="img/logo192.png" />
+                    </PlaceImgDiv>
                             <PlaceAddress>
                                 <PlaceLabel>Adres</PlaceLabel><br/>
                                 {place.address}
