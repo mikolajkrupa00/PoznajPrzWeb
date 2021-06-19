@@ -23,7 +23,9 @@ const UserPanel = () => {
     const[visitedPlaces, setVistedPlaces] = useState("");
     const[ratedPlaces, setRatedPlaces] = useState("");
     
-    const {ProfileIntro,Button, Button2, Down, ButtonsWrapper,ButtonsWrapper2,  PlaceDetails, PlaceComment, PlaceLabel, PlaceRating, PlacesContainer, Place, PlaceName, PlaceAddress, PlaceImgDiv, PlaceImg, } = componentStyles
+    const {ProfileIntro, UsernameLabel, Button, Button2, Down, ButtonsWrapper,ButtonsWrapper2,  
+        PlaceDetails, PlaceComment, PlaceLabel, PlaceRating, PlacesContainer, Place, PlaceName, 
+        PlaceAddress, PlaceImgDiv, PlaceImg, } = componentStyles
     
 
     const iconStyles = {fontSize: "20px", marginRight: "5px"}
@@ -37,9 +39,9 @@ const UserPanel = () => {
     const MyPlaces = () => {
         return(
         <div>
-            <div style={{
-                margin: "30px",
-            }}>Miejsca odwiedzone przez Ciebie:</div>
+            <div style={{ margin: "30px auto", fontSize: '19px'}}>
+                Miejsca odwiedzone przez Ciebie:
+            </div>
             
     
                 <PlacesContainer>
@@ -70,9 +72,9 @@ const UserPanel = () => {
     const MyComments = () => {
         return(
         <div>
-            <div style={{
-                margin: "30px",
-            }}>Miejsca skomentowane przez Ciebie:</div>
+            <div style={{ margin: "30px auto", fontSize: '19px'}}>
+                Miejsca skomentowane przez Ciebie:
+            </div>
             
     
                 <PlacesContainer>
@@ -149,10 +151,10 @@ const UserPanel = () => {
             
             </ProfileIntro>
             <Down>
-            <h1>{username}</h1>
+            <UsernameLabel>{username}</UsernameLabel>
             </Down>
                 <div>
-                    <h4 style={{background:"whitesmoke",display:"flex",justifyContent:"center",width:"100%", marginTop:"10px"}}>
+                    <h4 style={{background:"whitesmoke",display:"flex",justifyContent:"center",width:"100%", marginTop:"15px"}}>
                         TWOJE STATYSTYKI
                     </h4>
                 </div>

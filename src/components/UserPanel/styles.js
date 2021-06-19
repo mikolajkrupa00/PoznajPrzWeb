@@ -59,10 +59,17 @@ const componentStyles = {
     display:flex;
     flex-direction:row;
     background-color: white;
-    padding: 25px 10px;
+    padding: 25px 10px 0px 10px;
     `,
 
-    //////PLACES
+    UsernameLabel: styled.div`
+    padding-bottom: 20px;
+    font-size: 18px;
+    `,
+
+
+
+   
 
     // ---- PLACES CONTAINER ---- //
     PlacesContainer: styled.div`
@@ -74,9 +81,7 @@ const componentStyles = {
     padding: 5px;
     background-color: white;
     border-bottom: 1px solid #CCC;
-
-    //width: calc(100% - 30px);
-     
+    margin: 4px 0px; 
     `,
     PlaceDetails: styled.div`
      display:flex;
