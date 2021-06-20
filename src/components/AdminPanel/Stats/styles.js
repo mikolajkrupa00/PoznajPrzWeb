@@ -2,7 +2,23 @@ import styled from "styled-components";
 
 
 const componentStyles = {
-
+    FeatureNav: styled.div`
+    display:flex;
+    justify-content: center;
+    
+    `,
+    FButton: styled.button`
+    display:flex;
+        justify-content: space-around;
+        align-items: center;
+        border: 1px solid;
+        border-radius: 10px;
+        padding: 0px 8px;
+        height: 30px;
+        margin: 5px;
+        border-color: ${props => props.act};
+        color: ${props => props.act};
+    `,
     PlacesContainer: styled.div`
     display:flex;
     flex-grow:1;
@@ -78,6 +94,7 @@ const componentStyles = {
     font-weight: bold;
     `,
     Counter:styled.div`
+    margin-top: 15px;
     `,
     NumOfComments: styled.div`
     `,
